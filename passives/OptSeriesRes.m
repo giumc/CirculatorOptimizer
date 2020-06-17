@@ -17,37 +17,35 @@ classdef OptSeriesRes < OnePortRes
    % y(freq)   
    % l
    % c
-   
-    properties 
-       
-       label="SeriesResonator";
-       
-   end
-   
+      
     methods
 
         function obj=OptSeriesRes(varargin)
             
             obj=obj@OnePortRes(varargin{:});
-
+            obj.label="SeriesResonator";
         end
                    
-        function val=l(obj)
-            val=obj.q_loaded.value*obj.ref_impedance/(2*pi*obj.f_center.value);
+        function ind=l(obj)
+            ind=obj.q_loaded.value*obj.ref_impedance/(2*pi*obj.f_center.value);
         end
         
-        function val=c(obj)
-            val=1/(2*pi*obj.f_center.value)^2/obj.l;
+        function cap=c(obj)
+            cap=1/(2*pi*obj.f_center.value)^2/obj.l;
         end
 
         function imp=z(obj,freq)
             imp=1i*2*pi*freq*obj.l+...
                 1./(1i*2*pi*freq*obj.c)+...
-                (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded;
+                (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value;
         end
         
         function adm=y(obj,freq)
-            adm=1./obj.z(freq);
+            adm = inverse(obj.z(freq));
+        end
+        
+        function res=r(obj)
+            res = (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value;
         end
         
     end

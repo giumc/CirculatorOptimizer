@@ -11,13 +11,21 @@ classdef OptBandPassFilt < TwoPortPassive
     % OptBandPassFilt(varargin) -> accepts order as argument
 
     properties (Access=private,Constant)
+        
         def_f=1;
         def_q_l=3;
+        
     end
     
-    properties 
+    properties (SetAccess=private)
         
         order int32 = 1;
+        
+    end
+    
+    properties
+        
+        label = "Default";
        
         resonators OnePortRes;
         
@@ -28,8 +36,24 @@ classdef OptBandPassFilt < TwoPortPassive
         function obj=OptBandPassFilt(varargin)
             
             if ~isempty(varargin)
-            
-                obj.order=varargin{1};
+                
+                if isnumeric(varargin{1})
+                    
+                    obj.order=varargin{1};
+                    
+                else
+                    
+                    if strcmp(varargin{1},'order')
+                        
+                        if ~isempty(varargin{2})
+                            
+                            obj.order=varargin{2};
+                            
+                        end
+                        
+                    end
+                    
+                end
            
             end
             

@@ -52,61 +52,59 @@ classdef OptCirc <  CircGoal
 
        goal=CircGoal();
 
-       design TwoPortPassive; 
-
-       modratio opt_param = opt_param(0.1,'label','mod_ratio');
-
-       moddepth opt_param = opt_param(0.1,'label','mod_depth');
+       design OptNLBranch ;
 
     end % design parameters
 
-    methods %Constructor/Destructor
+    methods %Constructor/De.structor
 
-        function obj=circ(varargin)
-        
-            obj.f_test=obj.calculate_frf;
+        function obj=OptCirc(varargin)
 
-           if ~isempty (varargin)
-               
+            obj.f_test=obj.calculate_frf();
+
+            if ~isempty (varargin)
+
                for i=1:length(varargin)
-                   
-                   if ischar(varargin{i})|| isstring(varargin{i})
-                       
-                       switch varargin{i}
-                           
-                           case 'order'
-                               
-                               obj.design=OptBandPassFilt(varargin{i+1});
-                               
-                       end
-                       
-                   end
-                   
-               end
-               
-           end
-           
-           if isempty(obj.design)
-               
-               obj.design=OptBandPassFilt(1);
-               
-           end
 
-          obj.responsecalc;
-          obj.errorcalc;
-          obj.newcircgoalplot;
-          obj.addinteractivebar;
-          obj.addoptbutton;
+                   if ischar(varargin{i})|| isstring(varargin{i})
+
+                       switch varargin{i}
+
+                           case 'order'
+
+                               obj.design=OptBandPassFilt(varargin{i+1});
+
+                       end
+
+                   end
+
+               end
+
+            end
+
+            if isempty(obj.design)
+
+               obj.design=OptBandPassFilt(1);
+
+            end
+
+            
+            obj.errorcalc;
+            obj.newcircgoalplot;
+            obj.addinteractivebar;
+            obj.addoptbutton;
 
         end
-        
-   
+
+
 
         function delete(obj)
-        obj.removeinteractivebar;
-        obj.removecirctable;
-        obj.removecircplot;
-        obj.removeoptbutton;
+        
+            obj.removeinteractivebar;
+            obj.removecirctable;
+            obj.removecircplot;
+            obj.removeoptbutton;
+            
         end
     end
 
@@ -171,7 +169,6 @@ classdef OptCirc <  CircGoal
 
         m=multiABCD(obj,freq);
         
-        imt=IMtones(obj,freq);
     end
 
 end

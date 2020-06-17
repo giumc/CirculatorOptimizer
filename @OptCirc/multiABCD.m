@@ -1,7 +1,7 @@
 function m=multiABCD(c,freq)
-
-    c.modfreq=c.f_center*c.modratio.value;
-    c.freqs=c.IMtones(freq);
+    
+    %circulator multifrequency ABCD matrix
+    freqs=IMtones(freq,c.modratio.value*c.f_center,c.harmonics);
 
     ABCD.filt=diag(ones(c.n_freqs*2,1));
 

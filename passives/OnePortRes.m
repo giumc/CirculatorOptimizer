@@ -1,39 +1,42 @@
 classdef (Abstract) OnePortRes < OnePortPassive
     
    % interface for oneport resonator
-   % has two opt_param instances : f_center and q_loaded
-   % both values can be set from constructor as name value pairs
-   % the rest can be set by accessing the object
+   %
+   % inherits from OnePortPassive
+   %
+   % has three opt_param instances : 
+   % f_center
+   % q_loaded
+   % q_unloaded
    % 
-   % (public) properties
-   % ref_impedance (double)
-   % f_center (opt_param)
-   % q_loaded (opt_param)
-   % q_unloaded (opt_param)
+   % and one double:
+   % ref_impedance
+   % opt_param values can be set from constructor as name value pairs
+   % or by accessing the object
    % 
-   % methods to be implemented in member classes
-   % 
-   % z(freq)
-   % y(freq)   
+   % classes who inherit OnePortRes have to implement
+   % the following methods:
+   % z(freq) (from OnePortPassive)
+   % y(freq) (from OnePortPassive)  
    % l
    % c
+   % r
+   % OSS: both z and y have to handle frequency arrays
    
-    properties
+    properties 
       
        ref_impedance double = 50;
        
-       f_center opt_param = opt_param(1);
+       f_center opt_param = opt_param('value',1);
        
-       q_loaded opt_param = opt_param(5);
+       q_loaded opt_param = opt_param('value',5);
        
-       q_unloaded opt_param = opt_param(1e3);
+       q_unloaded opt_param = opt_param('value',1e3);
+       
+       label string;
        
    end
-
-    properties (Abstract)
-        label string;
-    end
-   
+  
     methods
 
         function obj=OnePortRes(varargin)
@@ -86,8 +89,7 @@ classdef (Abstract) OnePortRes < OnePortPassive
         
         ind=l(obj);
         cap=c(obj);
-        imp=z(obj,freq);
-        adm=y(obj,freq);
+        res=r(obj);
 
     end
 

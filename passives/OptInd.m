@@ -18,11 +18,11 @@ classdef OptInd< opt_param & OnePortPassive
         end
        
         function imp=z(obj,freq)
-            imp= (1i * 2 * pi * freq *obj.value );
+            imp = (1i * 2 * pi * freq *obj.value );
         end
        
         function adm=y(obj,freq)
-            adm = 1./obj.imp(freq);
+            adm = inverse(obj.z(freq));
         end
        
    end

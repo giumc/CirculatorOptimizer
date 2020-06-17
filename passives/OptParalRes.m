@@ -18,16 +18,11 @@ classdef OptParalRes < OnePortRes
    % l
    % c
    
-    properties 
-       
-       label="ParallelResonator";
-       
-   end
-   
     methods
 
         function obj=OptParalRes(varargin)
             obj=obj@OnePortRes(varargin{:});
+            obj.label="ParallelResonator";
         end
         
         function val=l(obj)
@@ -37,15 +32,20 @@ classdef OptParalRes < OnePortRes
         function val=c(obj)
             val=obj.q_loaded.value*obj.ref_impedance*(2*pi*obj.f_center.value);
         end
+        
+        function res= r(obj)
+            adm = (2*pi*obj.f_center.value*obj.c)/obj.q_unloaded.value;
+            res= 1./adm;
+        end
 
         function adm=y(obj,freq)
             adm=1i*2*pi*freq*obj.c+...
                 1./(1i*2*pi*freq*obj.l)+...
-                (2*pi*obj.f_center.value*obj.c)/obj.q_unloaded;
+                (2*pi*obj.f_center.value*obj.c)/obj.q_unloaded.value;
         end
         
         function imp=z(obj,freq)
-            imp=1./obj.y(freq);
+            imp = inverse(obj.y(freq));
         end
         
     end
