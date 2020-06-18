@@ -1,13 +1,19 @@
-classdef (Abstract) OnePortPassive < handle & matlab.mixin.Heterogeneous
+classdef (Abstract) OnePortPassive < handle &...
+                                     matlab.mixin.Heterogeneous & ...
+                                     GetSetOptParam
    
-    % interface for oneport passive components
-    % classes who inherit OnePortPassive must define
-    % methods:
-    % z(obj,freq) 
-    % y(obj,freq)
-    % 
-    % OSS z and y have to handle frequency arrays
-       
+%     
+% interface for one port passives
+% member of Heterogeneous
+% 
+% Abstract:
+% z(freq)         -> oneport has to have a z(f) and y(f) functions
+% y(freq)
+%
+% Public:
+% get_opt_param() -> defines base method, needs to be overridden 
+%                    in case subclass is not a opt_param
+
     methods (Abstract)
         
         imp=z(obj,freq);
@@ -41,7 +47,19 @@ classdef (Abstract) OnePortPassive < handle & matlab.mixin.Heterogeneous
             
             m= [ a b ; c d];
         end     
-
+        
+        function opt_par = get_opt_param(obj)
+        
+            opt_par=[];
+            
+            if obj.optimizable 
+                
+                opt_par=obj;
+                
+            end
+        
+        end
+        
     end
 
 end

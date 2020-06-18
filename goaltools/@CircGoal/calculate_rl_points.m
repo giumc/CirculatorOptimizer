@@ -25,8 +25,8 @@ function calculate_rl_points(c_goal)
     
     % set to object 
     
-    c_goal.RL.set_f_array(f_points);
+    c_goal.RLgoal.set_f_array(f_points);
     
-    c_goal.RL.set_goal(rl_values);
+    c_goal.RLgoal.set_goal(rl_values);
 
 end

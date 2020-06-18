@@ -29,8 +29,8 @@ function calculate_iso_points(c_goal)
     
     % set to object 
     
-    c_goal.ISO.set_f_array(f_points);
+    c_goal.ISOgoal.set_f_array(f_points);
 
-    c_goal.ISO.set_goal(iso_values);
+    c_goal.ISOgoal.set_goal(iso_values);
 
 end

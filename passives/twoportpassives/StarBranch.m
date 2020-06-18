@@ -1,5 +1,24 @@
 classdef StarBranch < OptNLBranch
     
+% Contains an OptBandPassFilt and OptNLSeriesRes
+% member of OptNLBranch
+% 
+% ------ PROPERTIES ------
+% 
+% Public:
+% label
+% 
+% ------ METHODS ------
+% 
+% Public:
+% StarBranch(varargin) -> pass {'order',N} to initialize 
+%                         passive as OptBandPassFilt(N-1)
+%                         nlres as OptNLRes
+%                         
+%                         OSS: all resonators have q_unloaded set to 
+%                         not optimizable
+% ABCD(freq)           -> calculates ABCD matrix 
+
     properties 
     
         label = "TwoPort Branch with BP Filter + NL Resonator";
@@ -13,6 +32,7 @@ classdef StarBranch < OptNLBranch
             obj.nlres=OptNLSeriesRes(varargin{:});
             
             order = [];
+            
             if ~isempty(varargin)
                 
                 if isnumeric(varargin{1})
@@ -74,7 +94,7 @@ classdef StarBranch < OptNLBranch
             end
             
         end
-           
+        
     end
         
 end

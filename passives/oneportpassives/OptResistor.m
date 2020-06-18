@@ -1,6 +1,6 @@
-classdef OptResistor <  opt_param & OnePortPassive
+classdef OptResistor <  OnePortPassive & opt_param 
     
-   % optimizable capacitor
+   % optimizable resistor
    properties (Access=private,Constant)
        
        def_res=50;
@@ -30,7 +30,7 @@ classdef OptResistor <  opt_param & OnePortPassive
             adm = inverse(obj.z(freq));
             
         end
-       
+        
    end
    
 end

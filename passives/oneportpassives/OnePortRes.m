@@ -1,31 +1,31 @@
-classdef (Abstract) OnePortRes < OnePortPassive
-    
-   % interface for oneport resonator
-   %
-   % inherits from OnePortPassive
-   %
-   % has three opt_param instances : 
-   % f_center
-   % q_loaded
-   % q_unloaded
-   % 
-   % and one double:
-   % ref_impedance
-   % opt_param values can be set from constructor as name value pairs
-   % or by accessing the object
-   % 
-   % classes who inherit OnePortRes have to implement
-   % the following methods:
-   % z(freq) (from OnePortPassive)
-   % y(freq) (from OnePortPassive)  
-   % l
-   % c
-   % r
-   % OSS: both z and y have to handle frequency arrays
+classdef  OnePortRes < OnePortPassive
+%     
+% interface for one port resonators
+% member of OnePortPassive
+% 
+% ------ PROPERTIES ------
+%     
+% Set-Access protected:
+% f_center (opt_param)
+% q_loaded (opt_param)
+% q_unloaded (opt_param)
+% label (string)
+% ref_impedance (double)
+% 
+% ------ METHODS ------
+% 
+% Public:
+% OnePortRes(varargin)        -> pass {NAME,VALUE} to set values
+%                                 NAMES:'f_center','q_loaded','q_unloaded'
+% 
+% get_opt_param()           ->  returns optimizable opt_param
+% Abstract:
+% c()                         -> members have to define l , c, r
+% l()
+% r()
+
    
-    properties 
-      
-       ref_impedance double = 50;
+    properties (SetAccess=protected)
        
        f_center opt_param = opt_param('value',1);
        
@@ -35,8 +35,10 @@ classdef (Abstract) OnePortRes < OnePortPassive
        
        label string;
        
-   end
-  
+       ref_impedance double = 50;
+       
+    end
+        
     methods
 
         function obj=OnePortRes(varargin)
@@ -80,6 +82,27 @@ classdef (Abstract) OnePortRes < OnePortPassive
             obj.q_unloaded.unit='';
             
             obj.q_unloaded.label='Q_U';
+                       
+        end
+        
+        function opt_par=get_opt_param(obj)
+            
+            opt_par=[];
+            if obj.f_center.optimizable
+                
+                opt_par=[opt_par ...
+                    obj.f_center];
+            end
+            
+            if obj.q_loaded.optimizable
+                opt_par=[opt_par ...
+                    obj.q_loaded];
+            end
+            
+            if obj.q_unloaded.optimizable
+                opt_par=[opt_par ...
+                    obj.q_unloaded];
+            end
             
         end
         
@@ -93,4 +116,6 @@ classdef (Abstract) OnePortRes < OnePortPassive
 
     end
 
+        
+                
 end

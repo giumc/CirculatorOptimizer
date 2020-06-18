@@ -25,6 +25,18 @@ classdef OptCap <  opt_param & OnePortPassive
         function adm=y(obj,freq)
             adm = inverse(obj.z(freq));
         end
+        
+        function opt_param=get_opt_param(obj)
+        
+            opt_param=[];
+            
+            if obj.optimizable
+                
+                opt_param=obj;
+                
+            end
+                
+        end
        
    end
    

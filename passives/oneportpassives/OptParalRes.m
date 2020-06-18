@@ -1,23 +1,5 @@
 classdef OptParalRes < OnePortRes
     
-   % optimizable parallel resonator
-   % has two opt_param instances : f_center and q_loaded
-   % both values can be set from constructor as name value pairs
-   % the rest can be set by accessing the object
-   % 
-   % (public) properties
-   % ref_impedance (double)
-   % f_center (opt_param)
-   % q_loaded (opt_param)
-   % q_unloaded (opt_param)
-   % 
-   % methods
-   % OptParalRes('f_center',1,'q_loaded',3,'q_unloaded',100)
-   % z(freq)
-   % y(freq)   
-   % l
-   % c
-   
     methods
 
         function obj=OptParalRes(varargin)

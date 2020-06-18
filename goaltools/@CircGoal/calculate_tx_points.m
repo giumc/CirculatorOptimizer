@@ -25,8 +25,8 @@ function calculate_tx_points(c_goal)
     
     % set to object 
     
-    c_goal.IL.set_f_array(f_points);
+    c_goal.ILgoal.set_f_array(f_points);
     
-    c_goal.IL.set_goal(tx_values);
+    c_goal.ILgoal.set_goal(tx_values);
     
 end

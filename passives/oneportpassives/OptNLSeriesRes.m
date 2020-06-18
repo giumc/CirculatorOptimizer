@@ -1,26 +1,26 @@
 classdef OptNLSeriesRes < OnePortNLRes    
-    % member of OnePortNLRes
-    %
-    % 
-    
-    properties(Access=private,Constant)
-        def_label='Non Linear Series LC Resonator';
-    end
+%    
+% Implements a series nonlinear resonator with nonlinear cap
+% member of OnePortNLRes
+% 
+% OSS: everytime f_c,q_l,q_u are changed, 
+%     resis, ind and var param are automatically updated
+%     
+% ------ METHODS ------
+% 
+% Public: 
+% OptNLSeries(varargin)       -> pass option to OnePortNLRes
     
     methods 
        
         function obj=OptNLSeriesRes(varargin)
             
             obj=obj@OnePortNLRes(varargin{:});
-            obj.label = obj.def_label;
+            obj.label ='Non Linear  LC Resonator';
             addlistener (obj.f_center,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_loaded,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_unloaded,'ValueUpdate',@obj.paramchange);
         end
-    
-    end
-    
-    methods 
         
         function cap = c(obj)
         
@@ -39,11 +39,7 @@ classdef OptNLSeriesRes < OnePortNLRes
             res = (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value;
             
         end
-        
-    end
-    
-    methods 
-        
+
         function m = seriesABCD(obj,freq)
             
             m = obj.ind.seriesABCD(freq)*obj.var.seriesABCD(freq);
