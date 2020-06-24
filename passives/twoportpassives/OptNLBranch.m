@@ -1,6 +1,5 @@
 classdef (Abstract) OptNLBranch < TwoPortPassive & ...
-                                   matlab.mixin.SetGet & ...
-                                  matlab.mixin.Copyable
+                                   matlab.mixin.SetGet 
 
 % Interface for nonlinear branches
 % inherits from TwoPortPassive, SetGet and Copyable
@@ -15,6 +14,7 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
 %
 % Public:
 % get_opt_param()           ->  returns optimizable opt_param
+% set_def_bounds(obj)       -> sets default boundaries
 
     properties 
         
@@ -51,6 +51,13 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
             
             opt_par= [opt_par obj.nlres.get_opt_param ];
         
+        end
+        
+        function set_def_bounds(obj)
+            
+            obj.passive.set_def_bounds;
+            obj.nlres.set_def_bounds;
+            
         end
         
     end

@@ -8,7 +8,7 @@ classdef OnePortNLRes < OnePortRes
 %     to recalculate the ABCD matrices to take into account 
 %     nonlinear terms in the var
 %     ------ PROPERTIES ------
-%     
+%
 %     Access Protected:
 %     resis (OptResistor)
 %     ind   (OptInd)
@@ -24,8 +24,9 @@ classdef OnePortNLRes < OnePortRes
 %                                     OSS:
 %                                     resis, ind and var.capacitance 
 %                                     are non optimizable by default
-%     % get_opt_param()           ->  returns optimizable opt_param
-
+%     get_opt_param()           ->  returns optimizable opt_param
+%     set_def_bounds()          -> set default boundaries
+    
     properties (Access=protected)
         
         resis OptResistor = OptResistor('value',1,'dummyResistor');
@@ -79,6 +80,13 @@ classdef OnePortNLRes < OnePortRes
             end
         
         end
+        
+        function set_def_bounds(obj)
+            
+            obj.set_def_bounds@OnePortRes;
+            obj.var.set_def_bounds;
+        end
+        
     end
        
 end

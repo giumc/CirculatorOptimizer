@@ -34,9 +34,6 @@ classdef OptBandPassFilt < TwoPortPassive
 
     properties (Access=private,Constant)
         
-        def_f=1;
-        def_q_l=3;
-        def_r_term=50;
         def_order=1;
         
     end
@@ -93,11 +90,9 @@ classdef OptBandPassFilt < TwoPortPassive
             
             for i=1:obj.order
 
-                obj.resonators(i)=obj.pick_resonator(i,obj.def_f,obj.def_q_l);
+                obj.resonators(i)=obj.pick_resonator(i);
                            
             end
-            
-                addlistener(obj,'ref_impedance','PostSet',@obj.update_ref_impedance);
             
         end
         
@@ -107,7 +102,7 @@ classdef OptBandPassFilt < TwoPortPassive
             
             for i=1:length(obj.resonators)
                 
-                obj.resonators(i).ref_impedance=obj.ref_impedance;
+                obj.resonators(i).set_ref_impedance(obj.ref_impedance);
                 
             end
             
@@ -115,11 +110,33 @@ classdef OptBandPassFilt < TwoPortPassive
         
         m=ABCD(obj,freq);
         
+        function opt_par=get_opt_param(obj)
+        
+            opt_par=[];
+            
+            for i=1:length(obj.resonators)
+                
+               opt_par=[opt_par obj.resonators.get_opt_param];
+                
+            end
+        
+        end
+        
+        function set_def_bounds(obj)
+        
+            for i=1:length(obj.resonators)
+               
+                obj.resonators(i).set_def_bounds;
+                
+            end
+        
+        end
+        
     end
     
     methods (Access=protected,Static) 
         
-        resonator=pick_resonator(n_res,f_c,q_l);
+        resonator=pick_resonator(n_res);
         
     end
         

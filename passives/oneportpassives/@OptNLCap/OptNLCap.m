@@ -1,11 +1,32 @@
 classdef OptNLCap < OnePortPassive
     
+    %     
+%         Private,Constant:
+%         def_max_mod_freq=0.3;
+%         def_max_mod_depth=0.3;
+%         def_mod_freq=0.1;
+%         def_mod_depth=0.1;
+%         def_mod_phase=0;
+%         def_max_mod_phase=360;
+
     properties (SetAccess=private)
         
-        mod_freq  opt_param = opt_param('value',0.1,'label','mod_ratio');
-        mod_depth opt_param = opt_param('value',0.1,'label','mod_depth');
-        mod_phase opt_param = opt_param('value',0,'label','mod_phase');
-        capacitance OptCap = OptCap('value',1e-12);
+        mod_freq  opt_param = opt_param('value',OptNLCap.def_mod_freq,'label','mod_ratio');
+        mod_depth opt_param = opt_param('value',OptNLCap.def_mod_depth,'label','mod_depth');
+        mod_phase opt_param = opt_param('value',OptNLCap.def_mod_phase,'label','mod_phase');
+        capacitance OptCap = OptCap('value',OptNLCap.def_cap);
+        
+    end
+    
+    properties (Access=private,Constant)
+        
+        def_cap=1e-12;
+        def_mod_freq=0.1;
+        def_mod_depth=0.1;
+        def_mod_phase=0;
+        def_max_mod_freq=0.3;
+        def_max_mod_depth=0.3;
+        def_max_mod_phase=360;
         
     end
     
@@ -69,7 +90,20 @@ classdef OptNLCap < OnePortPassive
             m = [a b ; c d];
         
         end
-
+        
+        function set_def_bounds(obj)
+        
+            obj.set_opt_param_min(obj.mod_freq,0);
+            obj.set_opt_param_min(obj.mod_depth,0);
+            obj.set_opt_param_min(obj.mod_phase,0);
+            obj.set_opt_param_max(obj.mod_freq,obj.def_max_mod_freq);
+            obj.set_opt_param_max(obj.mod_depth,obj.def_max_mod_depth);
+            obj.set_opt_param_max(obj.mod_phase,obj.def_max_mod_phase);
+            
+            obj.set_opt_param_min(obj.capacitance,obj.def_cap*0.5);
+            obj.set_opt_param_max(obj.capacitance,obj.def_cap*1.5);
+        end
+        
     end
 
 end

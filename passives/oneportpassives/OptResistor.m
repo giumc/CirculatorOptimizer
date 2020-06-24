@@ -3,14 +3,20 @@ classdef OptResistor <  OnePortPassive & opt_param
    % optimizable resistor
    properties (Access=private,Constant)
        
-       def_res=50;
+       def_res=1;
        
    end
    
    methods
       
         function obj=OptResistor(varargin)
-
+            
+            if isempty(varargin)
+                
+                varargin=def_res;
+                
+            end
+            
             obj=obj@opt_param(varargin{:});
 
             obj.unit='Ohm';

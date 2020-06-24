@@ -17,8 +17,8 @@ classdef StarCirc < OptCirc
     
     properties (Access=private)
                 
-        def_f_c=1;
-        def_max_q_l=10;
+        
+        max_q_l=10;
         
     end
     
@@ -40,8 +40,6 @@ classdef StarCirc < OptCirc
                 
                 obj.order = obj.design.passive.order +1;
                 
-                obj.design.set_ref_impedance(obj.def_term);
-                
             else
                 
                 obj.order = 1;
@@ -50,13 +48,12 @@ classdef StarCirc < OptCirc
                 
             obj.load.optimizable=false;
             
-            addlistener(obj.load,'ValueUpdate',@obj.callback_term);
+            addlistener(obj.load, 'ValueUpdate',@obj.callback_term);
             
             addlistener(obj,'UpdateGoal',@obj.callback_goal);
-            
         end
         
-%         function set.f_center(obj,value)
+%         function set.f_center(value)
 %             
 %             obj.f_center=value;
 %             

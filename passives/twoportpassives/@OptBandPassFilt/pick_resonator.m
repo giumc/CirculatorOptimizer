@@ -6,10 +6,10 @@ function res=pick_resonator(n,f,q)
     %center frequency f and loaded q 
     
     if mod(n,2)==1
-        res=OptParalRes('f_center',f,'q_loaded',q);
+        res=OptParalRes();
     else
         if mod(n,2)==0
-            res=OptSeriesRes('f_center',f,'q_loaded',q);
+            res=OptSeriesRes();
         else
             error("Resonator Init Failed in OptBandPassFilt");
         end

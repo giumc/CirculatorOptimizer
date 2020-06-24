@@ -6,6 +6,7 @@ classdef (Abstract) GetSetOptParam < handle
 %
 % Abstract:
 % opt_par = get_opt_param(obj);
+% set_def_bounds(obj);
 %
 % Static:
 % opt_par = set_opt_param_value(param,value);
@@ -16,6 +17,7 @@ classdef (Abstract) GetSetOptParam < handle
     methods (Abstract)
         
         opt_par = get_opt_param(obj);
+        set_def_bounds(obj);
         
     end
     

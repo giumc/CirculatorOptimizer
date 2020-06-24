@@ -82,8 +82,10 @@ classdef (Abstract) OptCirc <  CircGoal & ...
     end
     
     properties (SetAccess=protected) 
+
+       design  ;
        
-       load = OptResistor();
+       load = OptResistor('value',50);
 
     end % design parameters
 
@@ -131,11 +133,11 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             
             var.mod_phase.set_opt_param(obj.phases(1),'override');
             
-            m = obj.ABCD@OptNLBranch(freq) ;
+            m = obj.design.ABCD(freq) ;
             
             var.mod_phase.set_opt_param(obj.phases(2),'override');
             
-            m = m * obj.ABCD_term@OptNLBranch(obj.ref_impedance,freq,2);
+            m = m * obj.design.ABCD_term(obj.ref_impedance,freq,2);
                 
             var.mod_phase.set_opt_param(obj.phases(3),'override');
             
@@ -150,7 +152,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             for i=1:length(obj.f_test)
                
                 s_f(:,:,i) = obj.S_param_linear(...
-                    obj.ref_impedance,obj.f_test(i));
+                    obj.design.ref_impedance,obj.f_test(i));
                 
             end
         

@@ -17,6 +17,12 @@ classdef CircGoal < TwoPortGoal
         
     end
     
+    events
+        
+        UpdateGoal
+        
+    end
+    
     methods 
         
         function obj=CircGoal(varargin)
@@ -51,12 +57,12 @@ classdef CircGoal < TwoPortGoal
         
     end
     
-    methods (Access=private,Static)
+    methods (Access=private)
        
         function update_goals(obj,~,~)
         
             obj.calculate_goals;
-            
+            notify(obj,'UpdateGoal');
         end
         
     end

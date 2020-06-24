@@ -13,6 +13,8 @@ classdef (Abstract) OnePortPassive < handle &...
 % Public:
 % get_opt_param() -> defines base method, needs to be overridden 
 %                    in case subclass is not a opt_param
+% set_def_bounds() -> defines base method, needs to be overridden 
+%                    in case subclass is not a opt_param
 
     methods (Abstract)
         
@@ -57,6 +59,14 @@ classdef (Abstract) OnePortPassive < handle &...
                 opt_par=obj;
                 
             end
+        
+        end
+        
+        function set_def_bounds(obj)
+        
+            obj.set_opt_param_min(obj,obj.value*0.5);
+            
+            obj.set_opt_param_max(obj,obj.value*1.5);
         
         end
         

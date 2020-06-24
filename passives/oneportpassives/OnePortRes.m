@@ -5,6 +5,12 @@ classdef  OnePortRes < OnePortPassive
 % 
 % ------ PROPERTIES ------
 %     
+% Private,Constant:
+% def_f_c = 1
+% def_q_l = 5
+% def_q_u = 1000
+% def_r_term = 50
+% 
 % Set-Access protected:
 % f_center (opt_param)
 % q_loaded (opt_param)
@@ -18,24 +24,32 @@ classdef  OnePortRes < OnePortPassive
 % OnePortRes(varargin)        -> pass {NAME,VALUE} to set values
 %                                 NAMES:'f_center','q_loaded','q_unloaded'
 % 
-% get_opt_param()           ->  returns optimizable opt_param
+% get_opt_param()           ->  returns optimizable opt_params
+% set_def_bounds()          -> set default boundaries
 % Abstract:
 % c()                         -> members have to define l , c, r
 % l()
 % r()
-
+    properties (Access=private,Constant)
+        
+       def_f_c=1;
+       def_q_l=5;
+       def_q_u=1e3;
+       def_r_term=50;
+       
+    end
    
     properties (SetAccess=protected)
        
-       f_center opt_param = opt_param('value',1);
+       f_center opt_param = opt_param('value',OnePortRes.def_f_c);
        
-       q_loaded opt_param = opt_param('value',5);
+       q_loaded opt_param = opt_param('value',OnePortRes.def_q_l);
        
-       q_unloaded opt_param = opt_param('value',1e3);
+       q_unloaded opt_param = opt_param('value',OnePortRes.def_q_u);
        
        label string;
        
-       ref_impedance double = 50;
+       ref_impedance double = OnePortRes.def_r_term;
        
     end
         
@@ -103,6 +117,23 @@ classdef  OnePortRes < OnePortPassive
                 opt_par=[opt_par ...
                     obj.q_unloaded];
             end
+            
+        end
+        
+        function set_ref_impedance(obj,value)
+        
+            obj.ref_impedance = value;
+        
+        end
+        
+        function set_def_bounds(obj)
+            
+            obj.set_opt_param_min(obj.f_center,obj.f_center.value*0.5);
+            obj.set_opt_param_max(obj.f_center,obj.f_center.value*1.5);
+            obj.set_opt_param_min(obj.q_loaded,obj.q_loaded.value*0.5);
+            obj.set_opt_param_max(obj.q_loaded,obj.q_loaded.value*1.5);
+            obj.set_opt_param_min(obj.q_unloaded,obj.q_unloaded.value*0.5);
+            obj.set_opt_param_max(obj.q_unloaded,obj.q_unloaded.value*1.5);
             
         end
         
