@@ -31,10 +31,11 @@ classdef OptBandPassFilt < TwoPortPassive
 % Protected (Static) :
 % pick_resonator(n,fc,ql,qu) -> initialize res according to n to
 %                                default fc ql qu
-
+% set_def_bounds()
     properties (Access=private,Constant)
         
         def_order=1;
+        def_r_term=1;
         
     end
     

@@ -1,5 +1,5 @@
 classdef (Abstract) OptCirc <  CircGoal & ...
-                    OptNLBranch 
+                    TwoPortPassive
 
 % Interface for optimizable circulators
 % inherits from CircGoal and OptNLBranch
@@ -18,6 +18,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 % ftest 
 %
 % SetProtected :
+% design    (set-controlled to be a OptNLBranch)
 % load      (set-controlled to be a OnePortPassive)
 %
 % ------ METHODS ------
@@ -83,6 +84,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
     
     properties (SetAccess=protected) 
        
+       design;
        load = OptResistor();
 
     end % design parameters
@@ -111,6 +113,20 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
     methods
         
+        function set.design(obj,value)
+            
+            if ~isa(value,'OptNLBranch')
+                
+                error ( "design has to be a OptNLBranch instance");
+                
+            else
+                
+                obj.design=value;
+                
+            end
+        
+        end
+        
         function set.load(obj,value)
             
             if ~isa(value,'OnePortPassive')
@@ -131,11 +147,11 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             
             var.mod_phase.set_opt_param(obj.phases(1),'override');
             
-            m = obj.ABCD@OptNLBranch(freq) ;
+            m = obj.design.ABCD(freq) ;
             
             var.mod_phase.set_opt_param(obj.phases(2),'override');
             
-            m = m * obj.ABCD_term@OptNLBranch(obj.ref_impedance,freq,2);
+            m = m * obj.design.ABCD_term(obj.load,freq,2);
                 
             var.mod_phase.set_opt_param(obj.phases(3),'override');
             
@@ -158,10 +174,17 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         end
         
         function set_def_bounds(obj)
-        
+            
             obj.design.set_def_bounds;
+            
+        end
+        
+        function param = get_opt_param(obj)
+            
+            param=obj.design.get_opt_param;
         
         end
+        
     end
     
 end

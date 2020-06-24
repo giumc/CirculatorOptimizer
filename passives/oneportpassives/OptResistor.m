@@ -13,7 +13,7 @@ classdef OptResistor <  OnePortPassive & opt_param
             
             if isempty(varargin)
                 
-                varargin=def_res;
+                varargin={OptResistor.def_res};
                 
             end
             

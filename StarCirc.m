@@ -1,4 +1,4 @@
-classdef StarCirc < OptCirc
+classdef StarCirc < OptCirc 
 
 % Class for optimizable star topology circulator
 % member of OptCirc
@@ -24,8 +24,8 @@ classdef StarCirc < OptCirc
     
     properties 
         
-        label= "OptCirc with Star Design";
-               
+        label =  "OptCirc with Star Design";
+        
     end
     
     methods 
@@ -40,7 +40,7 @@ classdef StarCirc < OptCirc
                 
                 obj.order = obj.design.passive.order +1;
                 
-                obj.design.set_ref_impedance(obj.def_term);
+                obj.design.passive.set_ref_impedance(obj.def_term);
                 
             else
                 
@@ -55,18 +55,6 @@ classdef StarCirc < OptCirc
             addlistener(obj,'UpdateGoal',@obj.callback_goal);
             
         end
-        
-%         function set.f_center(obj,value)
-%             
-%             obj.f_center=value;
-%             
-%             for i=1:length(obj.design.passive.resonators)
-%                 
-%                obj.design.passive.resonators(i);
-%                 
-%             end
-%         
-%         end
         
     end
     
@@ -97,8 +85,7 @@ classdef StarCirc < OptCirc
         
         end
         
-    end
-    
+    end    
     
 end   
 
