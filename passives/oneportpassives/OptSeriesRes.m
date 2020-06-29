@@ -1,15 +1,15 @@
 classdef OptSeriesRes < OnePortRes
     
    % optimizable series resonator
-   % has two opt_param instances : f_center and q_loaded
+   % has two OptParam instances : f_center and q_loaded
    % both values can be set from constructor as name value pairs
    % the rest can be set by accessing the object
    % 
    % (public) properties
    % ref_impedance (double)
-   % f_center (opt_param)
-   % q_loaded (opt_param)
-   % q_unloaded (opt_param)
+   % f_center (OptParam)
+   % q_loaded (OptParam)
+   % q_unloaded (OptParam)
    % 
    % methods
    % OptSeriesRes('f_center',1,'q_loaded',3,'q_unloaded',100)
@@ -35,9 +35,9 @@ classdef OptSeriesRes < OnePortRes
         end
 
         function imp=z(obj,freq)
-            imp=1i*2*pi*freq*obj.l+...
+            imp=diag(1i*2*pi*freq*obj.l+...
                 1./(1i*2*pi*freq*obj.c)+...
-                (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value;
+                (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value);
         end
         
         function adm=y(obj,freq)

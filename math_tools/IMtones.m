@@ -7,8 +7,8 @@ function imt=IMtones(frf,fm,harmonics)
     imt=zeros(2*harmonics+1,1);
 
     index=-harmonics:harmonics;
-
-    for k=1:c.n_freqs
+    
+    for k=1:length(index)
 
         imt(k)=frf+index(k)*fm;
 

@@ -14,13 +14,9 @@ classdef StarCirc < OptCirc
 % StarCirc(varargin) -> you can pass {'order',N} to initialize
 %                       filter order
 %                       (initializes design as StarBranch)
-    
-    properties (Access=private)
-                
-        def_f_c=1;
-        def_max_q_l=10;
-        
-    end
+% callback_term()    -> updates ref_impedance of each resonator
+%                       in passive and nlres
+% callback_goal()    -> updates design when goals are edited
     
     properties 
         
@@ -50,6 +46,8 @@ classdef StarCirc < OptCirc
                 
             obj.load.optimizable=false;
             
+            obj.load.set_value(obj.def_term,'override');
+            
             addlistener(obj.load,'ValueUpdate',@obj.callback_term);
             
             addlistener(obj,'UpdateGoal',@obj.callback_goal);
@@ -73,13 +71,15 @@ classdef StarCirc < OptCirc
         end
         
         function callback_goal(obj,~,~)
-        
+            
+            obj.design=StarBranch('order',obj.order);
+            
             obj.design.nlres.f_center.set_value(obj.f_center);
             
             for i=1:length(obj.design.passive.resonators)
                 
-                obj.design.passive.resonators(i).f_center.set_value(obj.f_center);
-                obj.design.passive.resonators(i).q_loaded.set_value(1/2/obj.tx_bandwdith);
+                obj.design.passive.resonators(i).f_center.set_value(obj.f_center,'override');
+                obj.design.passive.resonators(i).q_loaded.set_value(1/2/obj.tx_bandwidth,'override');
                 
             end
         

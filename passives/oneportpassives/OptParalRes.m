@@ -21,9 +21,9 @@ classdef OptParalRes < OnePortRes
         end
 
         function adm=y(obj,freq)
-            adm=1i*2*pi*freq*obj.c+...
+            adm=diag(1i*2*pi*freq*obj.c+...
                 1./(1i*2*pi*freq*obj.l)+...
-                (2*pi*obj.f_center.value*obj.c)/obj.q_unloaded.value;
+                (2*pi*obj.f_center.value*obj.c)/obj.q_unloaded.value);
         end
         
         function imp=z(obj,freq)

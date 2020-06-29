@@ -18,7 +18,15 @@ classdef StarBranch < OptNLBranch
 %                         OSS: all resonators have q_unloaded set to 
 %                         not optimizable
 % ABCD(freq)           -> calculates ABCD matrix 
-
+  	
+    properties (Access=private,Constant)
+        
+        def_f_c=1;
+        def_q_l=2;
+        def_term=1;
+        
+    end
+    
     properties 
     
         label = "TwoPort Branch with BP Filter + NL Resonator";
@@ -65,7 +73,7 @@ classdef StarBranch < OptNLBranch
                 
             end
             
-            if ~isempty(order)
+            if ~isempty(order) && order>=1
                 
                 obj.passive=OptBandPassFilt(order);
                 
@@ -79,6 +87,26 @@ classdef StarBranch < OptNLBranch
                 
                 obj.nlres.q_unloaded.optimizable=false;
         
+                %set_default_values
+                
+                if ~isempty(obj.passive)
+                
+                    for i=1:length(obj.passive.resonators)
+                    
+                        obj.passive.resonators(i).f_center.set_value(...
+                            StarBranch.def_f_c,'override');
+                        obj.passive.resonators(i).q_loaded.set_value(...
+                            StarBranch.def_q_l,'override');
+                        
+                    end
+                    
+                    obj.passive.set_ref_impedance(StarBranch.def_term);
+                    
+                end
+                
+                obj.nlres.f_center.set_value(StarBranch.def_f_c,'override');
+                obj.nlres.q_loaded.set_value(StarBranch.def_q_l,'override');
+                obj.nlres.set_ref_impedance(StarBranch.def_term);
         end
     
         function m = ABCD(obj,freq)

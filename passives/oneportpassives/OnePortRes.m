@@ -12,9 +12,9 @@ classdef  OnePortRes < OnePortPassive
 % def_r_term = 50
 % 
 % Set-Access protected:
-% f_center (opt_param)
-% q_loaded (opt_param)
-% q_unloaded (opt_param)
+% f_center (OptParam)
+% q_loaded (OptParam)
+% q_unloaded (OptParam)
 % label (string)
 % ref_impedance (double)
 % 
@@ -24,7 +24,7 @@ classdef  OnePortRes < OnePortPassive
 % OnePortRes(varargin)        -> pass {NAME,VALUE} to set values
 %                                 NAMES:'f_center','q_loaded','q_unloaded'
 % 
-% get_opt_param()           ->  returns optimizable opt_params
+% get_OptParam()           ->  returns optimizable OptParams
 % set_def_bounds()          -> set default boundaries
 % Abstract:
 % c()                         -> members have to define l , c, r
@@ -41,11 +41,11 @@ classdef  OnePortRes < OnePortPassive
    
     properties (SetAccess=protected)
        
-       f_center opt_param = opt_param('value',OnePortRes.def_f_c);
+       f_center OptParam = OptParam('value',OnePortRes.def_f_c);
        
-       q_loaded opt_param = opt_param('value',OnePortRes.def_q_l);
+       q_loaded OptParam = OptParam('value',OnePortRes.def_q_l);
        
-       q_unloaded opt_param = opt_param('value',OnePortRes.def_q_u);
+       q_unloaded OptParam = OptParam('value',OnePortRes.def_q_u);
        
        label string;
        
@@ -99,7 +99,7 @@ classdef  OnePortRes < OnePortPassive
                        
         end
         
-        function opt_par=get_opt_param(obj)
+        function opt_par=get_OptParam(obj)
             
             opt_par=[];
             if obj.f_center.optimizable
@@ -126,14 +126,11 @@ classdef  OnePortRes < OnePortPassive
         
         end
         
-        function set_def_bounds(obj)
+        function set_bounds(obj)
             
-            obj.set_opt_param_min(obj.f_center,obj.f_center.value*0.5);
-            obj.set_opt_param_max(obj.f_center,obj.f_center.value*1.5);
-            obj.set_opt_param_min(obj.q_loaded,obj.q_loaded.value*0.5);
-            obj.set_opt_param_max(obj.q_loaded,obj.q_loaded.value*1.5);
-            obj.set_opt_param_min(obj.q_unloaded,obj.q_unloaded.value*0.5);
-            obj.set_opt_param_max(obj.q_unloaded,obj.q_unloaded.value*1.5);
+            obj.f_center.rescale_bounds;
+            obj.q_loaded.rescale_bounds;
+            obj.q_unloaded.rescale_bounds;
             
         end
         
@@ -146,7 +143,5 @@ classdef  OnePortRes < OnePortPassive
         res=r(obj);
 
     end
-
-        
-                
+             
 end

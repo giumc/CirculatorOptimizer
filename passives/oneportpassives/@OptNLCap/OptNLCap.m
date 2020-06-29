@@ -11,9 +11,9 @@ classdef OptNLCap < OnePortPassive
 
     properties (SetAccess=private)
         
-        mod_freq  opt_param = opt_param('value',OptNLCap.def_mod_freq,'label','mod_ratio');
-        mod_depth opt_param = opt_param('value',OptNLCap.def_mod_depth,'label','mod_depth');
-        mod_phase opt_param = opt_param('value',OptNLCap.def_mod_phase,'label','mod_phase');
+        mod_freq  OptParam = OptParam('value',OptNLCap.def_mod_freq,'label','mod_ratio');
+        mod_depth OptParam = OptParam('value',OptNLCap.def_mod_depth,'label','mod_depth');
+        mod_phase OptParam = OptParam('value',OptNLCap.def_mod_phase,'label','mod_phase');
         capacitance OptCap = OptCap('value',OptNLCap.def_cap);
         
     end
@@ -91,17 +91,46 @@ classdef OptNLCap < OnePortPassive
         
         end
         
-        function set_def_bounds(obj)
+        function set_bounds(obj)
         
-            obj.set_opt_param_min(obj.mod_freq,0);
-            obj.set_opt_param_min(obj.mod_depth,0);
-            obj.set_opt_param_min(obj.mod_phase,0);
-            obj.set_opt_param_max(obj.mod_freq,obj.def_max_mod_freq);
-            obj.set_opt_param_max(obj.mod_depth,obj.def_max_mod_depth);
-            obj.set_opt_param_max(obj.mod_phase,obj.def_max_mod_phase);
+            obj.mod_freq.rescale_bounds;
+            obj.mod_depth.rescale_bounds;
+            obj.mod_phase.rescale_bounds;
+            obj.capacitance.rescale_bounds;
             
-            obj.set_opt_param_min(obj.capacitance,obj.def_cap*0.5);
-            obj.set_opt_param_max(obj.capacitance,obj.def_cap*1.5);
+            %override min mod freq /depth
+            obj.mod_freq.set_min(0);
+            obj.mod_depth.set_min(0);
+        end
+        
+        function opt_par=get_OptParam(obj)
+            
+            opt_par=[];
+            
+            if obj.capacitance.optimizable
+            
+                opt_par=[opt_par, obj.capacitance];
+                
+            end
+            
+            if obj.mod_freq.optimizable
+                
+                opt_par=[opt_par obj.var.mod_freq];
+                
+            end
+            
+            if obj.var.mod_depth.optimizable
+                
+                opt_par=[opt_par obj.var.mod_depth];
+                
+            end
+            
+            if obj.var.mod_phase.optimizable
+                
+                opt_par=[opt_par obj.var.mod_depth];
+                
+            end
+            
         end
         
     end

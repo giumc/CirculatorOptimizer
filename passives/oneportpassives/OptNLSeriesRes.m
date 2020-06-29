@@ -46,19 +46,6 @@ classdef OptNLSeriesRes < OnePortNLRes
         
         end
         
-        function m = shuntABCD(obj,freq)
-            
-            adm = obj.y(freq);
-            
-            a = diag(ones(1,length(adm)));
-            b = diag(zeros(1,length(adm)));
-            c = diag(adm);
-            d = diag(ones(1,length(adm)));
-            
-            m = [a b ; c d];
-            
-        end
-        
         function imp = z(obj,freq)
             
             [ ~ ,b ,~ ,d] = ABCD_split(obj.seriesABCD(freq));
@@ -69,8 +56,7 @@ classdef OptNLSeriesRes < OnePortNLRes
         
         function adm = y(obj,freq)
         
-            imp = obj.z(freq);
-            adm = inv(imp);
+            adm = inv(obj.z(freq));
             
         end
        

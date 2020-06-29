@@ -4,13 +4,21 @@ function m=ABCD(obj,freq)
     
     for i=1:length(obj.resonators)
        
-        if mod(i,2)==1
+        if isa(obj.resonators(i),'OptParalRes')
             
             m=m*obj.resonators(i).shuntABCD(freq);
             
         else
             
-            m=m*obj.resonators(i).seriesABCD(freq);
+            if isa(obj.resonators(i),'OptSeriesRes')
+                
+                m=m*obj.resonators(i).seriesABCD(freq);
+                
+            else
+                
+                error("Invalid resonator in OptBandPassFilt");
+                
+            end
             
         end
         

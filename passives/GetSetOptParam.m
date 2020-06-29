@@ -1,31 +1,31 @@
 classdef (Abstract) GetSetOptParam < handle
    
-% interface to enable get/settability of opt_param
+% interface to control OptParams
 %
 % ------ METHODS ------
 %
 % Abstract:
-% opt_par = get_opt_param(obj);
-% set_def_bounds(obj);
+% opt_par = get_OptParam(obj);
+% set_bounds(obj);
 %
 % Static:
-% opt_par = set_opt_param_value(param,value);
-% set_opt_param_min(param,min);
-% set_opt_param_max(param,max);
+% opt_par = set_OptParam_value(param,value);
+% set_OptParam_min(param,min);
+% set_OptParam_max(param,max);
 
 
     methods (Abstract)
         
-        opt_par = get_opt_param(obj);
-        set_def_bounds(obj);
+        opt_par = get_OptParam(obj);
+        set_bounds(obj);
         
     end
     
-    methods
+    methods (Access=protected)
        
         function val=get_opt_norm_values(obj)
             
-            params=obj.get_opt_param;
+            params=obj.get_OptParam;
             
             val=[];
             
@@ -39,11 +39,11 @@ classdef (Abstract) GetSetOptParam < handle
         
         function update_opt_norm_values(obj,vals)
             
-            params=obj.get_opt_param;
+            params=obj.get_OptParam;
             
             if ~length(vals)==length(params)
                 
-                error("N values to be updated is different than opt_param");
+                error("N values to be updated is different than OptParam");
                 
             end
             
@@ -55,19 +55,31 @@ classdef (Abstract) GetSetOptParam < handle
             
         end
         
+        function update_bounds(obj)
+        
+            params=obj.get_OptParam;
+            
+            for i=1:length(params)
+               
+                params(i).rescale_bounds;
+                
+            end
+            
+        end
+        
     end
     
-    methods (Static)
+    methods (Access=protected,Static)
         
-        function set_opt_param_value(param,value,varargin)
+        function set_OptParam_value(param,value,varargin)
            param.set_value(value,varargin{:})
         end
         
-        function set_opt_param_min(param,min)
+        function set_OptParam_min(param,min)
             param.set_min(min);
         end
         
-        function set_opt_param_max(param,max)
+        function set_OptParam_max(param,max)
             param.set_max(max);
         end
 

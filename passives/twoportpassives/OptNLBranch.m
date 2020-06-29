@@ -13,7 +13,7 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
 % ------ METHODS -----
 %
 % Public:
-% get_opt_param()           ->  returns optimizable opt_param
+% get_OptParam()           ->  returns optimizable OptParam
 % set_def_bounds(obj)       -> sets default boundaries
 
     properties 
@@ -45,18 +45,18 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
             
         end
         
-        function opt_par=get_opt_param(obj)
+        function opt_par=get_OptParam(obj)
             
-            opt_par=obj.passive.get_opt_param;
+            opt_par=obj.passive.get_OptParam;
             
-            opt_par= [opt_par obj.nlres.get_opt_param ];
+            opt_par= [opt_par obj.nlres.get_OptParam ];
         
         end
         
-        function set_def_bounds(obj)
+        function set_bounds(obj)
             
-            obj.passive.set_def_bounds;
-            obj.nlres.set_def_bounds;
+            obj.passive.set_bounds;
+            obj.nlres.set_bounds;
             
         end
         

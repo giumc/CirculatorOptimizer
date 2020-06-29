@@ -10,9 +10,9 @@ function [a ,b ,c ,d ] = ABCD_split(mat)
 
     nfreq= xdim/2;
 
-    a=ABCD(1:nfreq,1:nfreq);
-    b=ABCD(1:nfreq,(nfreq+1):(2*nfreq));
-    c=ABCD((nfreq+1):(2*nfreq),1:nfreq);
-    d=ABCD((nfreq+1):(2*nfreq),(nfreq+1):(2*nfreq));
+    a=mat(1:nfreq,1:nfreq);
+    b=mat(1:nfreq,(nfreq+1):(2*nfreq));
+    c=mat((nfreq+1):(2*nfreq),1:nfreq);
+    d=mat((nfreq+1):(2*nfreq),(nfreq+1):(2*nfreq));
 
 end

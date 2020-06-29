@@ -1,4 +1,4 @@
-classdef OptCap <  opt_param & OnePortPassive
+classdef OptCap <  OptParam & OnePortPassive
     
    % optimizable capacitor
    properties (Access=private,Constant)
@@ -9,7 +9,7 @@ classdef OptCap <  opt_param & OnePortPassive
       
         function obj=OptCap(varargin)
 
-            obj=obj@opt_param(varargin{:});
+            obj=obj@OptParam(varargin{:});
 
             obj.unit='Farad';
             
@@ -18,21 +18,21 @@ classdef OptCap <  opt_param & OnePortPassive
         end
        
         function imp=z(obj,freq)
-            imp=1 ./ (1i * 2 * pi * freq *obj.value );
+            imp=diag(1 ./ (1i * 2 * pi * freq *obj.value ));
             
         end
        
         function adm=y(obj,freq)
-            adm = inverse(obj.z(freq));
+            adm = inv(obj.z(freq));
         end
         
-        function opt_param=get_opt_param(obj)
+        function OptParam=get_OptParam(obj)
         
-            opt_param=[];
+            OptParam=[];
             
             if obj.optimizable
                 
-                opt_param=obj;
+                OptParam=obj;
                 
             end
                 

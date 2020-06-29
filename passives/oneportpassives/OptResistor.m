@@ -1,4 +1,4 @@
-classdef OptResistor <  OnePortPassive & opt_param 
+classdef OptResistor <  OnePortPassive & OptParam 
     
    % optimizable resistor
    properties (Access=private,Constant)
@@ -17,7 +17,7 @@ classdef OptResistor <  OnePortPassive & opt_param
                 
             end
             
-            obj=obj@opt_param(varargin{:});
+            obj=obj@OptParam(varargin{:});
 
             obj.unit='Ohm';
             
@@ -27,13 +27,13 @@ classdef OptResistor <  OnePortPassive & opt_param
        
         function imp=z(obj,freq)
                 
-            imp=obj.value*ones(1,length(freq));
+            imp=diag(obj.value*ones(1,length(freq)));
             
         end
        
         function adm=y(obj,freq)
         
-            adm = inverse(obj.z(freq));
+            adm =inv(obj.z(freq));
             
         end
         

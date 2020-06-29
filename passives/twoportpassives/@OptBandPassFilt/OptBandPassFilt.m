@@ -1,6 +1,6 @@
 classdef OptBandPassFilt < TwoPortPassive 
       
-% implement shunt-first , all poles BP Filter
+% implement shunt-last , all poles BP Filter
 % member of TwoPortPassive
 % 
 % ------ PROPERTIES ------
@@ -26,7 +26,7 @@ classdef OptBandPassFilt < TwoPortPassive
 % 
 % Public:
 % OptBandPassFilt(varargin)-> pass {'order',N} to set filter order
-% get_opt_param()           ->  returns optimizable opt_param
+% get_OptParam()           ->  returns optimizable OptParam
 % set_ref_impedance(value)
 % Protected (Static) :
 % pick_resonator(n,fc,ql,qu) -> initialize res according to n to
@@ -111,23 +111,23 @@ classdef OptBandPassFilt < TwoPortPassive
         
         m=ABCD(obj,freq);
         
-        function opt_par=get_opt_param(obj)
+        function opt_par=get_OptParam(obj)
         
             opt_par=[];
             
             for i=1:length(obj.resonators)
                 
-               opt_par=[opt_par obj.resonators.get_opt_param];
+               opt_par=[opt_par obj.resonators.get_OptParam];
                 
             end
         
         end
         
-        function set_def_bounds(obj)
+        function set_bounds(obj)
         
             for i=1:length(obj.resonators)
                
-                obj.resonators(i).set_def_bounds;
+                obj.resonators(i).set_bounds;
                 
             end
         
@@ -135,9 +135,9 @@ classdef OptBandPassFilt < TwoPortPassive
         
     end
     
-    methods (Access=protected,Static) 
+    methods (Access=protected) 
         
-        resonator=pick_resonator(n_res);
+        resonator=pick_resonator(obj,n_res);
         
     end
         

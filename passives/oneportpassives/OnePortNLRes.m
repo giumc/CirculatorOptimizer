@@ -24,8 +24,8 @@ classdef OnePortNLRes < OnePortRes
 %                                     OSS:
 %                                     resis, ind and var.capacitance 
 %                                     are non optimizable by default
-%     get_opt_param()           ->  returns optimizable opt_param
-%     set_def_bounds()          -> set default boundaries
+%     get_OptParam()           ->  returns optimizable OptParam
+%     set_bounds()          -> set default boundaries
     
     properties (Access=protected)
         
@@ -57,34 +57,18 @@ classdef OnePortNLRes < OnePortRes
             
         end
         
-        function opt_par=get_opt_param(obj)
+        function opt_par=get_OptParam(obj)
         
-            opt_par=get_opt_param@OnePortRes(obj);
+            opt_par=get_OptParam@OnePortRes(obj);
             
-            if obj.var.mod_freq.optimizable
-                
-                opt_par=[opt_par obj.var.mod_freq];
-                
-            end
-            
-            if obj.var.mod_depth.optimizable
-                
-                opt_par=[opt_par obj.var.mod_depth];
-                
-            end
-            
-            if obj.var.mod_phase.optimizable
-                
-                opt_par=[opt_par obj.var.mod_depth];
-                
-            end
+            opt_par=[opt_par obj.var.get_OptParam];
         
         end
         
-        function set_def_bounds(obj)
+        function set_bounds(obj)
             
-            obj.set_def_bounds@OnePortRes;
-            obj.var.set_def_bounds;
+            obj.set_bounds@OnePortRes;
+            obj.var.set_bounds;
         end
         
     end

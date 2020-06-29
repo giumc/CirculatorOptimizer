@@ -1,6 +1,6 @@
 function inv=ABCD_inverse(mat)
 
-    [a b c d] = split_ABCD(mat);
+    [a, b, c, d] = ABCD_split(mat);
 
     det = a * d - b *c ;
 
