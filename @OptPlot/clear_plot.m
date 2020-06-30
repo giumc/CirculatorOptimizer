@@ -1,12 +1,13 @@
 function clear_plot(obj)
 
-    if ~isempty(obj.fig)
+    if ~isempty(obj.fig) || obj.find_plot
 
         if isvalid(obj.fig)
-            close(obj.fig);
-            delete(obj.fig);
+            
+            delete(obj.fig.Children);
+            
         end
-
+        
     end
 
 end

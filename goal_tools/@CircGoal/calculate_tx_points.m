@@ -1,17 +1,17 @@
-function calculate_tx_points(c_goal)
+function calculate_tx_points(obj)
 
     %equispaced points in tx bandwidth
     
     f_points=linspace(...
-        c_goal.f_center*(1-c_goal.tx_bandwidth/2),...
-        c_goal.f_center*(1+c_goal.tx_bandwidth/2),...
-        c_goal.order+2);
+        obj.f_center*(1-obj.tx_bandwidth/2),...
+        obj.f_center*(1+obj.tx_bandwidth/2),...
+        obj.order+2);
      
     %add center freq
     
-    if isempty(f_points(f_points==c_goal.f_center))
+    if isempty(f_points(f_points==obj.f_center))
         
-        f_points(end+1)=1;
+        f_points(end+1)=obj.f_center;
         
         f_points=sort(f_points);
         
@@ -25,8 +25,8 @@ function calculate_tx_points(c_goal)
     
     % set to object 
     
-    c_goal.ILgoal.set_f_array(f_points);
+    obj.ILgoal.set_f_array(f_points);
     
-    c_goal.ILgoal.set_goal(tx_values);
+    obj.ILgoal.set_goal(tx_values);
     
 end

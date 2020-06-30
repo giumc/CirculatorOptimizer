@@ -68,8 +68,11 @@ classdef OnePortNLRes < OnePortRes
         function set_bounds(obj)
             
             obj.set_bounds@OnePortRes;
+            
             obj.var.set_bounds;
+            
         end
+        
         
     end
        

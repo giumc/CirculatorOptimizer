@@ -18,7 +18,7 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
     % ValueUpdate (if value is set)
     % 
     % Public:
-    % optimizable       - > only 0 or 1
+    % optimizable (int32)    - > only 0 or 1
     % unit (string)
     % label (string)
     % rescale_factor    -> between 0 or 1
@@ -72,7 +72,7 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
     properties
         
         label string = "Default";
-        optimizable double = true;
+        optimizable int32 = true;
         unit string = "";
         rescale_factor double = OptParam.def_rescale_factor;
         
@@ -163,11 +163,11 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
         
         end
         
-        function rescale_bounds(obj)
+        function rescale_bounds(obj,varargin)
         
             f=obj.rescale_factor;
-            obj.set_min(obj.value*(1-f));
-            obj.set_max(obj.value*(1+f));
+            obj.set_min(obj.value*(1-f),varargin{:});
+            obj.set_max(obj.value*(1+f),varargin{:});
 
         end
         
@@ -176,8 +176,8 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
     methods
         
         set_value(obj,value,varargin);
-        set_min(obj,value);
-        set_max(obj,value);
+        set_min(obj,value,varargin);
+        set_max(obj,value,varargin);
         
     end %SET functions
 

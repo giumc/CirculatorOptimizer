@@ -49,10 +49,7 @@ classdef CircOptPlot < OptPlot
                         
             obj@OptPlot(varargin{:});
             obj.opt_obj=circ;
-            obj.label=CircOptPlot.def_label;
-            
-            obj.setup_plot;
-            obj.update_plot;
+            obj.label=CircOptPlot.def_label; % triggers reset
             
         end
         

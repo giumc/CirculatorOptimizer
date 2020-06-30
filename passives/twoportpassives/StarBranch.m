@@ -22,7 +22,7 @@ classdef StarBranch < OptNLBranch
     properties (Access=private,Constant)
         
         def_f_c=1;
-        def_q_l=2;
+        def_q_l=5;
         def_term=1;
         
     end
@@ -86,7 +86,8 @@ classdef StarBranch < OptNLBranch
             end
                 
                 obj.nlres.q_unloaded.optimizable=false;
-        
+                obj.nlres.var.mod_phase.optimizable=false;
+                
                 %set_default_values
                 
                 if ~isempty(obj.passive)

@@ -27,7 +27,7 @@ classdef StarCirc < OptCirc
     methods 
         
         function obj=StarCirc(varargin)
-            
+
             obj.f_test=obj.calculate_frf();
             
             obj.design=StarBranch(varargin{:});
@@ -72,14 +72,20 @@ classdef StarCirc < OptCirc
         
         function callback_goal(obj,~,~)
             
+            obj.f_test=obj.calculate_frf;
+            
             obj.design=StarBranch('order',obj.order);
             
-            obj.design.nlres.f_center.set_value(obj.f_center);
+            obj.design.nlres.f_center.set_value(obj.f_center,'override');
             
-            for i=1:length(obj.design.passive.resonators)
+            if ~isempty(obj.design.passive)
                 
-                obj.design.passive.resonators(i).f_center.set_value(obj.f_center,'override');
-                obj.design.passive.resonators(i).q_loaded.set_value(1/2/obj.tx_bandwidth,'override');
+                for i=1:length(obj.design.passive.resonators)
+
+                    obj.design.passive.resonators(i).f_center.set_value(obj.f_center,'override');
+    %                 obj.design.passive.resonators(i).q_loaded.set_value(1/obj.tx_bandwidth,'override');
+
+                end
                 
             end
         

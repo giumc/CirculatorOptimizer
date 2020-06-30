@@ -35,6 +35,7 @@ classdef OptBandPassFilt < TwoPortPassive
     properties (Access=private,Constant)
         
         def_order=1;
+        
         def_r_term=1;
         
     end

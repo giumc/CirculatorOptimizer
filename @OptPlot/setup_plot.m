@@ -12,8 +12,6 @@ function setup_plot(obj,varargin)
  dy_plotspacing=obj.dy_plotspacing;
  units=obj.unit;
  figlabel=obj.label;
- spacing=obj.button_spacing;
- dybuttons=obj.dybuttons;
  
  switch obj.type
      
@@ -34,34 +32,43 @@ function setup_plot(obj,varargin)
 %% Figure
 
     if ~isempty(obj.fig)
-        if isobject(obj.fig) 
+        
             if isvalid(obj.fig)
-                delete(obj.fig.Children);
+                
+                obj.clear_plot;
+                
             else
+                
                 obj.fig=figure(varargin{:});
+                
             end
-        else
-            obj.fig=figure(varargin{:});
-        end
+            
     else
-        obj.fig=figure(varargin{:});
+        
+        if ~obj.find_plot
+            
+                obj.fig=figure(varargin{:});
+        
+        end
+            
     end
 
-        obj.fig.Name=figlabel;
-        obj.fig.Units=units;
-        obj.fig.OuterPosition=[x0fig y0fig x0fig+dxfig y0fig+dyfig];
+    obj.fig.Name=figlabel;
+    obj.fig.Units=units;
+    obj.fig.OuterPosition=[x0fig y0fig x0fig+dxfig y0fig+dyfig];
 
 
 %% Axes
-
+    
+%     obj.ax=[];
+    
     plot_data=obj.generate_plot_data;
-    %
-    % can be made more complex here if needed
     
     for i=1:length(plot_data)
         
         ax(i)=axes(obj.fig);
-        ax(i).YLabel.String =   'titlehere';
+        ax(i).YLabel.String =   'YAxisLabel';
+        ax(i).XLabel.String =   'XAxisLabel';
         ax(i).Color         =   rgb('White');
         ax(i).GridLineStyle =   '-.';
         ax(i).XGrid         =   'on';
@@ -73,6 +80,8 @@ function setup_plot(obj,varargin)
         leg(i).Location     =   'southeast';
         
     end
+    
+    % can be made more complex here if needed
     
     if length(plot_data)==4
         

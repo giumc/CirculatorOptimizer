@@ -28,9 +28,13 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         function set.passive(obj,value)
             
             if ~isa(value,'TwoPortPassive')
+                
                 error('passive property needs to be member of TwoPortPassive');
+            
             else
+                
                 obj.passive=value; 
+                
             end
             
         end
@@ -38,9 +42,13 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         function set.nlres(obj,value)
             
             if ~isa(value,'OnePortNLRes')
+                
                 error('nlres property needs to be member of OnePortNLRes');
+           
             else
+                
                 obj.nlres=value; 
+                
             end
             
         end
@@ -56,6 +64,7 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         function set_bounds(obj)
             
             obj.passive.set_bounds;
+            
             obj.nlres.set_bounds;
             
         end

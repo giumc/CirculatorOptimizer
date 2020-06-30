@@ -57,7 +57,7 @@ classdef CircGoal < TwoPortGoal
         
     end
     
-    methods (Access=private)
+    methods (Access=protected)
        
         function update_goals(obj,~,~)
         

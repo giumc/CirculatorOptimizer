@@ -12,7 +12,7 @@ classdef OptParalRes < OnePortRes
         end
         
         function val=c(obj)
-            val=obj.q_loaded.value*obj.ref_impedance*(2*pi*obj.f_center.value);
+            val=obj.q_loaded.value/obj.ref_impedance/(2*pi*obj.f_center.value);
         end
         
         function res= r(obj)

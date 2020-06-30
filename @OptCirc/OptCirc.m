@@ -37,7 +37,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
     properties (Access=protected,Constant)
 
-        harmonics=1;
+        harmonics=2;
 
         phases=[0 120 240]; 
         
@@ -68,6 +68,12 @@ classdef (Abstract) OptCirc <  CircGoal & ...
     end % design parameters
 
     methods (Access=protected)
+        
+        function obj=OptCirc(varargin)
+        
+            obj=obj@CircGoal(varargin{:});
+            
+        end
         
         function f=calculate_frf(obj)
                 f_min = max(...
@@ -119,23 +125,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             
         end
         
-        function m = ABCD(obj,freq)
-        
-            var = obj.design.nlres.var;
-            
-            var.mod_phase.set_value(obj.phases(1),'override');
-            
-            m = obj.design.ABCD(freq) ;
-            
-            var.mod_phase.set_value(obj.phases(2),'override');
-            
-            m = m * obj.design.ABCD_term(obj.load,freq,2);
-                
-            var.mod_phase.set_value(obj.phases(3),'override');
-            
-            m = m * ABCD_inverse(obj.design.ABCD(freq)) ;
-            
-        end
+        m=ABCD(obj,freq);
         
         s_f=calculate_S_lin_response(obj);
         
@@ -150,6 +140,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             param=obj.design.get_OptParam;
         
         end
+        
+        debug_test(obj);
         
     end
     

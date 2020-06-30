@@ -1,27 +1,57 @@
-function set_max(opt_param,local_max)
+function set_max(obj,max,varargin)
 %callback function, triggered when one attempts to modify boundaries
     
-local_min=opt_param.min;
-v=opt_param.value;
+    if ~isempty(varargin)
 
-%prevent weird cases
-if local_max < local_min
-    opt_param.min=local_max;
-    opt_param.value=local_max;
-end
+        if strcmp(varargin{:},'override')
 
-if local_max > opt_param.global_max
-    opt_param.max=opt_param.global_max;
-end
+            if max > obj.global_max
 
-%adjust
+                obj.max=obj.global_max;
 
-if v > local_max
-    opt_param.value=local_max;
-    opt_param.max=min([local_max opt_param.global_max]);
-else
-    opt_param.max=min([local_max opt_param.global_max]);
-end
+            else
 
- 
+                obj.max=max;
+
+                return
+
+            end
+
+        end
+
+    end
+
+    min=obj.min;
+    
+    v=obj.value;
+
+    %prevent weird cases
+    if max < min
+        
+        obj.min=max;
+        
+        obj.value=max;
+        
+    end
+
+    if max > obj.global_max
+        
+        obj.max=obj.global_max;
+        
+    end
+
+    %adjust
+
+    if v > max
+        
+        obj.value=max;
+        
+        obj.max=min([max obj.global_max]);
+        
+    else
+        
+        obj.max=min([max obj.global_max]);
+        
+    end
+    
 end

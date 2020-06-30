@@ -29,10 +29,10 @@ classdef (Abstract) OnePortPassive < handle &...
             
             nfreq=length(freq);
             
-            a=ones(nfreq);
+            a=diag(ones(1,nfreq));
             b=obj.z(freq);
-            c=zeros(nfreq);
-            d=ones(nfreq);
+            c=diag(zeros(1,nfreq));
+            d=diag(ones(1,nfreq));
             
             m= [ a b ; c d];
             
@@ -42,10 +42,10 @@ classdef (Abstract) OnePortPassive < handle &...
             
             nfreq=length(freq);
             
-            a=ones(nfreq);
-            b=zeros(nfreq);
+            a=diag(ones(1,nfreq));
+            b=diag(zeros(1,nfreq));
             c=obj.y(freq);
-            d=ones(nfreq);
+            d=diag(ones(1,nfreq));
             
             m= [ a b ; c d];
         end     

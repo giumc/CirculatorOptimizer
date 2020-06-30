@@ -42,7 +42,9 @@ classdef OptNLSeriesRes < OnePortNLRes
 
         function m = seriesABCD(obj,freq)
             
-            m = obj.ind.seriesABCD(freq)*obj.var.seriesABCD(freq);
+            m = obj.ind.seriesABCD(freq)*...
+                obj.var.seriesABCD(freq)*...
+                obj.resis.seriesABCD(freq);
         
         end
         

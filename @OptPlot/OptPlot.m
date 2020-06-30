@@ -26,13 +26,13 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
     % 
     % plot data instructions:
     % cell array of structures, each one with the following fields
-    % p.Data  -> table with (X,Y1,X,Y2) plot points
-    % p.LineOptions -> cell array of 1xN line options
-    % p.LegendLabels -> cell array with legend names
-    % p.XAxisName
-    % p.YAxisName
+    % p.Data  -> table with (X,Y1,X,Y2...) plot points
+    % p.LineOption -> cell array of N line options
+    % p.LegendLabel -> cell array with N legend names
+    % p.XAxisLabel
+    % p.YAxisLabel
     
-   properties (Access=protected)
+   properties %(Access=protected)
       
        opt_obj;
        
@@ -174,7 +174,9 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
        end
        
        function delete(obj)
+       
             obj.clear_plot;
+            
        end
        
    end
@@ -189,6 +191,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
        
         setup_plot(obj);
         clear_plot(obj);
+        flag=find_plot(obj);
         reset_plot(obj);
         update_plot(obj);
         
