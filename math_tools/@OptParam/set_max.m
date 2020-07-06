@@ -1,17 +1,17 @@
-function set_max(obj,max,varargin)
+function set_max(obj,max_value,varargin)
 %callback function, triggered when one attempts to modify boundaries
     
     if ~isempty(varargin)
 
         if strcmp(varargin{:},'override')
 
-            if max > obj.global_max
+            if max_value > obj.global_max
 
                 obj.max=obj.global_max;
 
             else
 
-                obj.max=max;
+                obj.max=max_value;
 
                 return
 
@@ -21,20 +21,20 @@ function set_max(obj,max,varargin)
 
     end
 
-    min=obj.min;
+    min_value=obj.min;
     
     v=obj.value;
 
     %prevent weird cases
-    if max < min
+    if max_value < min_value
         
-        obj.min=max;
+        obj.min=max_value;
         
-        obj.value=max;
+        obj.value=max_value;
         
     end
 
-    if max > obj.global_max
+    if max_value > obj.global_max
         
         obj.max=obj.global_max;
         
@@ -42,16 +42,12 @@ function set_max(obj,max,varargin)
 
     %adjust
 
-    if v > max
+    if v > max_value
         
-        obj.value=max;
-        
-        obj.max=min([max obj.global_max]);
-        
-    else
-        
-        obj.max=min([max obj.global_max]);
+        obj.value=max_value;
         
     end
+        
+    obj.max=min([max_value obj.global_max]);
     
 end

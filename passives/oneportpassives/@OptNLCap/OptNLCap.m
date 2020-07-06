@@ -9,15 +9,6 @@ classdef OptNLCap < OnePortPassive
 %         def_mod_phase=0;
 %         def_max_mod_phase=360;
 
-    properties (SetAccess=private)
-        
-        mod_freq  OptParam = OptParam('value',OptNLCap.def_mod_freq,'label','mod_ratio');
-        mod_depth OptParam = OptParam('value',OptNLCap.def_mod_depth,'label','mod_depth');
-        mod_phase OptParam = OptParam('value',OptNLCap.def_mod_phase,'label','mod_phase');
-        capacitance OptCap = OptCap('value',OptNLCap.def_cap);
-        
-    end
-    
     properties (Access=private,Constant)
         
         def_cap=1e-12;
@@ -27,6 +18,17 @@ classdef OptNLCap < OnePortPassive
         def_max_mod_freq=0.3;
         def_max_mod_depth=0.3;
         def_max_mod_phase=360;
+        def_min_mod_freq=0;
+        def_min_mod_depth=0;
+        
+    end
+    
+    properties (SetAccess=private)
+        
+        mod_freq  OptParam = OptParam('value',OptNLCap.def_mod_freq,'label','mod_ratio');
+        mod_depth OptParam = OptParam('value',OptNLCap.def_mod_depth,'label','mod_depth');
+        mod_phase OptParam = OptParam('value',OptNLCap.def_mod_phase,'label','mod_phase');
+        capacitance OptCap = OptCap('value',OptNLCap.def_cap);
         
     end
     
@@ -99,10 +101,11 @@ classdef OptNLCap < OnePortPassive
             obj.capacitance.rescale_bounds;
             
             %override min mod freq /depth
-            obj.mod_freq.set_min(0);
-            obj.mod_depth.set_min(0);
-            obj.mod_freq_set_max(obj.def_max_mod_freq);
-            obj.mod_depth_set_max(obj.def_max_mod_depth);
+            obj.mod_freq.set_min(obj.def_min_mod_freq);
+            obj.mod_depth.set_min(obj.def_min_mod_depth);
+            obj.mod_freq.set_max(obj.def_max_mod_freq);
+            obj.mod_depth.set_max(obj.def_max_mod_depth);
+            
         end
         
         function opt_par=get_OptParam(obj)

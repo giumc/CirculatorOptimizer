@@ -16,6 +16,7 @@ classdef OptNLSeriesRes < OnePortNLRes
         function obj=OptNLSeriesRes(varargin)
             
             obj=obj@OnePortNLRes(varargin{:});
+            obj.paramchange;
             obj.label ='Non Linear  LC Resonator';
             addlistener (obj.f_center,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_loaded,'ValueUpdate',@obj.paramchange);
@@ -43,8 +44,9 @@ classdef OptNLSeriesRes < OnePortNLRes
         function m = seriesABCD(obj,freq)
             
             m = obj.ind.seriesABCD(freq)*...
-                obj.var.seriesABCD(freq)*...
-                obj.resis.seriesABCD(freq);
+                obj.var.seriesABCD(freq);
+            %*...
+               % obj.resis.seriesABCD(freq);
         
         end
         

@@ -1,5 +1,5 @@
 classdef (Abstract) OptCirc <  CircGoal & ...
-                    TwoPortPassive
+                    OptNLBranch
 
 % Interface for optimizable circulators
 % inherits from CircGoal and OptNLBranch
@@ -37,7 +37,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
     properties (Access=protected,Constant)
 
-        harmonics=2;
+        harmonics=1;
 
         phases=[0 120 240]; 
         
@@ -62,18 +62,18 @@ classdef (Abstract) OptCirc <  CircGoal & ...
     
     properties (SetAccess=protected) 
        
-       design;
+%        design;
        load = OptResistor();
 
     end % design parameters
 
     methods (Access=protected)
         
-        function obj=OptCirc(varargin)
-        
-            obj=obj@CircGoal(varargin{:});
-            
-        end
+%         function obj=OptCirc(varargin)
+%         
+%             obj=obj@CircGoal(varargin{:});
+%             
+%         end
         
         function f=calculate_frf(obj)
                 f_min = max(...
@@ -97,19 +97,19 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
     methods
         
-        function set.design(obj,value)
-            
-            if ~isa(value,'OptNLBranch')
-                
-                error ( "design has to be a OptNLBranch instance");
-                
-            else
-                
-                obj.design=value;
-                
-            end
-        
-        end
+%         function set.design(obj,value)
+%             
+%             if ~isa(value,'OptNLBranch')
+%                 
+%                 error ( "design has to be a OptNLBranch instance");
+%                 
+%             else
+%                 
+%                 obj.design=value;
+%                 
+%             end
+%         
+%         end
         
         function set.load(obj,value)
             
@@ -125,23 +125,23 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             
         end
         
-        m=ABCD(obj,freq);
+%         m=ABCD(obj,freq);
         
         s_f=calculate_S_lin_response(obj);
         
-        function set_bounds(obj)
-            
-            obj.design.set_bounds;
-            
-        end
+%         function set_bounds(obj)
+%             
+%             obj.design.set_bounds;
+%             
+%         end
+%         
+%         function param = get_OptParam(obj)
+%             
+%             param=obj.design.get_OptParam;
+%         
+%         end
         
-        function param = get_OptParam(obj)
-            
-            param=obj.design.get_OptParam;
-        
-        end
-        
-        debug_test(obj);
+       test(obj);
         
     end
     

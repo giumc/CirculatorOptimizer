@@ -63,8 +63,12 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         
         function set_bounds(obj)
             
+        if ~isempty(obj.passive)
+            
             obj.passive.set_bounds;
             
+        end
+        
             obj.nlres.set_bounds;
             
         end

@@ -1,4 +1,4 @@
-classdef StarCirc < OptCirc 
+classdef StarCirc < OptCirc & StarBranch 
 
 % Class for optimizable star topology circulator
 % member of OptCirc
@@ -18,25 +18,27 @@ classdef StarCirc < OptCirc
 %                       in passive and nlres
 % callback_goal()    -> updates design when goals are edited
     
-    properties 
-        
-        label =  "OptCirc with Star Design";
-        
-    end
+%     properties 
+%         
+%         label =  "OptCirc with Star Design";
+%         
+%     end
     
     methods 
         
         function obj=StarCirc(varargin)
 
+            obj=obj@StarBranch(varargin{:});
+            
             obj.f_test=obj.calculate_frf();
             
-            obj.design=StarBranch(varargin{:});
+            obj.label = "OptCirc with Star Design" ;
             
-            if ~isempty(obj.design.passive)
+            if ~isempty(obj.passive)
                 
-                obj.order = obj.design.passive.order +1;
+                obj.order = obj.passive.order +1;
                 
-                obj.design.passive.set_ref_impedance(obj.def_term);
+                obj.passive.set_ref_impedance(obj.def_term);
                 
             else
                 
@@ -54,6 +56,8 @@ classdef StarCirc < OptCirc
             
         end
         
+        m=ABCD(obj,freq);
+        
     end
     
     methods (Access=private)
@@ -62,28 +66,28 @@ classdef StarCirc < OptCirc
         
             new_value=obj.load.value;
             
-            if ~isempty(obj.design.passive)
+            if ~isempty(obj.passive)
                 
-                obj.design.passive.set_ref_impedance(new_value);
-                obj.design.nlres.set_ref_impedance(new_value);
+                obj.passive.set_ref_impedance(new_value);
+                obj.nlres.set_ref_impedance(new_value);
             end
         
-        end
+        end        
         
         function callback_goal(obj,~,~)
             
+            obj=StarCirc('order',obj.order);
+            
             obj.f_test=obj.calculate_frf;
             
-            obj.design=StarBranch('order',obj.order);
+            obj.nlres.f_center.set_value(obj.f_center,'override');
             
-            obj.design.nlres.f_center.set_value(obj.f_center,'override');
-            
-            if ~isempty(obj.design.passive)
+            if ~isempty(obj.passive)
                 
-                for i=1:length(obj.design.passive.resonators)
+                for i=1:length(obj.passive.resonators)
 
-                    obj.design.passive.resonators(i).f_center.set_value(obj.f_center,'override');
-    %                 obj.design.passive.resonators(i).q_loaded.set_value(1/obj.tx_bandwidth,'override');
+                    obj.passive.resonators(i).f_center.set_value(obj.f_center,'override');
+    %                 obj.passive.resonators(i).q_loaded.set_value(1/obj.tx_bandwidth,'override');
 
                 end
                 
