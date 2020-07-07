@@ -27,7 +27,7 @@ classdef CircGoal < TwoPortGoal
         
         function obj=CircGoal(varargin)
             
-            obj=obj@TwoPortGoal(varargin);
+            obj.init_goal(varargin{:});
             
             obj.calculate_goals;
             
@@ -41,7 +41,7 @@ classdef CircGoal < TwoPortGoal
         
     end
     
-    methods (Access=private)
+    methods (Access=protected)
        
         calculate_tx_points(obj);
         calculate_iso_points(obj);
@@ -55,14 +55,49 @@ classdef CircGoal < TwoPortGoal
         
         end
         
-    end
-    
-    methods (Access=protected)
-       
         function update_goals(obj,~,~)
         
             obj.calculate_goals;
             notify(obj,'UpdateGoal');
+        end
+        
+        
+    end
+    
+    methods (Access=protected)
+       
+        function init_goal(obj,varargin)
+        
+            init_goal@TwoPortGoal(obj,varargin{:});
+        
+            if ~isempty(varargin)
+                
+                for i=1:length(varargin)
+                    
+                    if isstring(varargin{i})||ischar(varargin{i})
+                        
+                        switch varargin{i}
+                            
+                            case 'iso_bandwidth'
+                                
+                                obj.iso_bandwidth=varargin{i+1};
+                                
+                            case 'tx_bandwidth'
+                                
+                                obj.tx_bandwidth=varargin{i+1};
+                                
+                            case 'tx_direction'
+                                
+                                obj.tx_direction=varargin{i+1};
+                        
+                        end
+                        
+                    end
+                    
+                end
+                
+            end
+        
         end
         
     end

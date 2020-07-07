@@ -35,10 +35,18 @@ classdef OnePortNLRes < OnePortRes
      
     end
     
-    properties (SetAccess=protected)
+    properties (Access=protected)
         
         var OptNLCap = OptNLCap('value',1e-12);
 
+    end
+    
+    properties (Dependent)
+        
+        mod_freq;
+        mod_depth;
+        mod_phase;
+        
     end
     
     methods
@@ -73,6 +81,23 @@ classdef OnePortNLRes < OnePortRes
             
         end
         
+        function v=get.mod_freq(obj)
+        
+            v=obj.var.mod_freq;
+        
+        end
+        
+        function v=get.mod_depth(obj)
+        
+            v=obj.var.mod_depth;
+        
+        end
+        
+        function v=get.mod_phase(obj)
+        
+            v=obj.var.mod_phase;
+        
+        end
         
     end
        

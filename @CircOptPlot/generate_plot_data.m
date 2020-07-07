@@ -53,7 +53,9 @@ function d=generate_plot_data(obj)
     d(4).YAxisLim=[0 1];
     
     for i=1:length(d)
+        
         d(i).LineOption={simlineoption,goallineoption};
+        
     end
     
 end

@@ -23,6 +23,14 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         
     end
     
+    properties (Dependent)
+        
+        mod_freq;
+        mod_depth;
+        mod_phase;
+        
+    end
+    
     methods  
         
         function set.passive(obj,value)
@@ -63,14 +71,26 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         
         function set_bounds(obj)
             
-        if ~isempty(obj.passive)
-            
-            obj.passive.set_bounds;
-            
+            if ~isempty(obj.passive)
+
+                obj.passive.set_bounds;
+
+            end
+
+                obj.nlres.set_bounds;
+
         end
         
-            obj.nlres.set_bounds;
-            
+        function v=get.mod_freq(obj)
+            v=obj.nlres.mod_freq;
+        end
+        
+        function v=get.mod_depth(obj)
+            v=obj.nlres.mod_depth;
+        end
+        
+        function v=get.mod_phase(obj)
+            v=obj.nlres.mod_phase;
         end
         
     end

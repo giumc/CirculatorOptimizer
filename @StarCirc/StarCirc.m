@@ -5,8 +5,6 @@ classdef StarCirc < OptCirc & StarBranch
 %
 % ------ PROPERTIES ------
 %
-% Public :
-% label
 % 
 % ------ METHODS ------
 %
@@ -28,7 +26,9 @@ classdef StarCirc < OptCirc & StarBranch
         
         function obj=StarCirc(varargin)
 
-            obj=obj@StarBranch(varargin{:});
+            obj@OptCirc(varargin{:});
+            
+            obj.init_branch(varargin{:});
             
             obj.f_test=obj.calculate_frf();
             
@@ -76,7 +76,13 @@ classdef StarCirc < OptCirc & StarBranch
         
         function callback_goal(obj,~,~)
             
-            obj=StarCirc('order',obj.order);
+            obj.init_goal('order',obj.order,...
+                'iso_bandwidth',obj.iso_bandwidth,...
+                'tx_bandwidth',obj.tx_bandwidth,...
+                'f_center',obj.f_center,...
+                'tx_direction',obj.tx_direction);
+                
+            obj.init_branch('order',obj.order);
             
             obj.f_test=obj.calculate_frf;
             

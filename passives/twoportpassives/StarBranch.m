@@ -37,6 +37,30 @@ classdef StarBranch < OptNLBranch
     
         function obj=StarBranch(varargin)
             
+            obj.init_branch(obj,varargin{:});
+            
+        end
+    
+        function m = ABCD(obj,freq)
+        
+            if ~isempty(obj.passive)
+                
+                m = obj.passive.ABCD(freq) * obj.nlres.seriesABCD(freq);
+                
+            else
+                
+                m = obj.nlres.seriesABCD(freq);
+                
+            end
+            
+        end
+        
+    end
+    
+    methods (Access=protected)
+        
+        function init_branch(obj,varargin)
+        
             obj.nlres=OptNLSeriesRes(varargin{:});
             
             order = [];
@@ -85,9 +109,6 @@ classdef StarBranch < OptNLBranch
                 
             end
                 
-                obj.nlres.q_unloaded.optimizable=false;
-                obj.nlres.var.mod_phase.optimizable=false;
-                
                 %set_default_values
                 
                 if ~isempty(obj.passive)
@@ -108,20 +129,7 @@ classdef StarBranch < OptNLBranch
                 obj.nlres.f_center.set_value(StarBranch.def_f_c,'override');
                 obj.nlres.q_loaded.set_value(StarBranch.def_q_l,'override');
                 obj.nlres.set_ref_impedance(StarBranch.def_term);
-        end
-    
-        function m = ABCD(obj,freq)
         
-            if ~isempty(obj.passive)
-                
-                m = obj.passive.ABCD(freq) * obj.nlres.seriesABCD(freq);
-                
-            else
-                
-                m = obj.nlres.seriesABCD(freq);
-                
-            end
-            
         end
         
     end

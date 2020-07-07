@@ -1,6 +1,8 @@
 function test (obj)
 
-    %f_test=obj.f_center;
+    f_test_old=obj.f_test;
+    
+%     f_test=obj.f_center;
     
     obj.order=1;
     
@@ -15,8 +17,8 @@ function test (obj)
 
     q_l=cold.design.cell.q;
 
-    obj.nlres.var.mod_depth.set_value(mod_depth,'override');
-    obj.nlres.var.mod_freq.set_value(mod_ratio,'override');
+    obj.mod_depth.set_value(mod_depth,'override');
+    obj.mod_freq.set_value(mod_ratio,'override');
     obj.nlres.q_loaded.set_value(q_l,'override');
 
     cold.responsecalc;
@@ -44,5 +46,8 @@ function test (obj)
     
     sold.fund
     snew
+    
+    obj.f_test=f_test_old;
+    
 
 end

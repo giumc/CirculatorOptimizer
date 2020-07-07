@@ -31,8 +31,10 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
     % p.LegendLabel -> cell array with N legend names
     % p.XAxisLabel
     % p.YAxisLabel
+    % p.YAxisLim
+    % p.LineOption
     
-   properties %(Access=protected)
+   properties (Access=protected)
       
        opt_obj;
        

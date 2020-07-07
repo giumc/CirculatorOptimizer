@@ -41,6 +41,23 @@ classdef TwoPortGoal < matlab.mixin.Copyable & handle
             % with default f_array ( 0.5:0.01:1.5 )
             % and default goal values 
             % else read arrays
+            obj.init_goal(varargin{:});
+                    
+        end
+        
+        function set_f_array(obj,newval)
+                    
+            obj.ILgoal.set_f_array(newval);
+            obj.ISOgoal.set_f_array(newval);
+            obj.RLgoal.set_f_array(newval);
+                    
+        end
+        
+    end
+    
+    methods (Access=protected)
+        
+        function init_goal(obj,varargin)
         
             if ~isempty(varargin)
                 
@@ -111,15 +128,7 @@ classdef TwoPortGoal < matlab.mixin.Copyable & handle
                 end
                 
             end
-                    
-        end
-        
-        function set_f_array(obj,newval)
-                    
-            obj.ILgoal.set_f_array(newval);
-            obj.ISOgoal.set_f_array(newval);
-            obj.RLgoal.set_f_array(newval);
-                    
+            
         end
         
     end
