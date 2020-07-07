@@ -28,7 +28,7 @@ classdef (Abstract) TwoPortPassive < handle & GetSetOptParam
         
     end
     
-    methods (Abstract)
+    methods (Access=protected,Abstract)
         
         m = ABCD (obj,freq);
         

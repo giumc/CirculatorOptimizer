@@ -39,6 +39,12 @@ classdef  OnePortRes < OnePortPassive
        def_r_term=50;
        
     end
+    
+    properties (SetObservable,AbortSet)
+        
+       label string;
+       
+    end
    
     properties (SetAccess=protected)
        
@@ -48,8 +54,6 @@ classdef  OnePortRes < OnePortPassive
        
        q_unloaded OptParam = OptParam('value',OnePortRes.def_q_u);
        
-       label string;
-       
        ref_impedance double = OnePortRes.def_r_term;
        
     end
@@ -58,45 +62,11 @@ classdef  OnePortRes < OnePortPassive
 
         function obj=OnePortRes(varargin)
             
-            if ~isempty(varargin)
-                
-                for i=1:length(varargin)
-                    
-                    if ischar(varargin{i})||isstring(varargin{i})
-                        
-                        switch varargin{i}
-                            
-                            case {'f','f_center','f_c'}
-                                
-                                obj.f_center.set_value(varargin{i+1},'override');
-                            
-                            case {'q','q_ref','q_l','q_loaded'}
-                                
-                                obj.q_loaded.set_value(varargin{i+1},'override');
-                            
-                            case {'q_u','qu','q_unloaded'}
-                                
-                                obj.q_unloaded.set_value(varargin{i+1},'override');
-                                
-                        end
-                        
-                    end
-                    
-                end
-                
-            end % set values as Name Value pair
+            obj.init_resonator(varargin{:})
+
+            obj.set_default_labels();
             
-            obj.f_center.unit='Hertz';
-            
-            obj.f_center.label='F_c';
-            
-            obj.q_loaded.unit='';
-            
-            obj.q_loaded.label='Q_L';
-            
-            obj.q_unloaded.unit='';
-            
-            obj.q_unloaded.label='Q_U';
+            addlistener(obj,'label','PostSet',@obj.update_label);
                        
         end
         
@@ -133,6 +103,67 @@ classdef  OnePortRes < OnePortPassive
             obj.q_loaded.rescale_bounds;
             obj.q_unloaded.rescale_bounds;
             
+        end
+        
+    end
+    
+    methods (Access=protected)
+        
+        function init_resonator(obj,varargin)
+        
+             if ~isempty(varargin)
+                
+                for i=1:length(varargin)
+                    
+                    if ischar(varargin{i})||isstring(varargin{i})
+                        
+                        switch varargin{i}
+                            
+                            case {'f','f_center','f_c'}
+                                
+                                obj.f_center.set_value(varargin{i+1},'override');
+                            
+                            case {'q','q_ref','q_l','q_loaded'}
+                                
+                                obj.q_loaded.set_value(varargin{i+1},'override');
+                            
+                            case {'q_u','qu','q_unloaded'}
+                                
+                                obj.q_unloaded.set_value(varargin{i+1},'override');
+                                
+                        end
+                        
+                    end
+                    
+                end
+                
+            end % set values as Name Value pair
+        
+        end
+        
+        function update_label(obj,~,~)
+            
+            obj.set_default_labels;
+            obj.f_center.label=strcat(obj.f_center.label,obj.label);
+            obj.q_loaded.label=strcat(obj.q_loaded.label,obj.label);
+            obj.q_unloaded.label=strcat(obj.q_loaded.label,obj.label);
+        
+        end
+        
+        function set_default_labels(obj)
+        
+            obj.f_center.unit='Hertz';
+
+            obj.f_center.label='F_c';
+
+            obj.q_loaded.unit='';
+
+            obj.q_loaded.label='Q_L';
+
+            obj.q_unloaded.unit='';
+
+            obj.q_unloaded.label='Q_U';
+        
         end
         
     end

@@ -22,7 +22,10 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
     % unit (string)
     % label (string)
     % rescale_factor    -> between 0 or 1
+    %
+    % Public , Hidden:
     % 
+    % slider;           -> graphic handler
     % ----- METHODS -----
     %
     % Public:
@@ -35,7 +38,11 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
     %%
     
     events
+        
        ValueUpdate; 
+       
+       GraphicUpdate;
+       
     end
     
     %% properties
@@ -51,6 +58,16 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
         def_unit="";
         def_opt=true;
         def_rescale_factor=0.5;
+        
+        dxbar=0.2;
+        dybar=0.04;
+        dxlabel = 0.04;
+        
+        
+        textfont=10;
+        units='normalized';
+        
+        sliderstep=[0.01 0.02];
         
     end
     
@@ -75,6 +92,16 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
         optimizable int32 = true;
         unit string = "";
         rescale_factor double = OptParam.def_rescale_factor;
+        
+    end
+    
+    properties (Access=private)
+       
+        slider matlab.ui.control.UIControl;
+        min_label matlab.ui.control.UIControl;
+        max_label matlab.ui.control.UIControl;
+        value_label matlab.ui.control.UIControl;
+        name_label matlab.ui.control.UIControl;
         
     end
     
@@ -119,6 +146,12 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
                 end
                 
             end
+            
+        end
+        
+        function delete(obj)
+        
+            obj.clear_graphics;
             
         end
         
@@ -168,8 +201,12 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
             f=obj.rescale_factor;
             obj.set_min(obj.value*(1-f),varargin{:});
             obj.set_max(obj.value*(1+f),varargin{:});
+            obj.update_graphics;
 
         end
+        
+        ret=setup_graphics(obj,fig,pos0);
+        update_graphics(obj);
         
     end %Math
     
@@ -180,5 +217,13 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
         set_max(obj,value,varargin);
         
     end %SET functions
+    
+    methods (Access=private)
+        
+        clear_graphics(obj);
+        slider_callback(obj,src,event);
+        
+    end
+    
 
 end

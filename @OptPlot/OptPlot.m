@@ -42,7 +42,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
    
    properties (SetObservable,AbortSet)
        
-        type string {mustBeMember(type,["full","minimal","none"])} = "full";
+        type string {mustBeMember(type,["full","minimal","none"])} = "minimal";
         
         label string;
         
@@ -67,19 +67,11 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
         dx_plotspacing=0.02;
         
         YXratio=1/1.618;
-        x0bar=0.06;
-        y0bar=0.02;
-
-        dxbar=0.3;
-        dybar=0.04;
         
         dxfig_full=1;
         dxfig_minimal=0.5;
         dyfig=1;
-        
-        dxlabel = 0.04;
-        dylabel = 0.03;
-        
+
         dxbutton = 0.1;
         dybutton = 0.05;
         dybuttons = 0.2;
@@ -88,6 +80,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
         
         dx0optimtext=0.1;
         dy0optimtext=0.1;
+        
         textfont=20;
         
         buttons_name=[...
@@ -121,9 +114,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
         
         legend matlab.graphics.illustration.Legend;
         
-        sliders matlab.ui.control.UIControl;
-        
-        text matlab.graphics.shape.TextBox;
+        OptParamGraphics matlab.ui.control.UIControl;
         
         buttons matlab.ui.control.UIControl;
         

@@ -10,6 +10,10 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 % harmonics 
 % phases
 % fpoints
+% def_term
+%
+% Set Protected:
+% load (OptResistor)
 %
 % Protected :
 % optimsetup
@@ -17,23 +21,19 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 %
 % Public :
 % ftest 
-%
-% SetProtected :
-% design    (set-controlled to be a OptNLBranch)
-% load      (set-controlled to be a OnePortPassive)
+% plot_tools -> has to be a CircOptPlot instance
 %
 % ------ METHODS ------
 %
 % Public: 
 % ABCD(freq)        -> calculates ABCD matrix
-% opt_par = get_OptParam() -> get all optim param
 % s_f = calculate_S_lin_response(obj) -> get response for all f_test
-% set_def_bounds;
-% get_OptParam;
+%
 % Protected :
 %
 % calculate_frf()   -> calculates ftest
 % n_freqs()         -> calculates number of frequencies
+
 
     properties (Access=protected,Constant)
 
@@ -58,22 +58,17 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         f_test;
         
+        plot_tools;
+        
     end
     
-    properties (SetAccess=protected) 
-       
-%        design;
+    properties (Access=protected) 
+
        load = OptResistor();
 
     end % design parameters
 
     methods (Access=protected)
-        
-        function obj=OptCirc(varargin)
-        
-            obj=obj@CircGoal(varargin{:});
-            
-        end
         
         f=calculate_frf(obj);
         
@@ -84,8 +79,14 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         end
               
     end
-
+    
     methods
+
+        function obj=OptCirc(varargin)
+        
+            obj=obj@CircGoal(varargin{:});
+            
+        end
         
         function set.load(obj,value)
             
@@ -100,7 +101,20 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             end
             
         end
-               
+              
+        function set.plot_tools(obj,value)
+        
+            if ~isa(value,'OptPlot')
+                
+                error("plot_tools property has to be a member of OptPlot");
+                
+            else
+                
+                obj.plot_tools=value;
+                
+            end
+        end
+        
         s_f=calculate_S_lin_response(obj);
 
         test(obj);

@@ -32,8 +32,29 @@ function calculate_iso_points(obj)
     
     % set to object 
     
-    obj.ISOgoal.set_f_array(f_points);
+    if obj.tx_direction==2
+        
+        obj.ISOgoal.set_f_array(f_points);
 
-    obj.ISOgoal.set_goal(iso_values);
+        obj.ISOgoal.set_goal(iso_values);
+        
+    else
+        
+        if obj.tx_direction==1
+
+            obj.ILgoal.set_f_array(f_points);
+
+            obj.ILgoal.set_goal(iso_values);
+            
+        else
+            
+            error("Invalid direction");
+            
+        end
+        
+    end
+    
+    
+    
 
 end

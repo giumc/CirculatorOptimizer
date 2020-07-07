@@ -9,5 +9,19 @@ function clear_plot(obj)
         end
         
     end
+    
+    if ~isempty(obj.OptParamGraphics)
+        
+        for i=1:length(obj.OptParamGraphics)
+            
+            if isvalid(obj.OptParamGraphics(i))
+                
+                delete(obj.OptParamGraphics(i));
+                
+            end
+            
+        end
+        
+    end
 
 end

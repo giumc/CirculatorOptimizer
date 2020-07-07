@@ -1,26 +1,23 @@
+
 classdef StarCirc < OptCirc & StarBranch 
 
 % Class for optimizable star topology circulator
 % member of OptCirc
 %
-% ------ PROPERTIES ------
-%
-% 
 % ------ METHODS ------
 %
 % Public:
 % StarCirc(varargin) -> you can pass {'order',N} to initialize
 %                       filter order
 %                       (initializes design as StarBranch)
+% Protected:
+% ABCD(freq)
+%
+% Private:
 % callback_term()    -> updates ref_impedance of each resonator
 %                       in passive and nlres
 % callback_goal()    -> updates design when goals are edited
-    
-%     properties 
-%         
-%         label =  "OptCirc with Star Design";
-%         
-%     end
+
     
     methods 
         
@@ -30,7 +27,7 @@ classdef StarCirc < OptCirc & StarBranch
             
             obj.init_branch(varargin{:});
             
-            obj.f_test=obj.calculate_frf();
+            obj.f_test = obj.calculate_frf();
             
             obj.label = "OptCirc with Star Design" ;
             
@@ -50,11 +47,24 @@ classdef StarCirc < OptCirc & StarBranch
             
             obj.load.set_value(obj.def_term,'override');
             
+            obj.plot_tools=CircOptPlot(obj,varargin{:});
+            
             addlistener(obj.load,'ValueUpdate',@obj.callback_term);
             
             addlistener(obj,'UpdateGoal',@obj.callback_goal);
             
         end
+        
+        function delete(obj)
+        
+            obj.plot_tools.delete;
+        
+        end
+        
+        
+    end
+    
+    methods (Access=protected)
         
         m=ABCD(obj,freq);
         
@@ -69,8 +79,10 @@ classdef StarCirc < OptCirc & StarBranch
             if ~isempty(obj.passive)
                 
                 obj.passive.set_ref_impedance(new_value);
-                obj.nlres.set_ref_impedance(new_value);
+                
             end
+            
+            obj.nlres.set_ref_impedance(new_value);
         
         end        
         

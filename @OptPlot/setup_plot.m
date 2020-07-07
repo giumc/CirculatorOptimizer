@@ -137,6 +137,39 @@ function setup_plot(obj,varargin)
        
     end
 
+    
+%% Sliders
+    
+    PosOptParam=[x0fig+2*dxaxis,y0fig+2*dyaxis];
+    dxOptParam=0;
+    dyOptParam=0;
+    
+    if strcmp(obj.type,"full") 
+        
+        opt_param=obj.opt_obj.get_OptParam;
+            
+        for i=1:length(opt_param)
+            
+            DeltaLabel=[dxOptParam, -dyOptParam];
+            
+            PosOptParam=PosOptParam+DeltaLabel;
+            
+            obj.OptParamGraphics(i,:)=opt_param(i).setup_graphics(obj.fig,PosOptParam);
+            
+            if i==1 % take dyOPtParam
+                
+                dyOptParam=obj.OptParamGraphics(1,1).Extent(4);
+                
+            end
+            
+            % add listeners for value updates from graphics
+            
+            addlistener(opt_param(i),'GraphicUpdate',@(~,~)obj.update_plot);
+            
+        end
+        
+    end
+    
 end
 
 

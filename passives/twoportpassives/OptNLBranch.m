@@ -63,7 +63,16 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         
         function opt_par=get_OptParam(obj)
             
-            opt_par=obj.passive.get_OptParam;
+            
+            if ~isempty( obj.passive)
+                
+                opt_par=obj.passive.get_OptParam;
+                
+            else
+                
+                opt_par=[];
+                
+            end
             
             opt_par= [opt_par obj.nlres.get_OptParam ];
         

@@ -120,19 +120,19 @@ classdef OptNLCap < OnePortPassive
             
             if obj.mod_freq.optimizable
                 
-                opt_par=[opt_par obj.var.mod_freq];
+                opt_par=[opt_par obj.mod_freq];
                 
             end
             
-            if obj.var.mod_depth.optimizable
+            if obj.mod_depth.optimizable
                 
-                opt_par=[opt_par obj.var.mod_depth];
+                opt_par=[opt_par obj.mod_depth];
                 
             end
             
-            if obj.var.mod_phase.optimizable
+            if obj.mod_phase.optimizable
                 
-                opt_par=[opt_par obj.var.mod_depth];
+                opt_par=[opt_par obj.mod_phase];
                 
             end
             

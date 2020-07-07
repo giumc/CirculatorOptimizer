@@ -76,6 +76,14 @@ function update_plot(obj)
         
     end
     
+    opt_params=obj.opt_obj.get_OptParam;
+    
+    for i=1:length(opt_params)
+        
+        opt_params(i).update_graphics;
+        
+    end
+    
     drawnow;
 
 end

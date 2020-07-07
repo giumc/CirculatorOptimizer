@@ -1,12 +1,12 @@
 function [scaled_values,label,exp]=num2str_sci(values)
 % num2str_sci (values)      -> return convert2sci + prefix + unit  
     label='';
-    if mean(values)-1<1e-3
-        scaled_values=0;
-        label='';
-        exp=0;
-        return
-    end
+%     if mean(values)-1<1e-3
+%         scaled_values=0;
+%         label='';
+%         exp=0;
+%         return
+%     end
     
     if length(values)==1
         if values==0

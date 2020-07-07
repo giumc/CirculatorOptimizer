@@ -24,9 +24,26 @@ function calculate_tx_points(obj)
     tx_values([1,end])=1/sqrt(2);
     
     % set to object 
+    if obj.tx_direction==2
+        
+        obj.ILgoal.set_f_array(f_points);
     
-    obj.ILgoal.set_f_array(f_points);
-    
-    obj.ILgoal.set_goal(tx_values);
+        obj.ILgoal.set_goal(tx_values);
+        
+    else
+        
+        if obj.tx_direction==1
+
+            obj.ISOgoal.set_f_array(f_points);
+
+            obj.ISOgoal.set_goal(tx_values);
+            
+        else
+            
+            error("Invalid direction");
+            
+        end
+        
+    end
     
 end

@@ -110,15 +110,13 @@ classdef OptBandPassFilt < TwoPortPassive
             
         end
         
-        m=ABCD(obj,freq);
-        
         function opt_par=get_OptParam(obj)
         
             opt_par=[];
             
             for i=1:length(obj.resonators)
                 
-               opt_par=[opt_par obj.resonators.get_OptParam];
+               opt_par=[opt_par obj.resonators(i).get_OptParam];
                 
             end
         
@@ -139,6 +137,7 @@ classdef OptBandPassFilt < TwoPortPassive
     methods (Access=protected) 
         
         resonator=pick_resonator(obj,n_res);
+        m=ABCD(obj,freq);
         
     end
         

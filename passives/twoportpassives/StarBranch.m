@@ -11,12 +11,16 @@ classdef StarBranch < OptNLBranch
 % ------ METHODS ------
 % 
 % Public:
-% StarBranch(varargin) -> pass {'order',N} to initialize 
-%                         passive as OptBandPassFilt(N-1)
-%                         nlres as OptNLRes
+% StarBranch(varargin) -> 
 %                         
 %                         OSS: all resonators have q_unloaded set to 
 %                         not optimizable
+%
+% Protected:
+% init_branch(varargin) ->pass {'order',N} to initialize 
+%                         passive as OptBandPassFilt(N-1)
+%                         nlres as OptNLRes
+%                         +options for OptNLSeriesRes
 % ABCD(freq)           -> calculates ABCD matrix 
   	
     properties (Access=private,Constant)
@@ -38,20 +42,6 @@ classdef StarBranch < OptNLBranch
         function obj=StarBranch(varargin)
             
             obj.init_branch(obj,varargin{:});
-            
-        end
-    
-        function m = ABCD(obj,freq)
-        
-            if ~isempty(obj.passive)
-                
-                m = obj.passive.ABCD(freq) * obj.nlres.seriesABCD(freq);
-                
-            else
-                
-                m = obj.nlres.seriesABCD(freq);
-                
-            end
             
         end
         
@@ -130,6 +120,20 @@ classdef StarBranch < OptNLBranch
                 obj.nlres.q_loaded.set_value(StarBranch.def_q_l,'override');
                 obj.nlres.set_ref_impedance(StarBranch.def_term);
         
+        end
+        
+        function m = ABCD(obj,freq)
+        
+            if ~isempty(obj.passive)
+                
+                m = obj.passive.ABCD(freq) * obj.nlres.seriesABCD(freq);
+                
+            else
+                
+                m = obj.nlres.seriesABCD(freq);
+                
+            end
+            
         end
         
     end
