@@ -30,7 +30,6 @@ classdef  OnePortRes < OnePortPassive
 % c()                         -> members have to define l , c, r
 % l()
 % r()
-
     properties (Access=private,Constant)
         
        def_f_c=1;
@@ -48,11 +47,11 @@ classdef  OnePortRes < OnePortPassive
    
     properties (SetAccess=protected)
        
-       f_center OptParam = OptParam('value',OnePortRes.def_f_c);
+       f_center OptParam ;
        
-       q_loaded OptParam = OptParam('value',OnePortRes.def_q_l);
+       q_loaded OptParam ;
        
-       q_unloaded OptParam = OptParam('value',OnePortRes.def_q_u);
+       q_unloaded OptParam ;
        
        ref_impedance double = OnePortRes.def_r_term;
        
@@ -62,7 +61,7 @@ classdef  OnePortRes < OnePortPassive
 
         function obj=OnePortRes(varargin)
             
-            obj.init_resonator(varargin{:})
+            obj.init_resonator(varargin{:});
 
             obj.set_default_labels();
             
@@ -111,6 +110,12 @@ classdef  OnePortRes < OnePortPassive
         
         function init_resonator(obj,varargin)
         
+            obj.f_center=OptParam('value',OnePortRes.def_f_c);
+            
+            obj.q_loaded=OptParam('value',OnePortRes.def_q_l);
+            
+            obj.q_unloaded=OptParam('value',OnePortRes.def_q_u);
+        
              if ~isempty(varargin)
                 
                 for i=1:length(varargin)
@@ -144,25 +149,25 @@ classdef  OnePortRes < OnePortPassive
         function update_label(obj,~,~)
             
             obj.set_default_labels;
-            obj.f_center.label=strcat(obj.f_center.label,obj.label);
-            obj.q_loaded.label=strcat(obj.q_loaded.label,obj.label);
-            obj.q_unloaded.label=strcat(obj.q_loaded.label,obj.label);
+            obj.f_center.label=strcat(obj.f_center.label,"_",obj.label);
+            obj.q_loaded.label=strcat(obj.q_loaded.label,"_",obj.label);
+            obj.q_unloaded.label=strcat(obj.q_loaded.label,"_",obj.label);
         
         end
         
         function set_default_labels(obj)
         
-            obj.f_center.unit='Hertz';
+            obj.f_center.unit='Hz';
 
-            obj.f_center.label='F_c';
+            obj.f_center.label='Fc';
 
             obj.q_loaded.unit='';
 
-            obj.q_loaded.label='Q_L';
+            obj.q_loaded.label='Ql';
 
             obj.q_unloaded.unit='';
 
-            obj.q_unloaded.label='Q_U';
+            obj.q_unloaded.label='Qu';
         
         end
         

@@ -36,7 +36,14 @@ function ret=setup_graphics(obj,fig,pos0)
     
     obj.name_label=uicontrol('Style','text',...
         'Parent',fig','Units',units,'FontSize',textfont);
-    obj.name_label.String=strcat(obj.label," [",obj.unit,"]");
+    
+    nametag=obj.label;
+    
+    if ~strcmp(obj.unit,"")
+        nametag=strcat(obj.label," [",obj.unit,"]");
+    end
+    
+    obj.name_label.String=nametag;
     obj.name_label.Position=[pos0 dxname obj.name_label.Extent(4)];
     
     obj.value_label=uicontrol('Style','text',...

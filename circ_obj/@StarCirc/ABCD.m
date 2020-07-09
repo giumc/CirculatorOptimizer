@@ -12,5 +12,7 @@ function m = ABCD(obj,freq)
         obj.mod_phase.set_value(obj.phases(3),'override');
 
         m = m * ABCD_inverse(ABCD@StarBranch(obj,freq));
+        
+        obj.mod_phase.set_value(obj.phases(1),'override');
 
 end

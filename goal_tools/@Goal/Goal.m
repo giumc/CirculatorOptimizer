@@ -1,4 +1,4 @@
-classdef Goal < matlab.mixin.Copyable & handle
+classdef Goal < matlab.mixin.Copyable
     
     % handles goal functions
     %
@@ -26,13 +26,19 @@ classdef Goal < matlab.mixin.Copyable & handle
         
     end
     
-    properties (SetAccess=private)
+    properties (SetAccess=protected)
         
         label="Default";
         
         f_array=Goal.def_min:0.01:Goal.def_max;
         
-        goal=zeros(1,length(0.5:0.01:1.5));
+        goal;
+        
+    end
+    
+    properties (SetAccess=protected)
+        
+        test_indexes;
         
     end
     
@@ -40,75 +46,15 @@ classdef Goal < matlab.mixin.Copyable & handle
        
         function obj=Goal(varargin)
             
-            if ~isempty(varargin)
-                
-                for i = 1 : length(varargin)
-                    
-                    if ischar(varargin{i}) || isstring(varargin{i})
-                        
-                        switch varargin{i}
-
-                            case 'f_array'
-
-                                if ~isempty(varargin{i+1})
-
-                                    if isnumeric(varargin{i+1})
-
-                                        obj.f_array=varargin{i+1};
-
-                                    end
-
-                                end
-
-                            case 'goal'
-
-                                if ~isempty(varargin{i+1})
-
-                                    if isnumeric(varargin{i+1})
-
-                                        obj.goal=varargin{i+1};
-
-                                    end
-
-                                end
-
-                            case 'label'
-
-                                if ~isempty(varargin{i+1})
-
-                                    if isstring(varargin{i+1})
-
-                                        obj.label=varargin{i+1};
-
-                                    else
-
-                                        if ischar(varargin{i+1})
-
-                                            obj.label=string(varargin{i+1});
-
-                                        end
-
-                                    end
-
-                                end
-
-                        end
-                        
-                    end
-                    
-                end
-                
-            end
-            
-        end
+            obj.init_goal(varargin{:});
         
-        error = error_function ( goal , func ) ;
+        end
         
         function set_goal(obj,new_val)
             
             if ~ length(new_val)==length(obj.f_array)
                 
-                error(0,'Mismatch in goal array');
+                error('Mismatch in goal array');
                 
             else
                 
@@ -154,6 +100,20 @@ classdef Goal < matlab.mixin.Copyable & handle
                 
             end
             
+        end
+        
+        function find_indexes(obj,f_test)
+        
+            idx=[];
+            
+            for i=1:length(obj.f_array)
+               
+                [~,idx(i)]=min(abs(f_test-obj.f_array(i)));
+                
+            end
+            
+            obj.test_indexes=idx;
+        
         end
         
     end

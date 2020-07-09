@@ -24,6 +24,7 @@ classdef OptSeriesRes < OnePortRes
             
             obj=obj@OnePortRes(varargin{:});
             obj.label="SeriesResonator";
+            
         end
                    
         function ind=l(obj)

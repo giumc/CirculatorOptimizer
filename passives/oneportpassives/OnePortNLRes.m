@@ -29,15 +29,15 @@ classdef OnePortNLRes < OnePortRes
     
     properties (Access=protected)
         
-        resis OptResistor = OptResistor('value',1,'dummyResistor');
+        resis OptResistor ;
         
-        ind OptInd = OptInd('value',1e-9,'label','dummyInductor');
+        ind OptInd ;
      
     end
     
     properties (Access=protected)
         
-        var OptNLCap = OptNLCap('value',1e-12);
+        var OptNLCap ;
 
     end
     
@@ -54,6 +54,10 @@ classdef OnePortNLRes < OnePortRes
         function obj=OnePortNLRes(varargin)
             
             obj=obj@OnePortRes(varargin{:});
+            
+            obj.resis = OptResistor('value',1,'label','dummyResistor');
+            
+            obj.ind = OptInd('value',1e-9,'label','dummyInductor');
             
             obj.var=OptNLCap(varargin{:});
             
@@ -97,6 +101,26 @@ classdef OnePortNLRes < OnePortRes
         
             v=obj.var.mod_phase;
         
+        end
+        
+        function set_ref_impedance(obj,value)
+            
+            set_ref_impedance@OnePortRes(obj,value);
+            
+            obj.paramchange;
+            
+        end
+        
+    end
+    
+    methods (Access=protected)
+        
+        function paramchange(obj,varargin)
+         
+            obj.var.capacitance.set_value(obj.c,'override');
+            obj.ind.set_value(obj.l,'override');
+            obj.resis.set_value(obj.r,'override');
+            
         end
         
     end

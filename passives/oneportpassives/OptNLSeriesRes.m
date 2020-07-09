@@ -17,7 +17,7 @@ classdef OptNLSeriesRes < OnePortNLRes
             
             obj=obj@OnePortNLRes(varargin{:});
             obj.paramchange;
-            obj.label ='Non Linear  LC Resonator';
+            obj.label ='NLRes';
             addlistener (obj.f_center,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_loaded,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_unloaded,'ValueUpdate',@obj.paramchange);
@@ -69,17 +69,6 @@ classdef OptNLSeriesRes < OnePortNLRes
             
         end
        
-    end
-    
-    methods (Access=private)
-        
-        function paramchange(obj,~,~)
-         
-            obj.var.capacitance.set_value(obj.c,'override');
-            obj.ind.set_value(obj.l,'override');
-            obj.resis.set_value(obj.r,'override');
-        end
-        
     end
         
 end

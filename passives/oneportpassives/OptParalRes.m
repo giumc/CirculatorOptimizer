@@ -3,8 +3,10 @@ classdef OptParalRes < OnePortRes
     methods
 
         function obj=OptParalRes(varargin)
+        
             obj=obj@OnePortRes(varargin{:});
             obj.label="ParallelResonator";
+            
         end
         
         function val=l(obj)

@@ -25,10 +25,10 @@ classdef OptNLCap < OnePortPassive
     
     properties (SetAccess=private)
         
-        mod_freq  OptParam = OptParam('value',OptNLCap.def_mod_freq,'label','mod_ratio');
-        mod_depth OptParam = OptParam('value',OptNLCap.def_mod_depth,'label','mod_depth');
-        mod_phase OptParam = OptParam('value',OptNLCap.def_mod_phase,'label','mod_phase');
-        capacitance OptCap = OptCap('value',OptNLCap.def_cap);
+        mod_freq  OptParam ;
+        mod_depth OptParam ;
+        mod_phase OptParam ;
+        capacitance OptCap ;
         
     end
     
@@ -36,37 +36,12 @@ classdef OptNLCap < OnePortPassive
        
         function obj=OptNLCap(varargin)
         
-            if ~isempty(varargin)
-                
-                for i=1:length(varargin)
-
-                    if (ischar(varargin{i})||isstring(varargin{i}))
-
-                        switch varargin{i}
-
-                            case 'mod_freq'
-
-                                obj.mod_freq.set_value(varargin{i+1},'override');
-
-                            case 'mod_depth'
-
-                                obj.mod_depth.set_value(varargin{i+1},'override');
-
-                            case 'mod_phase'
-                                
-                                obj.mod_phase.set_value(varargin{i+1},'override');
-
-                            case {'capacitor','cap'}
-                                
-                                obj.capacitance.set_value(varargin{i+1},'override');
-
-                        end
-
-                    end
-                    
-                end
-
-            end
+            obj.mod_freq = OptParam('value',OptNLCap.def_mod_freq,'label','mod_freq');
+            obj.mod_depth= OptParam('value',OptNLCap.def_mod_depth,'label','mod_depth');
+            obj.mod_phase= OptParam('value',OptNLCap.def_mod_phase,'label','mod_phase');
+            obj.capacitance= OptCap('value',OptNLCap.def_cap);
+            
+            obj.init_cap(varargin{:});
             
         end
         
@@ -136,6 +111,46 @@ classdef OptNLCap < OnePortPassive
                 
             end
             
+        end
+        
+    end
+    
+    methods (Access=protected)
+        
+        function init_cap(obj,varargin)
+        
+            if ~isempty(varargin)
+
+                    for i=1:length(varargin)
+
+                        if (ischar(varargin{i})||isstring(varargin{i}))
+
+                            switch varargin{i}
+
+                                case 'mod_freq'
+
+                                    obj.mod_freq.set_value(varargin{i+1},'override');
+
+                                case 'mod_depth'
+
+                                    obj.mod_depth.set_value(varargin{i+1},'override');
+
+                                case 'mod_phase'
+
+                                    obj.mod_phase.set_value(varargin{i+1},'override');
+
+                                case {'capacitor','cap'}
+
+                                    obj.capacitance.set_value(varargin{i+1},'override');
+
+                            end
+
+                        end
+
+                    end
+
+            end
+                           
         end
         
     end
