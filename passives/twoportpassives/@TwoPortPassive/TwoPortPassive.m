@@ -1,4 +1,4 @@
-classdef (Abstract) TwoPortPassive < handle & GetSetOptParam
+classdef (Abstract) TwoPortPassive < GetSetOptParam
     
     % interface for two port optimizable objects
     % inherits from handle and GetSetOptParam
@@ -23,34 +23,43 @@ classdef (Abstract) TwoPortPassive < handle & GetSetOptParam
     % S_param_linear(obj,z0,freq)       ->  Linear term of S
 
     properties (Abstract)
-        
+
         label string;
-        
+
     end
-    
+
     methods (Access=protected,Abstract)
-        
-        m = ABCD (obj,freq);
-        
+
+            m = ABCD (obj,freq);
+
     end
     
-   methods (Access=protected)
-        
+    methods (Access=protected)
+
         s=S_param(obj,z0,freq);
-        
+
         s=S_param_linear(obj,z0,freq);
         
-        m=ABCD_term(obj,m,z0,freq);
+    end
 
-   end
-    
-   methods (Access=protected,Static)
-         
-        adm=y_in(m,z0,freq);
+    methods (Access=protected,Static)
+
+        adm=y_in(m);
+
+        imp=z_in(m);
         
-        imp=z_in(m,z0,freq);
+        m=YshuntABCD(y);
+
+    end
+
+    methods
+       
+        function flag=isempty(obj)
+       
+            flag=isemptyobj(obj);
+            
+       end
        
    end
    
-
 end

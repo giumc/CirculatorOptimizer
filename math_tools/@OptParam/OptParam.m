@@ -111,41 +111,9 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
         
         function obj=OptParam(varargin)
                     
-            if ~isempty(varargin)
-                
-                if isnumeric(varargin{1})
-                    
-                    obj.set_value(varargin{1},'override');
-                    
-                else
-                    
-                    for i=1:length(varargin)
-                        
-                        if (ischar(varargin{i})||isstring(varargin{i}))
-                            
-                            switch varargin{i}
-                                
-                                case 'value'
-                                    
-                                    obj.set_value(varargin{i+1},'override');
-                                    
-                                case 'unit'
-                                    
-                                    obj.unit = varargin{i+1};
-                                    
-                                case 'label'
-                                    
-                                    obj.label=varargin{i+1};
-                                    
-                            end
-                            
-                        end
-                        
-                    end
-                                    
-                end
-                
-            end
+            obj.init_param(varargin{:});
+            
+            addlistener(obj,'ValueUpdate',@(x,y) obj.update_graphics);
             
         end
         
@@ -222,6 +190,8 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
         
         clear_graphics(obj);
         slider_callback(obj,src,event);
+        
+        init_param(obj,varargin);
         
     end
     

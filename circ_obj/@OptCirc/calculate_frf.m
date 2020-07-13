@@ -10,7 +10,5 @@
             obj.f_center*(1+obj.tx_bandwidth));
         
         obj.f_test=linspace(f_min,f_max,obj.fpoints);
-        
-        obj.find_indexes(obj.f_test);
       
  end

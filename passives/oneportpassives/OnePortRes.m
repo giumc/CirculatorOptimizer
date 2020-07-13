@@ -37,6 +37,9 @@ classdef  OnePortRes < OnePortPassive
        def_q_u=1e9;
        def_r_term=50;
        
+       def_f_rescale=0.1;
+       def_q_rescale=0.5;
+       
     end
     
     properties (SetObservable,AbortSet)
@@ -95,15 +98,7 @@ classdef  OnePortRes < OnePortPassive
             obj.ref_impedance = value;
         
         end
-        
-        function set_bounds(obj)
-            
-            obj.f_center.rescale_bounds;
-            obj.q_loaded.rescale_bounds;
-            obj.q_unloaded.rescale_bounds;
-            
-        end
-        
+               
     end
     
     methods (Access=protected)
@@ -115,7 +110,11 @@ classdef  OnePortRes < OnePortPassive
             obj.q_loaded=OptParam('value',OnePortRes.def_q_l);
             
             obj.q_unloaded=OptParam('value',OnePortRes.def_q_u);
-        
+            
+            obj.f_center.rescale_factor=obj.def_f_rescale;
+            
+            obj.q_loaded.rescale_factor=obj.def_q_rescale;
+            
              if ~isempty(varargin)
                 
                 for i=1:length(varargin)

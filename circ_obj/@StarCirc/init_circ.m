@@ -5,7 +5,7 @@ function init_circ(obj,varargin)
     obj.init_branch(varargin{:});
 
     obj.calculate_frf();
-
+    
     if ~isempty(obj.passive)
 
         obj.order = obj.passive.order +1;
@@ -20,4 +20,6 @@ function init_circ(obj,varargin)
 
     obj.plot_tools=CircOptPlot(obj,varargin{:});
 
+    obj.find_indexes(obj.f_test);
+    
 end

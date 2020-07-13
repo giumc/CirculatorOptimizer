@@ -1,29 +1,23 @@
 function [scaled_values,label,exp]=num2str_sci(values)
 % num2str_sci (values)      -> return convert2sci + prefix + unit  
     label='';
-%     if mean(values)-1<1e-3
-%         scaled_values=0;
-%         label='';
-%         exp=0;
-%         return
-%     end
-    
-    if length(values)==1
-        if values==0
-            scaled_values=0;
-            label='';
-            exp=0;
-            return
-        end
-    end
-    
     exp=0;
+    scaled_values=values;
+
+    mval=mean(values);
     
     for i=-18:3:15 
-        if mean(values)/10^(i) < 1e3 && mean(values)/10^(i) >= 1
+        
+        scal=mval/10^i;
+        
+        if ceil(scal)>=1 && ceil(scal)<1e3
+            
             scaled_values    =   values./10^(i); 
+            
             exp = i;
+            
             switch i
+                
                 case -18
                     label   =   'z';
                     break;

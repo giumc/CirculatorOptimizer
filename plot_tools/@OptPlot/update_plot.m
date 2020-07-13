@@ -4,17 +4,33 @@ function update_plot(obj)
     
     ax= obj.ax;
     
-    if isempty(ax)
+    fig=obj.fig;
+    
+    if isempty(fig)
         
-        error("No Axes, something went wrong");
+        return
+        
+    else
+        
+        if ~isvalid(fig)
+        
+            return
+            
+        end
         
     end
     
-    fig=obj.fig;
-    
-    if ~isvalid(fig)
+    if isempty(ax)
         
-        error("Update plot failed, invalid figure");
+        error("No Axes, something went wrong");
+    
+    else
+        
+        if any(~isvalid(ax))
+            
+            error("No Axes, something went wrong");
+            
+        end
         
     end
     

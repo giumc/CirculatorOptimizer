@@ -77,14 +77,6 @@ classdef OnePortNLRes < OnePortRes
         
         end
         
-        function set_bounds(obj)
-            
-            obj.set_bounds@OnePortRes;
-            
-            obj.var.set_bounds;
-            
-        end
-        
         function v=get.mod_freq(obj)
         
             v=obj.var.mod_freq;

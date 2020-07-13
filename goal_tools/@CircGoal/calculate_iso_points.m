@@ -1,7 +1,8 @@
 function calculate_iso_points(obj)
 
     % iso frequencies
-
+    iso_bw=obj.bandwidth/2;
+    
     if obj.order==1
 
         f_points=obj.f_center;
@@ -9,17 +10,17 @@ function calculate_iso_points(obj)
     else
 
         f_points=linspace(...
-            obj.f_center*(1-obj.iso_bandwidth/2),...
-            obj.f_center*(1+obj.iso_bandwidth/2),...
+            obj.f_center*(1-iso_bw/2),...
+            obj.f_center*(1+iso_bw/2),...
             obj.order+2);
         
-        if isempty(f_points(f_points==obj.f_center))
-           
-            f_points=[f_points,obj.f_center];
-            
-            f_points=sort(f_points);
-            
-        end
+%         if isempty(f_points(f_points==obj.f_center))
+%            
+%             f_points=[f_points,obj.f_center];
+%             
+%             f_points=sort(f_points);
+%             
+%         end
         
     end
     
@@ -32,7 +33,7 @@ function calculate_iso_points(obj)
     
     % set to object 
     
-    if obj.tx_direction==2
+    if obj.direction==2
         
         obj.ISOgoal.set_f_array(f_points);
 
@@ -40,7 +41,7 @@ function calculate_iso_points(obj)
         
     else
         
-        if obj.tx_direction==1
+        if obj.direction==1
 
             obj.ILgoal.set_f_array(f_points);
 

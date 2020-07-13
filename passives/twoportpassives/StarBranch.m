@@ -59,7 +59,7 @@ classdef StarBranch < OptNLBranch
                 
                 if isnumeric(varargin{1})
                     
-                    if varargin{1}>=2
+                    if varargin{1}>=1
                         
                         order=varargin{1}-1;
                         
@@ -97,29 +97,37 @@ classdef StarBranch < OptNLBranch
                 
                 end
                 
-            end
-                
-                %set_default_values
+            else
                 
                 if ~isempty(obj.passive)
-                
-                    for i=1:length(obj.passive.resonators)
                     
-                        obj.passive.resonators(i).f_center.set_value(...
-                            StarBranch.def_f_c,'override');
-                        obj.passive.resonators(i).q_loaded.set_value(...
-                            StarBranch.def_q_l,'override');
-                        
-                    end
-                    
-                    obj.passive.set_ref_impedance(StarBranch.def_term);
+                    delete(obj.passive);
                     
                 end
                 
-                obj.nlres.f_center.set_value(StarBranch.def_f_c,'override');
-                obj.nlres.q_loaded.set_value(StarBranch.def_q_l,'override');
-                obj.nlres.set_ref_impedance(StarBranch.def_term);
-        
+            end
+
+            %set_default_values
+
+            if ~isempty(obj.passive)
+
+                for i=1:length(obj.passive.resonators)
+
+                    obj.passive.resonators(i).f_center.set_value(...
+                        StarBranch.def_f_c,'override');
+                    obj.passive.resonators(i).q_loaded.set_value(...
+                        StarBranch.def_q_l,'override');
+
+                end
+
+                obj.passive.set_ref_impedance(StarBranch.def_term);
+
+            end
+
+            obj.nlres.f_center.set_value(StarBranch.def_f_c,'override');
+            obj.nlres.q_loaded.set_value(StarBranch.def_q_l,'override');
+            obj.nlres.set_ref_impedance(StarBranch.def_term);
+
         end
         
         function m = ABCD(obj,freq)

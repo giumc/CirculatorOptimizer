@@ -62,9 +62,9 @@ classdef (Abstract) OnePortPassive < handle &...
         
         end
         
-        function set_bounds(obj)
-        
-            obj.rescale_bounds;
+        function flag=isempty(obj)
+            
+            flag=isemptyobj(obj);
         
         end
         

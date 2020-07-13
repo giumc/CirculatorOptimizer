@@ -42,7 +42,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
    
    properties (SetObservable,AbortSet)
        
-        type string {mustBeMember(type,["full","minimal","none"])} = "minimal";
+        type string {mustBeMember(type,["full","minimal","none"])} = "none";
         
         label string;
         
@@ -187,6 +187,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
         flag=find_plot(obj);
         reset_plot(obj);
         update_plot(obj);
+        tab=generate_plot_table(obj);
         
    end
    

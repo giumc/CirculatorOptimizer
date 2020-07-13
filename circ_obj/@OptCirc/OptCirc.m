@@ -34,38 +34,31 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 % calculate_frf()   -> calculates ftest
 % n_freqs()         -> calculates number of frequencies
 
-
     properties (Access=protected,Constant)
 
-        harmonics=2;
+        harmonics=1;
 
-        phases=[0 -120 -240]; 
+        phases=[0 120 240]; 
         
-        fpoints=201;
+        fpoints=81;
         
         def_term=1;
         
     end
 
-    properties (Access=protected) 
-        
-        optimsetup=struct();
-        s_f;
-        
-    end %optim variables
-
     properties 
 
         f_test;
-        
-        plot_tools;
         
     end
     
     properties (Access=protected) 
 
-       load OptResistor;
-
+        load OptResistor;
+        optimsetup=struct();
+        s_f;
+        plot_tools;
+        
     end % design parameters
     
     methods
@@ -107,39 +100,44 @@ classdef (Abstract) OptCirc <  CircGoal & ...
                 obj.plot_tools=value;
                 
             end
+            
         end
         
         s_f=calculate_S_lin_response(obj);
 
-        test(obj);
+        optim_routine(obj);
+
+        function setup_plot(obj,varargin)
+
+            if isempty(obj.plot_tools)
+
+                obj.plot_tools=CircOptPlot(obj,varargin{:});
+
+            end
+
+            obj.plot_tools.setup_plot;
+
+        end
         
-        err=error_function(obj);
+        function update_plot(obj,varargin)
+
+            if ~isempty(obj.plot_tools)
+                
+                obj.plot_tools.update_plot;
+                
+            end
+
+        end
+        
+        function save_result(obj)
+        
+        end
         
     end
     
     methods (Access=protected)
         
-        function callback_goal(obj,~,~)
-            
-            obj.init_goal('order',obj.order,...
-                'iso_bandwidth',obj.iso_bandwidth,...
-                'tx_bandwidth',obj.tx_bandwidth,...
-                'f_center',obj.f_center,...
-                'tx_direction',obj.tx_direction);
-            
-            obj.calculate_frf;
-            
-            if ~isempty(obj.plot_tools)
-                
-                if ~strcmp(obj.plot_tools.type,"none")
-                    
-                    obj.plot_tools.reset_plot;
-                    
-                end
-                
-            end
-        
-        end
+        callback_goal(obj,~,~);
         
         calculate_frf(obj);
         
@@ -148,6 +146,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             n=2*obj.harmonics+1;
             
         end
+        
+        err=error_function(obj,varargin);
         
     end
     

@@ -40,11 +40,15 @@ classdef StarCirc < OptCirc & StarBranch
         
         end
         
+        reset_circ(obj);
+        
+        %test(obj);
+        
     end
     
     methods (Access=protected)
         
-        m=ABCD(obj,freq);
+        [m,varargout]=ABCD(obj,freq);
         
         init_circ(obj,varargin);
         
@@ -66,18 +70,7 @@ classdef StarCirc < OptCirc & StarBranch
             
             obj.init_branch('order',obj.order);
             
-            obj.nlres.f_center.set_value(obj.f_center,'override');
-            
-            if ~isempty(obj.passive)
-                
-                for i=1:length(obj.passive.resonators)
-
-                    obj.passive.resonators(i).f_center.set_value(obj.f_center,'override');
-    %                 obj.passive.resonators(i).q_loaded.set_value(1/obj.tx_bandwidth,'override');
-
-                end
-                
-            end
+            obj.reset_circ;
             
             callback_goal@OptCirc(obj);
         

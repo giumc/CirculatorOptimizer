@@ -1,5 +1,22 @@
-function err=error_function(obj)
+function err=error_function(obj,varargin)
+    %if an array is passed, it is used to update the circ OptParams values
+
+%     keyboard();
+    
+    if ~isempty(varargin)
+        
+        if isnumeric(varargin{1})
             
+            newvals=varargin{1};
+                       
+            obj.update_opt_norm_values(newvals);
+        
+            obj.calculate_S_lin_response;
+            
+        end
+        
+    end
+    
     s21=squeeze(obj.s_f(2,1,:));
     err_IL=obj.ILgoal.error_function(s21(obj.ILgoal.test_indexes));
 

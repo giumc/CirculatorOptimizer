@@ -3,8 +3,8 @@ function calculate_tx_points(obj)
     %equispaced points in tx bandwidth
     
     f_points=linspace(...
-        obj.f_center*(1-obj.tx_bandwidth/2),...
-        obj.f_center*(1+obj.tx_bandwidth/2),...
+        obj.f_center*(1-obj.bandwidth/2),...
+        obj.f_center*(1+obj.bandwidth/2),...
         obj.order+2);
      
     %add center freq
@@ -24,7 +24,7 @@ function calculate_tx_points(obj)
     tx_values([1,end])=1/sqrt(2);
     
     % set to object 
-    if obj.tx_direction==2
+    if obj.direction==2
         
         obj.ILgoal.set_f_array(f_points);
     
@@ -32,7 +32,7 @@ function calculate_tx_points(obj)
         
     else
         
-        if obj.tx_direction==1
+        if obj.direction==1
 
             obj.ISOgoal.set_f_array(f_points);
 

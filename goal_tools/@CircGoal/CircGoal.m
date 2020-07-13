@@ -5,11 +5,9 @@ classdef CircGoal < TwoPortGoal
    
     properties (SetObservable,AbortSet)
         
-        tx_direction int32 = 2;
+        direction int32 = 2;
         
-        tx_bandwidth double = 0.1;
-        
-        iso_bandwidth double = 0.1;
+        bandwidth double = 0.1;
         
         f_center double = 1; 
         
@@ -31,9 +29,8 @@ classdef CircGoal < TwoPortGoal
             
             obj.calculate_goals;
             
-            addlistener(obj,'tx_direction','PostSet',@obj.update_goals);
-            addlistener(obj,'tx_bandwidth','PostSet',@obj.update_goals);
-            addlistener(obj,'iso_bandwidth','PostSet',@obj.update_goals);
+            addlistener(obj,'direction','PostSet',@obj.update_goals);
+            addlistener(obj,'bandwidth','PostSet',@obj.update_goals);
             addlistener(obj,'f_center','PostSet',@obj.update_goals);
             addlistener(obj,'order','PostSet',@obj.update_goals);
             
@@ -78,17 +75,13 @@ classdef CircGoal < TwoPortGoal
                         
                         switch varargin{i}
                             
-                            case 'iso_bandwidth'
+                            case 'bandwidth'
                                 
-                                obj.iso_bandwidth=varargin{i+1};
+                                obj.bandwidth=varargin{i+1};
                                 
-                            case 'tx_bandwidth'
+                            case 'direction'
                                 
-                                obj.tx_bandwidth=varargin{i+1};
-                                
-                            case 'tx_direction'
-                                
-                                obj.tx_direction=varargin{i+1};
+                                obj.direction=varargin{i+1};
                         
                         end
                         

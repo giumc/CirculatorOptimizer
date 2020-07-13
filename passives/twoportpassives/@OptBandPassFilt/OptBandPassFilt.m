@@ -122,16 +122,6 @@ classdef OptBandPassFilt < TwoPortPassive
         
         end
         
-        function set_bounds(obj)
-        
-            for i=1:length(obj.resonators)
-               
-                obj.resonators(i).set_bounds;
-                
-            end
-        
-        end
-        
     end
     
     methods (Access=protected) 
