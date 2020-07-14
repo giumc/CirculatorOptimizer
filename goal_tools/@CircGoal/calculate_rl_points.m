@@ -1,37 +1,24 @@
-function calculate_rl_points(c_goal)
+function calculate_rl_points(obj)
+    
+    rl_bandwidth=obj.bandwidth*2/3;
+    
+    f_points=[obj.f_center*(1-rl_bandwidth/2),...
+        obj.f_center*(1+rl_bandwidth/2)];
+   
+    idx=find_indexes(f_points,obj.f_test);
+   
+    idx=ceil(linspace(min(idx),max(idx),5));
+    
+    f_points=obj.f_test(idx);
+       
+    rl_values= zeros(1,length(f_points));
+    
+    %rl_values([1,end])=1-1/sqrt(2);
+    
+    obj.RLgoal.set_f_array(f_points);
+    
+    obj.RLgoal.set_goal(rl_values);
 
-%     equispaced points in rl bandwidth
-%     
-%     f_points=linspace(...
-%         c_goal.f_center*(1-c_goal.tx_bandwidth/2),...
-%         c_goal.f_center*(1+c_goal.tx_bandwidth/2),...
-%         c_goal.order+2);
-%      
-%     add center freq
-%     
-%     if isempty(f_points(f_points==c_goal.f_center))
-%         
-%         f_points(end+1)=1;
-%         
-%         f_points=sort(f_points);
-%         
-%     end
-%     
-% evaluate rl
-%     
-%     rl_values = zeros(1,length(f_points)) ;
-%     
-    f_points=c_goal.f_center;
+    obj.RLgoal.set_indexes(idx);
     
-    rl_values= 0;
-    
-    
-    %rl_values([1,end])=1/sqrt(2);
-    
-    % set to object 
-    
-    c_goal.RLgoal.set_f_array(f_points);
-    
-    c_goal.RLgoal.set_goal(rl_values);
-
 end

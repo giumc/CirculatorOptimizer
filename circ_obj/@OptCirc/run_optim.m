@@ -11,9 +11,9 @@ function flag=run_optim(obj)
     
     problem.options.FiniteDifferenceType = 'central';
     
-    problem.options.FunctionTolerance = 1e-4;
+    problem.options.FunctionTolerance = 1e-3;
     
-    problem.options.StepTolerance = 1e-4;
+    problem.options.StepTolerance = 1e-3;
     
     %     problem.options.ConstraintTolerance         =1e-15;
     

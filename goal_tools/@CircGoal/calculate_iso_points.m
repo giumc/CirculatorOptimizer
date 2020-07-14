@@ -9,7 +9,9 @@ function calculate_iso_points(obj)
 
     idx= find_indexes(f_points,obj.f_test);
     
-    f_points=obj.f_test(idx(1):idx(2));
+    idx= idx(1):floor(obj.fpoints/10):idx(2);
+    
+    f_points=obj.f_test(idx);
     
     iso_values=zeros(1,length(f_points));
     
@@ -18,7 +20,9 @@ function calculate_iso_points(obj)
     if obj.direction==2
         
         obj.ISOgoal.set_f_array(f_points);
-
+        
+        obj.ISOgoal.set_indexes(idx);
+        
         obj.ISOgoal.set_goal(iso_values);
         
     else
@@ -26,6 +30,8 @@ function calculate_iso_points(obj)
         if obj.direction==1
 
             obj.ILgoal.set_f_array(f_points);
+            
+            obj.ILgoal.set_indexes(idx);
 
             obj.ILgoal.set_goal(iso_values);
             

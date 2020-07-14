@@ -16,6 +16,8 @@ function calculate_tx_points(obj)
         f_points=sort(f_points);
         
     end
+    
+    idx=find_indexes(f_points,obj.f_test);
              
     % evaluate IL
     
@@ -30,6 +32,8 @@ function calculate_tx_points(obj)
     
         obj.ILgoal.set_goal(tx_values);
         
+        obj.ILgoal.set_indexes(idx);
+        
     else
         
         if obj.direction==1
@@ -37,6 +41,8 @@ function calculate_tx_points(obj)
             obj.ISOgoal.set_f_array(f_points);
 
             obj.ISOgoal.set_goal(tx_values);
+            
+            obj.ISOgoal.set_indexes(idx);
             
         else
             

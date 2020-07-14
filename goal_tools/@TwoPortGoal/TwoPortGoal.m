@@ -9,7 +9,7 @@ classdef TwoPortGoal < matlab.mixin.Copyable
     % methods:
     % set_f_array -> set f axis of all goals
     
-    properties (Access=private,Constant)
+    properties (Access=protected,Constant)
         
         def_min=0.5;
         def_array=0.5:0.01:1.5;

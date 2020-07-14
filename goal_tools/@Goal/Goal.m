@@ -34,6 +34,8 @@ classdef Goal < matlab.mixin.Copyable
         
         goal;
         
+        test_indexes;
+        
     end
 
     methods 
@@ -94,6 +96,12 @@ classdef Goal < matlab.mixin.Copyable
                 
             end
             
+        end
+        
+        function set_indexes(obj,idx)
+        
+            obj.test_indexes=idx;
+        
         end
         
     end

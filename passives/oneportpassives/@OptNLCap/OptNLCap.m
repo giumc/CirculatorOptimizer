@@ -11,8 +11,8 @@ classdef OptNLCap < OnePortPassive
     properties (Access=private,Constant)
         
         def_cap=1e-12;
-        def_mod_freq=0.1;
-        def_mod_depth=0.1;
+        def_mod_freq=0.2;
+        def_mod_depth=0.2;
         def_mod_phase=0;
         def_max_mod_freq=0.5;
         def_max_mod_depth=0.5;
@@ -72,22 +72,7 @@ classdef OptNLCap < OnePortPassive
             m = [a b ; c d];
         
         end
-        
-        function set_bounds(obj)
-        
-            obj.mod_freq.rescale_bounds;
-            obj.mod_depth.rescale_bounds;
-            obj.mod_phase.rescale_bounds;
-            obj.capacitance.rescale_bounds;
-            
-            %override min mod freq /depth
-            obj.mod_freq.set_min(obj.def_min_mod_freq);
-            obj.mod_depth.set_min(obj.def_min_mod_depth);
-            obj.mod_freq.set_max(obj.def_max_mod_freq);
-            obj.mod_depth.set_max(obj.def_max_mod_depth);
-            
-        end
-        
+               
         function opt_par=get_OptParam(obj)
             
             opt_par=[];
