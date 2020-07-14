@@ -124,25 +124,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
        
        function obj=OptPlot(varargin)
        
-           if ~isempty(varargin)
-
-                for i=1:length(varargin)
-
-                    if isa(varargin{i},'char')||isa(varargin{i},'string')
-
-                        switch varargin{i}
-
-                            case 'type'
-
-                                obj.type=varargin{i+1};
-
-                        end
-
-                    end
-
-                end
-
-           end
+           obj.init_plot(obj,varargin{:});
            
 %            obj.setup_plot;
 
@@ -184,11 +166,20 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
        
         setup_plot(obj);
         clear_plot(obj);
-        flag=find_plot(obj);
+        
         reset_plot(obj);
         update_plot(obj);
-        tab=generate_plot_table(obj);
+        tab=generate_data_table(obj);
+        outcome=save_plot(obj);
         
+   end
+   
+   methods (Access=protected)
+      
+       flag=find_plot(obj);
+       
+       init_plot(obj,varargin);
+       
    end
    
 end

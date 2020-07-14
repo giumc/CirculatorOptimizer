@@ -23,7 +23,8 @@ classdef StarCirc < StarBranch & OptCirc
         function obj=StarCirc(varargin)
             
             obj@OptCirc(varargin{:});
-
+            
+            
             obj.init_circ(varargin{:});
             
             obj.label = "OptCirc with Star Design" ;

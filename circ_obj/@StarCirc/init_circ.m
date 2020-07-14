@@ -18,8 +18,8 @@ function init_circ(obj,varargin)
 
     end
 
-    obj.plot_tools=CircOptPlot(obj,varargin{:});
-
     obj.find_indexes(obj.f_test);
     
+    obj.plot_tools=CircOptPlot(obj,varargin{:});
+
 end

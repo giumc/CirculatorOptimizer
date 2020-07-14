@@ -112,6 +112,7 @@ classdef Goal < matlab.mixin.Copyable
                 
             end
             
+            idx=unique(idx);
             obj.test_indexes=idx;
         
         end

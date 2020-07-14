@@ -27,10 +27,22 @@ classdef CircOptPlot < OptPlot
     methods 
        
         function obj=CircOptPlot(circ,varargin)
-                        
+                
+            if ~isempty(varargin)
+                
+                varargin=[varargin(:)' ,...
+                    {'label'},{CircOptPlot.def_label}];
+                
+            else
+                
+                varargin={'label',...
+                    CircOptPlot.def_label};
+                
+            end
+            
             obj@OptPlot(varargin{:});
             obj.opt_obj=circ;
-            obj.label=CircOptPlot.def_label; % triggers reset
+
             
         end
         

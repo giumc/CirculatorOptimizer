@@ -2,13 +2,10 @@
  
         f_min = max(...
             0,...
-            min(obj.f_center*(1-obj.tx_bandwidth),...
-                obj.f_center*(1-obj.iso_bandwidth)));
+            obj.f_center*(1-obj.bandwidth));
             
-        f_max = max(...
-            obj.f_center*(1+obj.iso_bandwidth),...
-            obj.f_center*(1+obj.tx_bandwidth));
-        
+        f_max = obj.f_center*(1+obj.bandwidth);
+            
         obj.f_test=linspace(f_min,f_max,obj.fpoints);
       
  end

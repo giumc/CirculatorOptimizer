@@ -22,7 +22,6 @@ classdef OptNLSeriesRes < OnePortNLRes
             addlistener (obj.q_loaded,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_unloaded,'ValueUpdate',@obj.paramchange);
         
-            
             obj.q_unloaded.optimizable=false;
             obj.var.mod_phase.optimizable=false;
         

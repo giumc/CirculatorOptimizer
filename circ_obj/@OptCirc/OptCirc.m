@@ -38,16 +38,16 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         harmonics=1;
 
-        phases=[0 120 240]; 
+        phases=[0 240 120]; 
         
         fpoints=81;
         
         def_term=1;
         
     end
-
+    
     properties 
-
+        
         f_test;
         
     end
@@ -129,8 +129,10 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         end
         
-        function save_result(obj)
+        function save_data(obj,varargin)
         
+            obj.plot_tools.save_plot(varargin{:});
+            
         end
         
     end

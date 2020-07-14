@@ -6,7 +6,7 @@ function tab=generate_data_table(obj)
     
     for i=1:length(params)
         
-        vars(i)=params(i).denormalize;
+        vars(i)=params(i).value;
         names(i)=params(i).label;
     end
     

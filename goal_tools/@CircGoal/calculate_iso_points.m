@@ -1,7 +1,7 @@
 function calculate_iso_points(obj)
 
     % iso frequencies
-    iso_bw=obj.bandwidth/2;
+    iso_bw=obj.bandwidth;
     
     if obj.order==1
 
@@ -12,7 +12,7 @@ function calculate_iso_points(obj)
         f_points=linspace(...
             obj.f_center*(1-iso_bw/2),...
             obj.f_center*(1+iso_bw/2),...
-            obj.order+2);
+            100);
         
 %         if isempty(f_points(f_points==obj.f_center))
 %            
@@ -25,9 +25,14 @@ function calculate_iso_points(obj)
     end
     
     % iso values
-    if obj.order>1
-        f_points([1,end])=[];
-    end
+%     if obj.order>1
+%         f_points([1,end])=[];
+%     end
+%     
+% %         f_points=linspace(...
+% %             min(f_points),...
+% %             max(f_points),...
+% %             100);
     
     iso_values=zeros(1,length(f_points));
     

@@ -37,8 +37,8 @@ classdef  OnePortRes < OnePortPassive
        def_q_u=1e9;
        def_r_term=50;
        
-       def_f_rescale=0.1;
-       def_q_rescale=0.5;
+       def_f_rescale=0.05;
+       def_q_rescale=0.4;
        
     end
     

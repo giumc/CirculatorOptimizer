@@ -1,25 +1,25 @@
 function [m,varargout] = ABCD(obj,freq)
 
+        % obj.ABCD_inverse refers to the StarBranch implementation
+        
         obj.mod_phase.set_value(obj.phases(1),'override');
 
         m1 = ABCD@StarBranch(obj,freq);
+        
         m = m1;
 
         obj.mod_phase.set_value(obj.phases(2),'override');
 
-        ygnd=obj.y_in(...
-            ABCD_inverse(obj.nlres.seriesABCD(freq))*...
-            ABCD_inverse(obj.passive.ABCD(freq))*...
-            obj.load.shuntABCD(freq));
-        
-        m2=obj.YshuntABCD(ygnd);
+        m2=obj.YshuntABCD(...
+            obj.y_in(...
+                obj.ABCD_inverse(freq)*...
+                obj.load.shuntABCD(freq)));
         
         m = m * m2; 
 
         obj.mod_phase.set_value(obj.phases(3),'override');
 
-        m3 = ABCD_inverse(obj.nlres.seriesABCD(freq))*...
-            ABCD_inverse(obj.passive.ABCD(freq));
+        m3 =obj.ABCD_inverse(freq);
         
         m = m * m3;
         
@@ -40,10 +40,6 @@ function [m,varargout] = ABCD(obj,freq)
             case 3
                 
                 varargout={m1,m2,m3};
-                
-            case 4
-                
-                varargout={m1,m2,m3,ygnd};
                 
         end
 
