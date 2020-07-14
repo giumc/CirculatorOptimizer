@@ -1,7 +1,5 @@
 function reset_circ(obj)
 
-    obj.calculate_frf();
-
     obj.nlres.f_center.set_value(obj.f_center,'override');
     obj.nlres.q_loaded.set_value(1/obj.bandwidth,'override');
     

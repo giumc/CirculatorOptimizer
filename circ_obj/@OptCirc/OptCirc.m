@@ -40,17 +40,10 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         phases=[0 240 120]; 
         
-        fpoints=81;
-        
         def_term=1;
         
     end
-    
-    properties 
-        
-        f_test;
-        
-    end
+
     
     properties (Access=protected) 
 
@@ -140,8 +133,6 @@ classdef (Abstract) OptCirc <  CircGoal & ...
     methods (Access=protected)
         
         callback_goal(obj,~,~);
-        
-        calculate_frf(obj);
         
         function n=n_freqs(obj)
         

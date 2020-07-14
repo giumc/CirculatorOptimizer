@@ -1,11 +1,9 @@
 function callback_goal(obj,~,~)
-
-    obj.init_goal('order',obj.order,...
-        'bandwidth',obj.bandwidth,...
-        'f_center',obj.f_center,...
-        'direction',obj.direction);
-
-    obj.calculate_frf;
+% 
+%     obj.init_goal('order',obj.order,...
+%         'bandwidth',obj.bandwidth,...
+%         'f_center',obj.f_center,...
+%         'direction',obj.direction);
 
     if ~isempty(obj.plot_tools)
 
@@ -16,7 +14,5 @@ function callback_goal(obj,~,~)
         end
 
     end
-
-    obj.find_indexes(obj.f_test);
 
 end

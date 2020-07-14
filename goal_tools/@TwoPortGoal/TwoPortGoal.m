@@ -14,6 +14,7 @@ classdef TwoPortGoal < matlab.mixin.Copyable
         def_min=0.5;
         def_array=0.5:0.01:1.5;
         def_max=1.5;
+        fpoints=81;
         
     end
     
@@ -31,6 +32,7 @@ classdef TwoPortGoal < matlab.mixin.Copyable
             'f_array',TwoPortGoal.def_array,...
             'goal',zeros(1,length(TwoPortGoal.def_array)));
        
+        f_test;
         
     end
     
@@ -53,19 +55,13 @@ classdef TwoPortGoal < matlab.mixin.Copyable
                     
         end
         
-        function find_indexes(obj,f_test)
-        
-            obj.ILgoal.find_indexes(f_test);
-            obj.ISOgoal.find_indexes(f_test);
-            obj.RLgoal.find_indexes(f_test);
-            
-        end
-        
     end
     
     methods (Access=protected)
         
         init_goal(obj,varargin);
+        
+        calculate_ftest(obj);
         
     end
       

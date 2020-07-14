@@ -7,11 +7,11 @@ function calculate_iso_points(obj)
         obj.f_center*(1-iso_bw/2),...
         obj.f_center*(1+iso_bw/2)];
 
+    iso_values=zeros(1,length(f_points));
+    
     idx= find_indexes(f_points,obj.f_test);
     
     f_points=obj.f_test(idx(1):idx(2));
-    
-    iso_values=zeros(1,length(f_points));
     
     % set to object 
     

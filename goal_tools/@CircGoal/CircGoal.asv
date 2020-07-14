@@ -2,7 +2,7 @@ classdef CircGoal < TwoPortGoal
     
     % TwoPortGoal object with special methods to set f points and goals
     % to implement circulator goals
-    
+   
     properties (SetObservable,AbortSet)
         
         direction int32 = 2;
@@ -20,7 +20,12 @@ classdef CircGoal < TwoPortGoal
         UpdateGoal
         
     end
-
+       
+    properties 
+        
+        f_test;
+        
+    end
     
     methods 
         
@@ -28,7 +33,6 @@ classdef CircGoal < TwoPortGoal
             
             obj.init_goal(varargin{:});
             
-            obj.calculate_ftest;
             obj.calculate_goals;
             
             addlistener(obj,'direction','PostSet',@obj.update_goals);
@@ -55,12 +59,9 @@ classdef CircGoal < TwoPortGoal
         end
         
         function update_goals(obj,~,~)
-            
-            obj.calculate_ftest;
+        
             obj.calculate_goals;
-
             notify(obj,'UpdateGoal');
-            
         end
         
         
@@ -68,7 +69,9 @@ classdef CircGoal < TwoPortGoal
     
     methods (Access=protected)
        
-        init_goal(obj,varargin);
+        init_goal
+        
+        calculate_frf(obj);
         
     end
             

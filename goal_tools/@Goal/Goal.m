@@ -35,13 +35,7 @@ classdef Goal < matlab.mixin.Copyable
         goal;
         
     end
-    
-    properties (SetAccess=protected)
-        
-        test_indexes;
-        
-    end
-    
+
     methods 
        
         function obj=Goal(varargin)
@@ -100,21 +94,6 @@ classdef Goal < matlab.mixin.Copyable
                 
             end
             
-        end
-        
-        function find_indexes(obj,f_test)
-        
-            idx=[];
-            
-            for i=1:length(obj.f_array)
-               
-                [~,idx(i)]=min(abs(f_test-obj.f_array(i)));
-                
-            end
-            
-            idx=unique(idx);
-            obj.test_indexes=idx;
-        
         end
         
     end
