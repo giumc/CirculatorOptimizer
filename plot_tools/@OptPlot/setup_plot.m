@@ -95,6 +95,7 @@ function setup_plot(obj,varargin)
         
         dyaxis=obj.YXratio*dxaxis;
         y0fig=y0fig+dyaxis-dy_plotspacing;
+        
     end
     
     if strcmp(obj.type,'full')
@@ -105,11 +106,11 @@ function setup_plot(obj,varargin)
     
     if length(plot_data)==2
         
-        ax(1).OuterPosition=[x0fig, y0fig+dy_plotspacing,...
+        ax(1).OuterPosition=[x0fig+dx_plotspacing, y0fig+dy_plotspacing,...
             dxaxis, dyaxis];
 
         ax(2).OuterPosition=ax(1).OuterPosition+...
-            [0, dyaxis + 0,0,0];
+            [0,- dyaxis + 0,0,0];
     
     end
     
@@ -136,7 +137,6 @@ function setup_plot(obj,varargin)
        error("Case still not covered");
        
     end
-
     
 %% Sliders
     

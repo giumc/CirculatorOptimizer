@@ -64,9 +64,9 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
             'LineWidth',3};
     
         dy_plotspacing=0.1;
-        dx_plotspacing=0.02;
+        dx_plotspacing=0.05;
         
-        YXratio=1/1.618;
+        YXratio=1/2;
         
         dxfig_full=1;
         dxfig_minimal=0.5;
@@ -123,14 +123,16 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
    methods 
        
        function obj=OptPlot(varargin)
-       
-           obj.init_plot(obj,varargin{:});
-           
-%            obj.setup_plot;
+            
+            pause(1);
+            
+            obj.init_plot(obj,varargin{:});
 
-           addlistener(obj,'type','PostSet',@(x,y)obj.reset_plot);
-       
-           addlistener(obj,'label','PostSet',@(x,y)obj.reset_plot);
+            %            obj.setup_plot;
+
+            addlistener(obj,'type','PostSet',@(x,y)obj.reset_plot);
+
+            addlistener(obj,'label','PostSet',@(x,y)obj.reset_plot);
            
        end
        
