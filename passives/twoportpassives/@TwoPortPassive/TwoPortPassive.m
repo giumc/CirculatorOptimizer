@@ -39,9 +39,7 @@ classdef (Abstract) TwoPortPassive < GetSetOptParam
         s=S_param(obj,z0,freq);
 
         s=S_param_linear(obj,z0,freq);
-        
-        m=ABCD_inverse(obj,freq);
-        
+       
     end
 
     methods (Access=protected,Static)

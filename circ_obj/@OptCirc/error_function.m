@@ -32,5 +32,7 @@ function err=error_function(obj,varargin)
     err_RL=(err_RL1+err_RL2)/2;
 
     err=err_IL+err_ISO+err_RL;
+    
+%     err=err+obj.IL_error_function;
 
 end

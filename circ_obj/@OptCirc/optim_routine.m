@@ -43,8 +43,11 @@ function optim_routine(obj)
 
     end
     
-%     fprintf(repmat('\b',1,itermsg));
-%     
-%     fprintf(repmat('\b',1,startmsg));
-%    
+%     if obj.error_function>=1e-2
+%         
+%         obj.fine_optim;
+%         
+%     end
+    
+
 end

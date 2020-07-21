@@ -42,9 +42,16 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         
         def_term=1;
         
+        def_mod_freq=0.2;
+        
+        def_mod_depth=0.2;
+        
+        def_max_mod_freq=0.5;
+        
+        def_max_mod_depth=0.5;
+        
     end
 
-    
     properties (Access=protected) 
 
         load OptResistor;
@@ -128,6 +135,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             
         end
         
+        update_bounds(obj);
+        
     end
     
     methods (Access=protected)
@@ -141,6 +150,10 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         end
         
         err=error_function(obj,varargin);
+        
+        err=fine_error_function(obj,varargin);
+        
+        fine_optim(obj);
         
     end
     

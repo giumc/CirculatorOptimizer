@@ -26,6 +26,8 @@ classdef StarCirc < StarBranch & OptCirc
 
             obj.init_circ(varargin{:});
             
+            obj.update_bounds;
+            
             obj.label = "OptCirc with Star Design" ;
             
             addlistener(obj,'UpdateGoal',@obj.callback_goal);
