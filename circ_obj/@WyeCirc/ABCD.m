@@ -1,12 +1,10 @@
 function [m,varargout] = ABCD(obj,freq)
 
-        % obj.ABCD_inverse refers to the StarBranch implementation
+        % obj.ABCD_inverse refers to the WyeCirc implementation
         
         obj.mod_phase.set_value(obj.phases(1),'override');
 
         m1 = ABCD@StarBranch(obj,freq);
-        
-        m = m1;
 
         obj.mod_phase.set_value(obj.phases(2),'override');
 

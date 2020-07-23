@@ -52,7 +52,9 @@ classdef StarBranch < OptNLBranch
         init_branch(obj,varargin);
         
         m=ABCD(obj,freq);
-
-    end
         
+        m=ABCD_inverse_branch(obj,freq);
+        
+    end
+       
 end

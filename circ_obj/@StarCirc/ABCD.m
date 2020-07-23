@@ -1,6 +1,6 @@
 function [m,varargout] = ABCD(obj,freq)
 
-        % obj.ABCD_inverse refers to the StarBranch implementation
+        % obj.ABCD_inverse refers to the StarCirc implementation
         
         obj.mod_phase.set_value(obj.phases(1),'override');
 
@@ -12,14 +12,14 @@ function [m,varargout] = ABCD(obj,freq)
 
         m2=obj.YshuntABCD(...
             obj.y_in(...
-                obj.ABCD_inverse(freq)*...
+                obj.ABCD_inverse_branch(freq)*...
                 obj.load.shuntABCD(freq)));
         
         m = m * m2; 
 
         obj.mod_phase.set_value(obj.phases(3),'override');
 
-        m3 =obj.ABCD_inverse(freq);
+        m3 =obj.ABCD_inverse_branch(freq);
         
         m = m * m3;
         
