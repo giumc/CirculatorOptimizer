@@ -24,31 +24,15 @@ classdef WyeCirc<StarBranch & OptCirc
             
             obj@OptCirc(varargin{:});
 
-            obj.init_circ(varargin{:});
-            
-            obj.update_bounds;
-            
             obj.label = "OptCirc with Wye Design" ;
-            
-            addlistener(obj,'UpdateGoal',@obj.callback_goal);
-            
-            obj.reset_circ;
-            
-            obj.setup_plot;
-            
-            obj.update_plot;
             
         end
         
         function delete(obj)
-        
-            if ~isempty(obj.plot_tools)
-                obj.plot_tools.delete;
-            end
+            
+            delete@OptCirc(obj);
         
         end
-        
-        reset_circ(obj);
         
         %test(obj);
         
@@ -57,32 +41,6 @@ classdef WyeCirc<StarBranch & OptCirc
     methods (Access=protected)
         
         [m,varargout]=ABCD(obj,freq);
-        
-        init_circ(obj,varargin);
-        
-        function callback_term(obj,~,~)
-        
-            new_value=obj.load.value;
-            
-            if ~isempty(obj.passive)
-                
-                obj.passive.set_ref_impedance(new_value);
-                
-            end
-            
-            obj.nlres.set_ref_impedance(new_value);
-        
-        end        
-        
-        function callback_goal(obj,~,~)
-            
-            obj.init_branch('order',obj.order);
-            
-            obj.reset_circ;
-            
-            callback_goal@OptCirc(obj);
-        
-        end
         
     end    
     

@@ -90,6 +90,8 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
             v=obj.nlres.mod_phase;
         end
         
+        init_branch(obj,varargin);
+        
     end
     
 end

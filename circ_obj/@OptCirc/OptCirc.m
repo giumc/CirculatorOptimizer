@@ -67,12 +67,28 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         
             obj=obj@CircGoal(varargin{:});
             
+            obj.init_circ(varargin{:});
+            
             obj.load=OptResistor('value',OptCirc.def_term);
             
             obj.load.optimizable=false;
             
-            listener(obj.load,'ValueUpdate',@obj.callback_term);
+            obj.setup_plot;
             
+            obj.reset_circ;
+            
+            addlistener(obj.load,'ValueUpdate',@obj.callback_term);
+            
+            addlistener(obj,'UpdateGoal',@obj.callback_goal);
+            
+        end
+        
+        function delete(obj)
+        
+            if ~isempty(obj.plot_tools)
+                obj.plot_tools.delete;
+            end
+        
         end
         
         function set.load(obj,value)
@@ -137,11 +153,17 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         
         update_bounds(obj);
         
+        reset_circ(obj);
+        
+        test(obj);
+        
     end
     
     methods (Access=protected)
         
         callback_goal(obj,~,~);
+        
+        callback_term(obj,~,~);
         
         function n=n_freqs(obj)
         
@@ -154,6 +176,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         err=fine_error_function(obj,varargin);
         
         fine_optim(obj);
+        
+        init_circ(varargin);
         
     end
     

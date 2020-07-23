@@ -7,5 +7,5 @@ function m=ABCD_inverse_branch(obj,freq)
         m= m*ABCD_inverse(obj.passive.ABCD(freq));
         
     end
-
+    
 end

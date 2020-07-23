@@ -7,7 +7,9 @@ function test (obj)
     obj.order=2;
     
     obj.f_test=obj.f_center;
-
+    
+    obj.calculate_S_lin_response;
+    
     cold=circ(2);
 
     cold.modratio=0.1;
@@ -20,15 +22,9 @@ function test (obj)
     obj.nlres.q_loaded.set_value(20,'override');
     obj.passive.resonators.q_loaded.set_value(20,'override');
 
-%     cold.responsecalc;
-    
-%     cold.newcircgoalplot;
-
     cold.f = obj.f_center;
     cold.responsecalc;
-    
-    obj.f_test = obj.f_center;
-    
+     
     mold_branch = cold.ABCD.branch;
     mold_branchrev=cold.ABCD.branchrev;
     mold_toground=cold.ABCD.shuntdyn.ABCDshuntEq;
@@ -38,9 +34,7 @@ function test (obj)
  
     obj.mod_phase.set_value(0,'override');
      
-    [mtot,mnew_branch,mnew_toground,mnew_branchrev,ygnd]= obj.ABCD(farray);
-    
-    keyboard();
+    [mtot,mnew_branch,mnew_toground,mnew_branchrev]= obj.ABCD(farray);
 
     mold_branch-mnew_branch
     clc
@@ -59,8 +53,8 @@ function test (obj)
     
     sold.fund
     snew
+    keyboard
     
     obj.f_test=f_test_old;
     
-
 end
