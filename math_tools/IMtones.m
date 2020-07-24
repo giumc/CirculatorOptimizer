@@ -12,10 +12,26 @@ function imt=IMtones(frf,fm,harmonics)
 
         imt(k)=frf+index(k)*fm;
 
-        if abs(imt(k))<0.125
-            imt(k)=sign(imt(k))*0.125;
+    end
+    
+    %check for negative frequencies
+    
+    for i=1:length(imt)
+       
+        if abs(imt(i))<1e-3
+            
+            imt(i)=1e-3;
+            
+        else
+            
+            if imt(i)<0
+                
+                imt(i)=-imt(i);
+                
+            end
+            
         end
-
+        
     end
 
 end

@@ -38,7 +38,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         harmonics=1;
 
-        phases=[0 240 120]; 
+        phases=[0 120 240]; 
         
         def_term=1;
         
