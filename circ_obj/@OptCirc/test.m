@@ -4,23 +4,26 @@ function test (obj)
     
 %     f_test=obj.f_center;
     
-    obj.order=2;
+    mod_freq=0.2;
+    mod_depth=0.05;
+    q=20;
+    obj.order=1;
     
     obj.f_test=obj.f_center;
     
     obj.calculate_S_lin_response;
     
-    cold=circ(2);
-
-    cold.modratio=0.1;
-    cold.moddepth=0.1;
-    cold.design.cell(1).q=20;
-    cold.design.cell(2).q=20;
+    cold=circ(1);
     
-    obj.mod_depth.set_value(0.1,'override');
-    obj.mod_freq.set_value(0.1,'override');
-    obj.nlres.q_loaded.set_value(20,'override');
-    obj.passive.resonators.q_loaded.set_value(20,'override');
+    cold.modratio=mod_freq;
+    cold.moddepth=mod_depth;
+    cold.design.cell(1).q=q;
+    cold.design.cell(2).q=q;
+    
+    obj.mod_depth.set_value(mod_depth,'override');
+    obj.mod_freq.set_value(mod_freq,'override');
+    obj.nlres.q_loaded.set_value(q,'override');
+%     obj.passive.resonators.q_loaed.set_value(20,'override');
 
     cold.f = obj.f_center;
     cold.responsecalc;
@@ -37,7 +40,7 @@ function test (obj)
     [mtot,mnew_branch,mnew_toground,mnew_branchrev]= obj.ABCD(farray);
 
     mold_branch-mnew_branch
-    clc
+    keyboard
     
     mold_toground-mnew_toground
     clc
@@ -53,7 +56,7 @@ function test (obj)
     
     sold.fund
     snew
-    keyboard
+    
     
     obj.f_test=f_test_old;
     

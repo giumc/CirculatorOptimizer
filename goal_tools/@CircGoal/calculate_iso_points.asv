@@ -7,21 +7,11 @@ function calculate_iso_points(obj)
         obj.f_center*(1+obj.bandwidth/2),...
         obj.order+2);
      
-    if obj.order>1
-        
-        f_points([1,end])=[];
-        
-        idx= find_indexes(f_points,obj.f_test);
+    f
+
+    idx= find_indexes(f_points,obj.f_test);
     
-        idx= ceil(linspace(min(idx),max(idx),5));
-        
-    else
-        
-        f_points([1,end])=[];
-        
-        idx= find_indexes(f_points,obj.f_test);
-        
-    end
+    idx= idx(1):floor(obj.fpoints/10):idx(2);
     
     f_points=obj.f_test(idx);
     

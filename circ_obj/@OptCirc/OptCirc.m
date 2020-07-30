@@ -56,8 +56,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         load OptResistor;
         optimsetup=struct();
-        s_f;
         plot_tools;
+        s_f;
         
     end % design parameters
     

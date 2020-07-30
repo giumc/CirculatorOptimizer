@@ -1,7 +1,5 @@
-function s = S_param(obj, z0, freq) 
-            
-    m = obj.ABCD(freq) ;
-
+function s = ABCD_to_S_v1(m, z0, freq) 
+    
     zterm = z0.value ;
 
     [a ,b ,c ,d ] = ABCD_split(m);

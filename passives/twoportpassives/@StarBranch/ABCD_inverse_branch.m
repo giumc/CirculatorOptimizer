@@ -1,6 +1,6 @@
 function m=ABCD_inverse_branch(obj,freq)
 
-    m=ABCD_inverse(obj.nlres.seriesABCD(freq));
+    m=obj.nlres.seriesABCD_inv(freq);
     
     if ~isempty(obj.passive)
         

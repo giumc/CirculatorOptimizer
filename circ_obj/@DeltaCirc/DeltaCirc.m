@@ -1,4 +1,4 @@
-classdef WyeCirc<StarBranch & OptCirc  
+classdef DeltaCirc<StarBranch & OptCirc  
 
 % Class for optimizable wye topology circulator
 % member of OptCirc
@@ -20,7 +20,7 @@ classdef WyeCirc<StarBranch & OptCirc
     
     methods 
         
-        function obj=WyeCirc(varargin)
+        function obj=DeltaCirc(varargin)
             
             obj@OptCirc(varargin{:});
 

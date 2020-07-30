@@ -28,19 +28,19 @@ function d=generate_plot_data(obj)
     d(1).LegendLabel=legendlabels;
     d(1).YAxisLim=[0 1];
     
-    d(2).data=table(circ.f_test,abs(s21).',...
-        circ.ILgoal.f_array,circ.ILgoal.goal);
+    d(2).data=table(circ.f_test,abs(s12).',...
+        circ.ISOgoal.f_array,circ.ISOgoal.goal);
     d(2).data.Properties.VariableNames=varnames;
     d(2).XAxisLabel=xaxisname;
-    d(2).YAxisLabel=strcat("|S_{21}|");
+    d(2).YAxisLabel=strcat("|S_{12}|");
     d(2).LegendLabel=legendlabels;
     d(2).YAxisLim=[0 1];
     
-    d(3).data=table(circ.f_test,abs(s12).',...
-        circ.ISOgoal.f_array,circ.ISOgoal.goal);
+    d(3).data=table(circ.f_test,abs(s21).',...
+        circ.ILgoal.f_array,circ.ILgoal.goal);
     d(3).data.Properties.VariableNames=varnames;
     d(3).XAxisLabel=xaxisname;
-    d(3).YAxisLabel=strcat("|S_{12}|");
+    d(3).YAxisLabel=strcat("|S_{21}|");
     d(3).LegendLabel=legendlabels;
     d(3).YAxisLim=[0 1];
     

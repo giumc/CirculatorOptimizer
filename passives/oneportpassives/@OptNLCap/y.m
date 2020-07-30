@@ -16,21 +16,19 @@ function adm = y (obj,freq)
         
         ymod(i,i)=1;
         
-        if i<length(freq)-1
+        if i<length(freq)
        
-            ymod(i,i+1)=-1i*sqrt(-exp(-2*1i*phase))*eps*...
+            ymod(i,i+1)=exp(-1i*phase)*eps*...
                 freq(i)/2/freq(i+1);
 
-            ymod(i+1,i)=-1i*sqrt(-exp(-2*1i*phase))*eps*...
+            ymod(i+1,i)=exp(1i*phase)*eps*...
                 freq(i+1)/2/freq(i);
-            
+           
         end
         
     end
-
-%
-%
-%   Nonlinear expansion
+% 
+% %   Nonlinear expansion
 %     for i=1:length(freq)
 %        
 %         ymod(i,i)=1/2*(2+eps^2);

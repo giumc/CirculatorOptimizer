@@ -20,6 +20,7 @@ classdef OptNLCap < OnePortPassive
         def_min_mod_freq=0;
         def_min_mod_depth=0;
         def_min_mod_phase=-360;
+        
     end
     
     properties (SetAccess=private)

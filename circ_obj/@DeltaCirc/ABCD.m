@@ -1,6 +1,6 @@
 function [m,varargout] = ABCD(obj,freq)
 
-        %  refers to the WyeCirc implementation
+        %  refers to the DeltaCirc implementation
         
         obj.mod_phase.set_value(obj.phases(1),'override');
 

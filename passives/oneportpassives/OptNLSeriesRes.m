@@ -48,22 +48,31 @@ classdef OptNLSeriesRes < OnePortNLRes
         function m = seriesABCD(obj,freq)
             
             m = obj.ind.seriesABCD(freq)*...
-                obj.var.seriesABCD(freq)*...
+                obj.resis.seriesABCD(freq)*...
+                obj.var.seriesABCD(freq);
+                
+        
+        end
+        
+         function m = seriesABCD_inv(obj,freq)
+            
+            m = obj.var.seriesABCD(freq)*...
+                obj.ind.seriesABCD(freq)*...
                 obj.resis.seriesABCD(freq);
         
         end
         
         function imp = z(obj,freq)
             
-            [ ~ ,b ,~ ,d] = ABCD_split(obj.seriesABCD(freq));
-            
-            imp = b/d;
+            imp=obj.var.z(freq)+obj.ind.z(freq)+obj.resis.z(freq);
             
         end
         
         function adm = y(obj,freq)
         
-            adm = inv(obj.z(freq));
+            imp=obj.z(freq);
+            
+            adm=pinv(imp);
             
         end
        

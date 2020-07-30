@@ -1,10 +1,12 @@
 function calculate_rl_points(obj)
+
+    f_points=linspace(...
+        obj.f_center*(1-obj.bandwidth/2),...
+        obj.f_center*(1+obj.bandwidth/2),...
+        obj.order+2);
     
-    rl_bandwidth=obj.bandwidth*2/3;
+    f_points([1 end])=[];
     
-    f_points=[obj.f_center*(1-rl_bandwidth/2),...
-        obj.f_center*(1+rl_bandwidth/2)];
-   
     idx=find_indexes(f_points,obj.f_test);
    
     idx=ceil(linspace(min(idx),max(idx),5));

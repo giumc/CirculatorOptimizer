@@ -30,6 +30,7 @@ classdef  OnePortRes < OnePortPassive
 % c()                         -> members have to define l , c, r
 % l()
 % r()
+
     properties (Access=private,Constant)
         
        def_f_c=1;
