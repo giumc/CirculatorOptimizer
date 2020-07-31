@@ -14,8 +14,8 @@ classdef TwoPortGoal < matlab.mixin.Copyable
         def_min=0.5;
         def_array=0.5:0.01:1.5;
         def_max=1.5;
-        fpoints=81;
-        
+        fpoints=101;
+        edge_margin=5;
     end
     
     properties (SetAccess=protected)

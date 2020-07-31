@@ -1,5 +1,7 @@
 function calculate_rl_points(obj)
 
+    margin=ceil(obj.fpoints/obj.edge_margin);
+    
     f_points=linspace(...
         obj.f_center*(1-obj.bandwidth/2),...
         obj.f_center*(1+obj.bandwidth/2),...
@@ -9,11 +11,22 @@ function calculate_rl_points(obj)
     
     idx=find_indexes(f_points,obj.f_test);
    
-    idx=ceil(linspace(min(idx),max(idx),5));
+    idx=idx(1):idx(end);
+       
+    rl_values= zeros(1,length(idx));
+    
+    %add margin at end
+    
+    lowspan=1:margin;
+    highspan=(obj.fpoints-margin):obj.fpoints;
+    
+    idx=[lowspan idx highspan];
     
     f_points=obj.f_test(idx);
-       
-    rl_values= zeros(1,length(f_points));
+    
+    rl_values=[ones(1,length(lowspan)),...
+        rl_values,...
+        ones(1,length(highspan))];
     
     %rl_values([1,end])=1-1/sqrt(2);
     

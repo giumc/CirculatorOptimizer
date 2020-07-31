@@ -1,5 +1,7 @@
 function calculate_tx_points(obj)
 
+    margin=ceil(obj.fpoints/obj.edge_margin);
+    
     %equispaced points in tx bandwidth
     
     f_points=linspace(...
@@ -18,12 +20,24 @@ function calculate_tx_points(obj)
     end
     
     idx=find_indexes(f_points,obj.f_test);
-             
-    % evaluate IL
     
-    tx_values = ones(1,length(f_points)) ;
+    idx=[idx(1) idx(2):idx(end-1) idx(end)];
+    
+    tx_values = ones(1,length(idx)) ;
     
     tx_values([1,end])=1/sqrt(2);
+    
+    
+    lowspan=1:margin;
+    highspan=(obj.fpoints-margin):obj.fpoints;
+    
+    idx=[lowspan idx highspan];
+    
+    f_points=obj.f_test(idx);
+    
+    tx_values=[zeros(1,length(lowspan)),...
+        tx_values,...
+        zeros(1,length(highspan))];
     
     % set to object 
     if obj.direction==2

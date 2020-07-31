@@ -9,11 +9,11 @@ function calculate_iso_points(obj)
      
     if obj.order>1
         
-        f_points([1,end])=[];
+%         f_points([1,end])=[];
         
         idx= find_indexes(f_points,obj.f_test);
     
-        idx= ceil(linspace(min(idx),max(idx),5));
+        idx= idx(1):idx(end);
         
     else
         

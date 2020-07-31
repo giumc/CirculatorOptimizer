@@ -36,7 +36,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
     properties (Access=protected,Constant)
 
-        harmonics=1;
+        harmonics=2;
 
         phases=[0 120 240]; 
         
@@ -122,6 +122,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         s_f=calculate_S_lin_response(obj);
 
         optim_routine(obj);
+         
+        fine_optim(obj);
 
         function setup_plot(obj,varargin)
 
@@ -174,9 +176,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         err=error_function(obj,varargin);
         
         err=fine_error_function(obj,varargin);
-        
-        fine_optim(obj);
-        
+       
         init_circ(varargin);
         
     end
