@@ -18,7 +18,7 @@ function [m,varargout] = ABCD(obj,freq)
         
         obj.mod_phase.set_value(obj.phases(1),'override');
         
-        m = ABCD_parallel(m1,m2*m3);
+        m = ABCD_parallel_v2(m1,m2*m3);
         
         switch nargout - 1
             

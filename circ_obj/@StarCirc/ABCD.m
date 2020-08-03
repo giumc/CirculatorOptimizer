@@ -1,6 +1,6 @@
 function [m,varargout] = ABCD(obj,freq)
 
-        % obj.ABCD_inverse refers to the StarCirc implementation
+        %refers to the StarCirc implementation
         
         obj.mod_phase.set_value(obj.phases(1),'override');
 

@@ -6,8 +6,8 @@ function s_f = calculate_S_lin_response(obj)
         
         freqs=IMtones(obj.f_test(i),obj.mod_freq.value,...
             obj.harmonics);
-                s_f(:,:,i) = obj.S_param_linear(...
-            obj.load,freqs);
+                s_f(:,:,i) = S_param_linear(obj.ABCD(freqs),...
+            obj.load.value);
         
     end
 

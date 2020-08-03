@@ -11,9 +11,9 @@ function flag=run_optim(obj)
     
     problem.options.FiniteDifferenceType = 'central';
     
-    problem.options.FunctionTolerance = 1e-3;
+    problem.options.FunctionTolerance = 5e-3;
     
-    problem.options.StepTolerance = 1e-5;
+    problem.options.StepTolerance = 5e-3;
     
     problem.options.OutputFcn                   =@(x,y,z) obj.out_optim(x,y,z);
     

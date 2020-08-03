@@ -1,7 +1,7 @@
 function outcome=save_plot(obj,varargin)
 
    %by default, it saves png and .m file
-   %in CircOptimizer/Results folder
+   %in Results folder
    %
    %pass as many options as you need:
    %'png' to print png
@@ -12,25 +12,11 @@ function outcome=save_plot(obj,varargin)
    %'data' to save only .m data file
    % OSS:
    
-    save_folder=strrep(mfilename('fullpath'),...
-       strcat('CircOptimizer',filesep,...
-       'plot_tools',filesep,...
-       '@OptPlot',filesep,'save_plot'),...
-       strcat('Results',filesep));
-
     outcome=false;
 
     tab=obj.generate_data_table;
 
-    foldername=strcat(obj.opt_obj.label,'_order_',num2str(obj.opt_obj.order));
-    
-    if ~ makefolder(save_folder,foldername)
-        
-        error("Could not setup folder\n");
-        
-    end
-    
-    filepath=strcat(save_folder,foldername,filesep,foldername);
+    filepath=obj.get_save_folder;
     
     tablename=strcat(filepath,'.csv');
 
@@ -59,9 +45,7 @@ function outcome=save_plot(obj,varargin)
                 case 'txt'
                     txtfilename=strcat(filepath,'.out');
                     fid=fopen(txtfilename,'w');
-                    diary(txtfilename);
-                    disp(opt_obj);
-                    diary('off');
+                    fprintf(fid,'%s\n', opt_obj.print_report);
                     fclose(fid);
                     
                 case 'full'
@@ -73,6 +57,12 @@ function outcome=save_plot(obj,varargin)
                     outcome=true;
                     break
                     
+                case 'csv'
+                    
+                    writetable(tab,tablename,'WriteRowNames',true);%,'FileType','.csv');
+                    outcome=true;
+                    
+                    
             end
             
         end
@@ -80,21 +70,20 @@ function outcome=save_plot(obj,varargin)
     else
         %default
         savefig(obj.fig,filepath);
-        %print(obj.fig,filepath,'-dpng','-r100');
+        
         writetable(tab,tablename,'WriteRowNames',true);%,'FileType','.csv');
+        
         obj.clear_plot;
         delete(obj.fig);
         save(strcat(filepath,'.mat'),'opt_obj');
         
         txtfilename=strcat(filepath,'.out');
-        fid=fopen(txtfilename,'w');
-        diary(txtfilename);
-        disp(opt_obj);
-        diary('off');
-        fclose(fid);
-                    
-        outcome=true;
         
+        fid=fopen(txtfilename,'w');
+        fprintf(fid,'%s\n', opt_obj.print_report);
+        fclose(fid);  
+        
+        outcome=true;
         obj.setup_plot;
         obj.update_plot;
 

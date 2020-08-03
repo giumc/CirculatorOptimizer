@@ -58,7 +58,7 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
         simlineoption={'LineWidth',3,...
             'Color',rgb('DarkBlue')};
         goallineoption={'LineStyle','none',...
-            'MarkerSize',1,...
+            'MarkerSize',5,...
             'Marker','+',...
             'Color',rgb('ForestGreen'),...
             'LineWidth',1};
@@ -166,14 +166,20 @@ classdef (Abstract) OptPlot < handle & matlab.mixin.SetGet
    
    methods 
        
+        path=get_save_folder(obj);
+
         setup_plot(obj);
+
         clear_plot(obj);
-        
+
         reset_plot(obj);
+
         update_plot(obj);
+
         tab=generate_data_table(obj);
-        outcome=save_plot(obj);
-        
+
+        outcome=save_plot(obj,varargin);
+
    end
    
    methods (Access=protected)

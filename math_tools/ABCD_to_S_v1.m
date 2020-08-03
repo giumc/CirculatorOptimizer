@@ -1,12 +1,10 @@
-function s = ABCD_to_S_v1(m, z0, freq) 
-    
-    zterm = z0.value ;
+function s = ABCD_to_S_v1(m, zterm) 
 
     [a ,b ,c ,d ] = ABCD_split(m);
     
     denom = ( a + b/zterm +c *zterm +d );     
     
-    u = diag(ones(1,length(freq)));
+    u = diag(ones(1,square_dim(a)));
     
     s11 = (a+b/zterm-c*zterm-d) / denom ;
     
@@ -16,7 +14,7 @@ function s = ABCD_to_S_v1(m, z0, freq)
     
     m_conv2= [ a -b ; c -d];
     
-    m_inv=inv(m_conv2);
+    m_inv=diag(ones(1,2*square_dim(a)))/m_conv2;
     
     [a ,b ,c ,d ] = ABCD_split(m_inv);
     

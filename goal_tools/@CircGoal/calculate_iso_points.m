@@ -1,27 +1,21 @@
 function calculate_iso_points(obj)
 
     % iso frequencies
-    
-    f_points=linspace(...
+    f_points= [...
         obj.f_center*(1-obj.bandwidth/2),...
-        obj.f_center*(1+obj.bandwidth/2),...
-        obj.order+2);
-     
-    if obj.order>1
-        
-%         f_points([1,end])=[];
-        
-        idx= find_indexes(f_points,obj.f_test);
+        obj.f_center*(1+obj.bandwidth/2)];
     
-        idx= idx(1):idx(end);
-        
-    else
-        
-        f_points([1,end])=[];
-        
-        idx= find_indexes(f_points,obj.f_test);
-        
-    end
+    bwbounds=find_indexes(f_points,obj.f_test);
+    
+    idx=bwbounds(1):bwbounds(2);
+    
+    lbw=bwbounds(2)-bwbounds(1);
+    
+    margin=floor(lbw/obj.edge_margin/2);
+    
+    idx(1:margin)=[];
+    
+    idx((end-margin):end)=[];
     
     f_points=obj.f_test(idx);
     

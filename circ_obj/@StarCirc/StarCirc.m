@@ -29,11 +29,11 @@ classdef StarCirc < StarBranch & OptCirc
         end
         
         function delete(obj)
+        
+            obj.delete@OptCirc;
             
-            delete@OptCirc(obj);
-        
         end
-        
+               
     end
     
     methods (Access=protected)

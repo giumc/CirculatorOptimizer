@@ -5,9 +5,7 @@ function s=ABCD_to_S(m,z0)
 
     [ a ,b ,c ,d] = ABCD_split(m);
     
-    [nfreq,~]=size(a);
-    
-    Id=diag(ones(1,nfreq));
+    Id=ones(xdim(a),ydim(a)));
     
     z0=z0*Id;
     

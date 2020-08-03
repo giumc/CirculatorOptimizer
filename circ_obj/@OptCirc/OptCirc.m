@@ -38,17 +38,17 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         harmonics=2;
 
-        phases=[0 120 240]; 
+        phases=[0 240 120]; 
         
         def_term=1;
         
-        def_mod_freq=0.2;
+        def_mod_freq=0.1;
         
-        def_mod_depth=0.2;
+        def_mod_depth=0.1;
         
-        def_max_mod_freq=0.5;
+        def_max_mod_freq=0.4;
         
-        def_max_mod_depth=0.5;
+        def_max_mod_depth=0.4;
         
     end
 
@@ -73,7 +73,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
             
             obj.load.optimizable=false;
             
-            obj.setup_plot;
+            obj.setup_plot(varargin{:});
             
             obj.reset_circ;
             
@@ -122,9 +122,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         s_f=calculate_S_lin_response(obj);
 
         optim_routine(obj);
-         
-        fine_optim(obj);
-
+        
         function setup_plot(obj,varargin)
 
             if isempty(obj.plot_tools)
@@ -159,6 +157,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         
         test(obj);
         
+        s=print_report(obj);
+        
     end
     
     methods (Access=protected)
@@ -175,8 +175,6 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         
         err=error_function(obj,varargin);
         
-        err=fine_error_function(obj,varargin);
-       
         init_circ(varargin);
         
     end
