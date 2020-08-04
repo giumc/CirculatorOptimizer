@@ -1,6 +1,6 @@
 function m=ABCD_inverse_branch(obj,freq)
 
-    % implementation for StarBranch
+    % implementation for DeltaBranch
     
     m=ABCD_inverse( obj.nlres.seriesABCD(freq));
     

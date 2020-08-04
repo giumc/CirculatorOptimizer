@@ -1,4 +1,4 @@
-classdef DeltaCirc<StarBranch & OptCirc  
+classdef DeltaCirc<DeltaBranch & OptCirc  
 
 % Class for optimizable wye topology circulator
 % member of OptCirc
@@ -11,11 +11,6 @@ classdef DeltaCirc<StarBranch & OptCirc
 %                       (initializes design as StarBranch)
 % Protected:
 % ABCD(freq)
-%
-% Private:
-% callback_term()    -> updates ref_impedance of each resonator
-%                       in passive and nlres
-% callback_goal()    -> updates design when goals are edited
 
     
     methods 
@@ -24,7 +19,7 @@ classdef DeltaCirc<StarBranch & OptCirc
             
             obj@OptCirc(varargin{:});
 
-            obj.label = "OptCirc with Wye Design" ;
+            obj.label = "OptCirc with Delta Design" ;
             
         end
         

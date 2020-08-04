@@ -45,28 +45,11 @@ classdef OptNLParallelRes <OnePortNLRes
             
         end
 
-        function m = shuntABCD(obj,freq)
-            
-            m = obj.ind.shuntABCD(freq)*...
-                obj.resis.shuntABCD(freq)*...
-                obj.var.shuntABCD(freq);
-                
-        
-        end
-        
-        function m = shuntABCD_inv(obj,freq)
-            
-            m = obj.var.shuntABCD(freq)*...
-                obj.ind.shuntABCD(freq)*...
-                obj.resis.shuntABCD(freq);
-        
-        end
-        
         function imp = z(obj,freq)
             
             adm=obj.y(freq);
             
-            imp=pinv(adm);
+            imp=inv(adm);
             
             
         end

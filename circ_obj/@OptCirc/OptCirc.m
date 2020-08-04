@@ -40,8 +40,6 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
         phases=[0 240 120]; 
         
-        def_term=1;
-        
         def_mod_freq=0.1;
         
         def_mod_depth=0.1;

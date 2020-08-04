@@ -16,6 +16,14 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
 % get_OptParam()           ->  returns optimizable OptParam
 % set_def_bounds(obj)       -> sets default boundaries
 
+    properties (Access=protected,Constant)
+        
+        def_f_c=1;
+        def_q_l=5;
+        def_term=1;
+        
+    end
+    
     properties 
         
         passive ;
@@ -89,6 +97,10 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
         function v=get.mod_phase(obj)
             v=obj.nlres.mod_phase;
         end
+        
+    end
+    
+    methods (Access=protected)
         
         init_branch(obj,varargin);
         

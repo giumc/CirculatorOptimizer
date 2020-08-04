@@ -23,17 +23,9 @@ classdef StarBranch < OptNLBranch
 %                         +options for OptNLSeriesRes
 % ABCD(freq)           -> calculates ABCD matrix 
   	
-    properties (Access=private,Constant)
-        
-        def_f_c=1;
-        def_q_l=5;
-        def_term=1;
-        
-    end
-    
     properties 
     
-        label = "TwoPort Branch with BP Filter + NL Resonator";
+        label = "Star Branch with BP Filter + NL Resonator";
         
     end
     

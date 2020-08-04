@@ -1,6 +1,6 @@
 function res=pick_resonator(obj,n)
 
-    %implementation for OptBandPassFilt
+    % implementation for OptBandStopFilt
     
     order=obj.order;
     
@@ -8,7 +8,7 @@ function res=pick_resonator(obj,n)
 
         if mod(order-n,2)==0
             
-            res=OptParalRes();
+            res=OptSeriesRes();
             
             res.label=num2str(n);
             
@@ -16,7 +16,7 @@ function res=pick_resonator(obj,n)
             
             if mod(order-n,2)==1
                 
-                res=OptSeriesRes();
+                res=OptParalRes();
                 
                 res.label=num2str(n);
                 
@@ -34,7 +34,7 @@ function res=pick_resonator(obj,n)
             
             if mod(order-n,2)==0
             
-                res=OptSeriesRes();
+                res=OptParallelRes();
 
                 res.label=num2str(n);
             
@@ -42,7 +42,7 @@ function res=pick_resonator(obj,n)
 
                 if mod(order-n,2)==1
 
-                    res=OptParallelRes();
+                    res=OptSeriesRes();
 
                     res.label=num2str(n);
 

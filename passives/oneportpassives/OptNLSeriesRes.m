@@ -44,23 +44,6 @@ classdef OptNLSeriesRes < OnePortNLRes
             res = (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value;
             
         end
-
-        function m = seriesABCD(obj,freq)
-            
-            m = obj.ind.seriesABCD(freq)*...
-                obj.resis.seriesABCD(freq)*...
-                obj.var.seriesABCD(freq);
-                
-        
-        end
-        
-         function m = seriesABCD_inv(obj,freq)
-            
-            m = obj.var.seriesABCD(freq)*...
-                obj.ind.seriesABCD(freq)*...
-                obj.resis.seriesABCD(freq);
-        
-        end
         
         function imp = z(obj,freq)
             

@@ -4,7 +4,7 @@ function [m,varargout] = ABCD(obj,freq)
         
         obj.mod_phase.set_value(obj.phases(1),'override');
 
-        m1 = ABCD@StarBranch(obj,freq);
+        m1 = ABCD@DeltaBranch(obj,freq);
 
         obj.mod_phase.set_value(obj.phases(2),'override');
         
@@ -19,6 +19,8 @@ function [m,varargout] = ABCD(obj,freq)
         obj.mod_phase.set_value(obj.phases(1),'override');
         
         m = ABCD_parallel_v2(m1,m2*m3);
+        
+%         m=m1;
         
         switch nargout - 1
             

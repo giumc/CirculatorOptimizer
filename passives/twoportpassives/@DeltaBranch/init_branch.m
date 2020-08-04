@@ -1,8 +1,8 @@
 function init_branch(obj,varargin)
 
-    % implementation for StarBranch
+    %refers to DeltaBranch Implementation
     
-    obj.nlres=OptNLSeriesRes(varargin{:});
+    obj.nlres=OptNLParallelRes(varargin{:});
     
     order = [];
 
@@ -18,9 +18,8 @@ function init_branch(obj,varargin)
 
                         order=varargin{i+1}-1;
 
-                        
-                        varargin{i+1}=order; 
-                        % subtract 1 to pass to OptBandPassFilt
+                        varargin{i}=[];
+                        varargin{i+1}=[];
 
                 end
 
@@ -32,7 +31,7 @@ function init_branch(obj,varargin)
 
     if ~isempty(order) && order>=1
 
-        obj.passive=OptBandPassFilt('order',order,...
+        obj.passive=OptBandStopFilt('order',order,...
             'lastres','shunt_res',...
             varargin{:});
 
@@ -68,7 +67,7 @@ function init_branch(obj,varargin)
         obj.passive.set_ref_impedance(obj.def_term);
 
     end
-
+    
     obj.init_branch@OptNLBranch(varargin{:});
     
 end
