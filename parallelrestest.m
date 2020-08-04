@@ -6,13 +6,13 @@ frf=1;
 
 fm=0.3;
 
-nharm=2;
+nharm=3;
 
 eps=0.1;
 
 ql=5;
 
-mod_phase=50;
+mod_phase=0;
 
 z0=1;
 
@@ -34,26 +34,32 @@ nlres.mod_phase.set_value(mod_phase,'override');
 
 nlres.set_ref_impedance(z0);
 
-%%
+
+clc
+
 ftest=IMtones(frf,fm,nharm);
 
 resis=OptResistor('value',z0);
 
-%m1=ind.seriesABCD(ftest)*nlcap.seriesABCD(ftest);
-m1=nlres.seriesABCD(ftest)*resis.shuntABCD(ftest);
-% nlcap.mod_phase.set_value(120,'override');
-% 
-% % m2=nlcap.seriesABCD(ftest)*...
-%     ind.seriesABCD(ftest);
-% 
-% nlcap.mod_phase.set_value(240,'override');
-% 
-% m3=nlcap.seriesABCD(ftest)*...
-%     ind.seriesABCD(ftest);
+nlres.mod_phase.set_value(0,'override');
 
-ABCD_tot=m1;
+m1=nlres.seriesABCD(ftest);
 
-% ABCD_tot=res.seriesABCD(ftest)*ABCD_tot*res.shuntABCD(ftest);
+nlres.mod_phase.set_value(120,'override');
+% 
+m2=nlres.seriesABCD(ftest);
+% 
+m2=m2*resis.shuntABCD(ftest);
+% % 
+
+nlres.mod_phase.set_value(240,'override');
+
+m2=m2*nlres.seriesABCD(ftest);
+
+m=ABCD_parallel_v2(m1,m2);
+
+ABCD_tot=resis.seriesABCD(ftest)*m*resis.shuntABCD(ftest);
+
 
 [a,b,c,d]=ABCD_split(ABCD_tot);
 

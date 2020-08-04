@@ -8,8 +8,8 @@ function m=Y_to_ABCD(y)
     
     a= -y21\y22;
     
-    b= -Id/y21;
-    
+    b= -Id/(y21);
+  
     c= y12-(y11/y21)*y22;
     
     d= -y11/y21;

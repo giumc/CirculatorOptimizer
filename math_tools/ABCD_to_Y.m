@@ -8,9 +8,9 @@ function y=ABCD_to_Y(m)
     
     y11 = d/b;
     
-    y12 = -Id/b;
+    y12 = c-(d/b)*a;
     
-    y21 = c-(d/b)*a;
+    y21 =  -Id/(b);
     
     y22 = b\a;
     
