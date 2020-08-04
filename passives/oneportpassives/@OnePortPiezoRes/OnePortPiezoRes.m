@@ -5,7 +5,7 @@ classdef OnePortPiezoRes < OnePortPassive
         def_kt2=0.02;
         def_q=1000;
         def_f_res=1e9;
-        def_c0=3.12e-12;
+        def_c0=3.13e-12;
         def_label="MEMSres";
         
     end
