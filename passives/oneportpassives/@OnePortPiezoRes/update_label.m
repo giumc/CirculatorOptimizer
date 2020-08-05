@@ -1,4 +1,4 @@
-function update_labels(obj)
+function update_label(obj,~,~)
 
     obj.set_default_labels;
     obj.f_center.label=strcat(obj.f_center.label,"_",obj.label);

@@ -99,7 +99,9 @@ classdef  OnePortRes < OnePortPassive
             obj.ref_impedance = value;
         
         end
-               
+         
+        varargout=summary(obj);
+        
     end
     
     methods (Access=protected)

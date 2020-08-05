@@ -13,6 +13,10 @@ function update_filt(obj)
 
     q_u=obj.q_u;
     
+    f_shunt=obj.f_antires(f_c,kt2);
+    
+    f_series=f_c;
+    
     if (isempty(res)||isempty(n)||isempty(f_c)||isempty(kt2)||...
             isempty(zref)||isempty(q_u))
         
@@ -32,10 +36,10 @@ function update_filt(obj)
                         
                         res(i).kt2.set_value(kt2,'override');
                         
-                        res(i).f_center.set_value(f_c,'override');
+                        res(i).f_center.set_value(f_shunt,'override');
 
                         res(i).z_match.set_value(...
-                            zref*obj.ratio_cap,'override');
+                            zref/obj.ratio_cap,'override');
                         
                         res(i).q_unloaded.set_value(q_u,'override');
 
@@ -43,10 +47,11 @@ function update_filt(obj)
                         
                         res(i).kt2.set_value(kt2,'override');
 
-                        res(i).f_center.set_value(obj.f_antires(res(i)),'override');
+                        res(i).f_center.set_value(...
+                            f_series,'override');
                         
                         res(i).z_match.set_value(...
-                            zref/obj.ratio_cap,'override');
+                            zref*obj.ratio_cap,'override');
                         
                         res(i).q_unloaded.set_value(q_u,'override');
 
@@ -64,7 +69,7 @@ function update_filt(obj)
 
                             res(i).kt2.set_value(kt2,'override');
 
-                            res(i).f_center.set_value(f_c,'override');
+                            res(i).f_center.set_value(f_shunt,'override');
 
                             res(i).z_match.set_value(...
                                 zref*obj.ratio_cap,'override');
@@ -75,7 +80,8 @@ function update_filt(obj)
 
                         res(i).kt2.set_value(kt2,'override');
 
-                        res(i).f_center.set_value(obj.f_antires(res(i)),'override');
+                        res(i).f_center.set_value(...
+                            f_series,'override');
 
                         res(i).z_match.set_value(...
                             zref/obj.ratio_cap,'override');

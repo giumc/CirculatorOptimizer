@@ -65,6 +65,22 @@ classdef (Abstract) GetSetOptParam < handle
             end
             
         end
+
+    end
+    
+    methods (Access=protected,Static)
+       
+        function s=build_summary(tbp)
+            
+            s='';
+    
+            for i=1:length(tbp)
+
+                s=strcat(s,tbp(i).summary);
+
+            end
+        
+        end
         
     end
     

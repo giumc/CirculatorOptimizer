@@ -122,6 +122,34 @@ classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
             
         end
         
+        function varargout=summary(obj)
+        
+            str=sprintf('%10s \t =\t %8.2e',obj.label,obj.value);
+            
+            if obj.optimizable
+                
+                str=strcat(str, ' (optimizable)\n');
+                
+            else
+                
+                str=strcat (str, '\n');
+                
+            end
+            
+            switch nargout
+                
+                case 0
+                    
+                    fprintf(str);
+                    
+                case 1
+                    
+                    varargout{1}=str;
+                    
+            end
+            
+        end
+        
     end %Constructor
 
     methods 

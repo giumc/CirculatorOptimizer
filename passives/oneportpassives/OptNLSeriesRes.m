@@ -17,7 +17,7 @@ classdef OptNLSeriesRes < OnePortNLRes
             
             obj=obj@OnePortNLRes(varargin{:});
             obj.paramchange;
-            obj.label ='NLRes';
+            obj.label ='NLSeriesRes';
             addlistener (obj.f_center,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_loaded,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_unloaded,'ValueUpdate',@obj.paramchange);

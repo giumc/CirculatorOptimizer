@@ -4,6 +4,10 @@ function init_resonator(obj,varargin)
 
     obj.q_unloaded=OptParam('value',OnePortRes.def_q_u);
     
+    obj.q_loaded=OptParam('value',0.5);
+    
+    obj.q_loaded.optimizable=false;
+    
     obj.kt2=OptParam('value',obj.def_kt2,'global_max',1);
 
     obj.ref_impedance=OnePortRes.def_r_term;
@@ -38,6 +42,10 @@ function init_resonator(obj,varargin)
                         
                         obj.z_match.set_value(varargin{i+1},'override');    
                         
+                    case 'label'
+                        
+                        obj.label=varargin{i+1};
+                    
                 end
                 
             end

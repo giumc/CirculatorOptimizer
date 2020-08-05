@@ -29,7 +29,11 @@ function init_resonator(obj,varargin)
                     case {'q_u','qu','q_unloaded'}
 
                         obj.q_unloaded.set_value(varargin{i+1},'override');
-
+                    
+                    case {'label'}
+                        
+                        obj.label=varargin{i+1};
+                
                 end
 
             end

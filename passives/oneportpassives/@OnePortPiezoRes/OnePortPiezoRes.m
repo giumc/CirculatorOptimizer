@@ -20,7 +20,9 @@ classdef OnePortPiezoRes < OnePortRes
    
         function obj=OnePortPiezoRes(varargin)
             
-            obj@OnePortRes(varargin{:});
+            obj@OnePortRes(varargin{:},'label','PiezoRes');
+            
+            addlistener(obj,'label','PostSet',@(x,y) obj.update_label(x,y));
             
         end
        
@@ -96,6 +98,8 @@ classdef OnePortPiezoRes < OnePortRes
         
         end
         
+        varargout=summary(obj);
+        
     end
     
     methods (Access=protected)
@@ -104,7 +108,7 @@ classdef OnePortPiezoRes < OnePortRes
         
         set_default_labels(obj);
         
-        update_labels(obj);
+        update_label(obj,~,~);
         
     end
     

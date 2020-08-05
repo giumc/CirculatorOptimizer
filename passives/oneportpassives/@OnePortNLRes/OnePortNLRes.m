@@ -103,6 +103,8 @@ classdef OnePortNLRes < OnePortRes
             
         end
         
+        s=summary(obj);
+        
     end
     
     methods (Access=protected)

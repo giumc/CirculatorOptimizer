@@ -12,7 +12,9 @@ function set_default_labels(obj)
 
     obj.q_unloaded.label='Qu';
     
-%     obj.z_match.unit='Ohm';
+    obj.q_loaded.label="Q_L (n.a)";
+    
+    obj.z_match.unit='Ohm';
 
     obj.z_match.label='Zres';
 

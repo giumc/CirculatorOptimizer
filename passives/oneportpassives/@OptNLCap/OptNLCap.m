@@ -87,6 +87,8 @@ classdef OptNLCap < OnePortPassive
             
         end
         
+        varargout=summary(obj);
+        
     end
     
     methods (Access=protected)

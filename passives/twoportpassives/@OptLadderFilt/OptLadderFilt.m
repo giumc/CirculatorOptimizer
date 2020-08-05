@@ -88,6 +88,8 @@ classdef OptLadderFilt < TwoPortPassive
         
         end
         
+        varargout=summary(obj);
+        
     end
     
     methods (Access=protected,Abstract) 

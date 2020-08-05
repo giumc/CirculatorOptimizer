@@ -10,15 +10,19 @@ function res=pick_resonator(obj,n)
             
             if mod(order-n,2)==0
 
-                res=OnePortPiezoRes('label',num2str(n));
+                res=OnePortPiezoRes('f_center',obj.def_f_c);
+                
+                res.label=strcat(res.label,' ',num2str(n));
 
             else
 
                 if mod(order-n,2)==1
 
                     res=OnePortPiezoRes(...
-                        'f_center',obj.f_antires(OnePortPiezoRes()),...
-                        'label',num2str(n));
+                        'f_center',...
+                        obj.f_antires(obj.def_f_c,obj.def_kt2));
+                    
+                    res.label=strcat(res.label,' ',num2str(n));
 
                 else
 
@@ -33,14 +37,18 @@ function res=pick_resonator(obj,n)
             if mod(order-n,2)==0
 
                 res=OnePortPiezoRes(...
-                    'f_center',obj.f_antires(OnePortPiezoRes()),...
-                    'label',num2str(n));
+                        'f_center',...
+                        obj.f_antires(obj.def_f_c,obj.def_kt2));
+                
+                res.label=strcat(res.label,' ',num2str(n));
 
             else
 
                 if mod(order-n,2)==1
 
-                    res=OnePortPiezoRes('label',num2str(n));
+                    res=OnePortPiezoRes('f_center',obj.def_f_c);
+                    
+                    res.label=strcat(res.label,' ',num2str(n));
 
                 else
 

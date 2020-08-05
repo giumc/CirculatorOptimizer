@@ -109,18 +109,20 @@ classdef OptMEMSBPFilt < OptLadderFilt
             obj.update_filt;
         
         end
+        
+        function s=calculate_S_lin_response(obj,ftest)
+        
+            s=S_param_linear(obj.ABCD(ftest),obj.ref_impedance);
+        
+        end
 
     end
 
     methods (Access=protected,Static)
 
-       function f_antires=f_antires(res)
+       function f_antires=f_antires(fres,kt2)
 
-            fres=res.f_center.value;
-
-            kt2=res.kt2.value;
-
-            f_antires=fres*(1+4/pi/pi*kt2);
+            f_antires=fres./(1+4/pi/pi*kt2);
 
        end
 
