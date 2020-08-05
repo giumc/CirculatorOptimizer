@@ -42,7 +42,7 @@ classdef OptSeriesRes < OnePortRes
         end
         
         function adm=y(obj,freq)
-            adm = inverse(obj.z(freq));
+            adm = inv(obj.z(freq));
         end
         
         function res=r(obj)

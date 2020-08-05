@@ -68,20 +68,4 @@ classdef (Abstract) GetSetOptParam < handle
         
     end
     
-%     methods (Access=protected,Static)
-%         
-%         function set_OptParam_value(param,value,varargin)
-%            param.set_value(value,varargin{:})
-%         end
-%         
-%         function set_OptParam_min(param,min)
-%             param.set_min(min);
-%         end
-%         
-%         function set_OptParam_max(param,max)
-%             param.set_max(max);
-%         end
-% 
-%     end
-    
 end

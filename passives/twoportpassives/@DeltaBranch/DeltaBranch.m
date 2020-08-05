@@ -14,13 +14,15 @@ classdef DeltaBranch < OptNLBranch
             
         end
         
+         
+        
     end
     
     methods (Access=protected)
         
         init_branch(obj,varargin);
         
-        m=ABCD(obj,freq);
+       m=ABCD(obj,freq);
         
         m=ABCD_inverse_branch(obj,freq);
         

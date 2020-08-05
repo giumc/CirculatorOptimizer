@@ -3,9 +3,8 @@ classdef OnePortPiezoRes < OnePortRes
     properties (Access=private,Constant)
        
         def_kt2=0.02;
-        def_q=1000;
-        def_f_res=1e9;
         def_label="MEMSres";
+        def_zmatch_rescale=0.2;
         
     end
     
@@ -13,19 +12,15 @@ classdef OnePortPiezoRes < OnePortRes
         
         kt2 OptParam;
         
-        q_unloaded OptParam;
-        
-        z_match OptResistor;
+        z_match OptParam;
         
     end
     
     methods 
    
-        function obj=OnePortPiezoRes()
+        function obj=OnePortPiezoRes(varargin)
             
-            obj.init_res;
-            obj.set_default_labels;
-            obj.label=obj.def_label;
+            obj@OnePortRes(varargin{:});
             
         end
        
@@ -35,7 +30,7 @@ classdef OnePortPiezoRes < OnePortRes
             
             y=inv(z);
             
-            val=y+diag(1i*2*pi*obj.c0.value*freq);
+            val=y+diag(1i*2*pi*obj.c0*freq);
         
         end
         
@@ -71,16 +66,12 @@ classdef OnePortPiezoRes < OnePortRes
             
             if obj.z_match.optimizable
                 
-                p=[p obj.c0];
+                p=[p obj.z_match];
                 
             end
             
         end
         
-    end
-    
-    methods (Access=protected)
-       
         function cm=c(obj)
             
             cm=(8/(pi^2))*obj.c0*obj.kt2.value;
@@ -105,7 +96,11 @@ classdef OnePortPiezoRes < OnePortRes
         
         end
         
-        init_res(obj);
+    end
+    
+    methods (Access=protected)
+       
+        init_resonator(obj,varargin);
         
         set_default_labels(obj);
         

@@ -31,7 +31,7 @@ classdef  OnePortRes < OnePortPassive
 % l()
 % r()
 
-    properties (Access=private,Constant)
+    properties (Access=protected,Constant)
         
        def_f_c=1;
        def_q_l=5;

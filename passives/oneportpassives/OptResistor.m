@@ -1,4 +1,4 @@
-classdef OptResistor <  OnePortPassive & OptParam 
+classdef OptResistor <  OptParam & OnePortPassive  
     
    % optimizable resistor
    properties (Access=private,Constant)

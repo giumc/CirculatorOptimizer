@@ -1,5 +1,4 @@
-classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet 
-    
+classdef OptParam < matlab.mixin.Copyable & matlab.mixin.SetGet
     % optimizable parameter. 
     % inherits from matlab.mixin.Copyable and matlab.mixin.SetGet
     % 

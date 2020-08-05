@@ -55,13 +55,7 @@ classdef OptLadderFilt < TwoPortPassive
         ref_impedance ;
         
     end
-    
-    properties (Abstract)
-        
-        label ;
-        
-    end
-    
+   
     methods 
        
         function obj=OptLadderFilt(varargin)
