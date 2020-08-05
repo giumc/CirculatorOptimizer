@@ -1,30 +1,21 @@
-classdef OnePortPiezoRes < OnePortPassive
+classdef OnePortPiezoRes < OnePortRes
     
     properties (Access=private,Constant)
        
         def_kt2=0.02;
         def_q=1000;
         def_f_res=1e9;
-        def_c0=3.13e-12;
         def_label="MEMSres";
         
     end
     
     properties (SetAccess=protected)
         
-        f_center OptParam;
-        
         kt2 OptParam;
         
         q_unloaded OptParam;
         
-        c0 OptParam;
-        
-    end
-    
-    properties 
-        
-        label string;
+        z_match OptResistor;
         
     end
     
@@ -35,20 +26,7 @@ classdef OnePortPiezoRes < OnePortPassive
             obj.init_res;
             obj.set_default_labels;
             obj.label=obj.def_label;
-        end
-        
-        function set.label(obj,value)
-        
-            obj.label=value;
             
-            obj.update_labels;
-        
-        end
-        
-        function z=zmatch(obj)
-        
-                z=1/(2*pi*obj.f_center.value*obj.c0.value);
-                
         end
        
         function val=y(obj,freq)
@@ -91,7 +69,7 @@ classdef OnePortPiezoRes < OnePortPassive
                 
             end
             
-            if obj.c0.optimizable
+            if obj.z_match.optimizable
                 
                 p=[p obj.c0];
                 
@@ -105,19 +83,25 @@ classdef OnePortPiezoRes < OnePortPassive
        
         function cm=c(obj)
             
-            cm=(8/(pi^2))*obj.c0.value*obj.kt2.value;
+            cm=(8/(pi^2))*obj.c0*obj.kt2.value;
             
         end
         
         function lm=l(obj)
         
-            lm=(pi^2/8)/((obj.f_center.value*2*pi)^2*obj.c0.value*obj.kt2.value);
+            lm=(pi^2/8)/((obj.f_center.value*2*pi)^2*obj.c0*obj.kt2.value);
         
         end
         
         function rm=r(obj)
         
-            rm=(pi^2)/8/((2*pi*obj.f_center.value)*obj.kt2.value*obj.q_unloaded.value*obj.c0.value);
+            rm=(pi^2)/8/((2*pi*obj.f_center.value)*obj.kt2.value*obj.q_unloaded.value*obj.c0);
+        
+        end
+        
+        function c=c0(obj)
+            
+            c=1/(2*pi*obj.f_center.value*obj.z_match.value);
         
         end
         
