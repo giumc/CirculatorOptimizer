@@ -17,7 +17,7 @@ classdef OptNLParallelRes <OnePortNLRes
             
             obj=obj@OnePortNLRes(varargin{:});
             obj.paramchange;
-            obj.label ='NLParallelRes';
+            obj.label ='NLParRes';
             addlistener (obj.f_center,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_loaded,'ValueUpdate',@obj.paramchange);
             addlistener (obj.q_unloaded,'ValueUpdate',@obj.paramchange);

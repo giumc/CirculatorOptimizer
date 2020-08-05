@@ -10,7 +10,8 @@ function varargout=summary(obj)
         
     end
     
-    s=strcat(s,sprintf('Reference Load = %8.3\n',obj.ref_impedance));
+    s=strcat(s,sprintf('%10s \t =\t %8.2e',pad('Ref.Load',12), obj.ref_impedance),...
+        '\n\n');
     
     switch nargout 
         

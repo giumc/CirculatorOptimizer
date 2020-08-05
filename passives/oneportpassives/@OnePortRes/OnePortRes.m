@@ -113,7 +113,7 @@ classdef  OnePortRes < OnePortPassive
             obj.set_default_labels;
             obj.f_center.label=strcat(obj.f_center.label,"_",obj.label);
             obj.q_loaded.label=strcat(obj.q_loaded.label,"_",obj.label);
-            obj.q_unloaded.label=strcat(obj.q_loaded.label,"_",obj.label);
+            obj.q_unloaded.label=strcat(obj.q_unloaded.label,"_",obj.label);
         
         end
         

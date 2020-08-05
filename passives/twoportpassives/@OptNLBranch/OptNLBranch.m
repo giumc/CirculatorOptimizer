@@ -98,6 +98,8 @@ classdef (Abstract) OptNLBranch < TwoPortPassive & ...
             v=obj.nlres.mod_phase;
         end
         
+        varargout=summary(obj);
+        
     end
     
     methods (Access=protected)

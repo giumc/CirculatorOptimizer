@@ -12,7 +12,7 @@ classdef OptMEMSBPFilt < OptLadderFilt
         
         def_kt2=0.03;
         
-        def_ratio_cap=2;
+        def_ratio_cap=1;
         
         def_q_u=1e3;
         

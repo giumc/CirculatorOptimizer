@@ -1,12 +1,13 @@
 function varargout=summary(obj)
 
-    s=obj.var.summary;
+    s=strcat('Passive Design :\n',...
+        obj.passive.summary,...
+        'Nonlinear Resonator :\n',...
+        obj.nlres.summary);
     
-    s=strcat(s,obj.summary@OnePortRes);
-
-    switch nargout
+    switch nargout 
         
-        case 0
+        case 0 
             clc
             fprintf(s);
             
@@ -15,5 +16,5 @@ function varargout=summary(obj)
             varargout{1}=s;
             
     end
-    
+
 end

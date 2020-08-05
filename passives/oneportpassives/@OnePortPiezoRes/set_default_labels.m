@@ -10,9 +10,9 @@ function set_default_labels(obj)
 
     obj.q_unloaded.unit='';
 
-    obj.q_unloaded.label='Qu';
+    obj.q_unloaded.label='Q_u';
     
-    obj.q_loaded.label="Q_L (n.a)";
+    obj.q_loaded.label="Q_l";
     
     obj.z_match.unit='Ohm';
 

@@ -73,13 +73,29 @@ classdef (Abstract) GetSetOptParam < handle
         function s=build_summary(tbp)
             
             s='';
-    
-            for i=1:length(tbp)
+            
+            if isvector(tbp) && (~iscell(tbp))
 
-                s=strcat(s,tbp(i).summary);
+                for i=1:length(tbp)
 
+                    s=strcat(s,tbp(i).summary);
+
+                end
+                
+            else
+                
+                if iscell(tbp)
+
+                    for i=1:length(tbp)
+
+                        s=strcat(s,tbp{i}.summary);
+
+                    end
+
+                end
+                
             end
-        
+               
         end
         
     end
