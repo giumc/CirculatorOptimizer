@@ -1,11 +1,12 @@
-function init_coupledmicrostrip(coupledmicrostrip,varargin)
+function init_coupledmicrostrip(obj,varargin)
 
-    spacing={'spacing','Spacing','space','Space','s'};
-    for i=1:length(varargin)
-        if any(strcmp(varargin{i},spacing))
-            if isnumeric(varargin{i+1})
-                coupledmicrostrip.spacing=varargin{i+1};
-            end
-        end
-    end
+    spacing_options={'spacing','Spacing','space','Space','s'};
+    
+    options={spacing_options};
+    set_options={@(x) obj.set_spacing(x)};
+    
+    obj.init_microstrip(varargin{:});
+
+    set_if_valid(varargin,options,set_options);
+    
 end

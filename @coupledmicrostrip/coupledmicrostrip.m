@@ -1,79 +1,41 @@
-classdef coupledmicrostrip < handle
+classdef CoupledMicrostrip < Microstrip
     
     properties
         
-        line;
-        
         spacing=10;
         
-        units='mil';
-        
     end
-    
-    properties (Dependent)
-        
-        Z_line_even;
-        
-        Z_line_odd;
-        
-        epsilon_eff_even;
-        
-        epsilon_eff_odd;
-        
-    end  
     
     methods % constructors
         
-        function obj=coupledmicrostrip(varargin)
+        function obj=CoupledMicrostrip(varargin)
         
-            if isempty(varargin)
-                
-                fprintf('Initialize default coupled microstrip');
-                
-                obj.line=microstrip();
-                
-            else
-                
-                obj.line=microstrip(varargin{:});
-                
-                init_coupledmicrostrip(obj,varargin{:});
-                
-            end
-            
+            obj.init_coupledmicrostrip(varargin{:});
+        
         end
         
     end
     
-    methods %defined in the folder
+    methods (Access=protected)
         
-        init_coupledmicrostrip(coupledmicrostrip,varargin);
+        init_coupledmicrostrip(obj,varargin);
         
     end
         
-    methods %dependent props defined in the folder
+    methods %get/set properties
         
-        function Z_line_even=get.Z_line_even(coupledmicrostrip)
+        ret=get_Z_odd(obj);
         
-            Z_line_even=calc_coupledmicrostrip_Z_even(coupledmicrostrip);
+        ret=get_Z_even(obj);
+        
+        ret=get_epsilon_even(obj);
+        
+        ret=get_epsilon_odd(obj);
+        
+        function set_spacing(obj,value)
+        
+            obj.spacing=value;
             
-        end
-        
-        function Z_line_odd=get.Z_line_odd(coupledmicrostrip)
-        
-            Z_line_odd=calc_coupledmicrostrip_Z_odd(coupledmicrostrip);
-            
-        end
-        
-        function epsilon_eff_even=get.epsilon_eff_even(coupledmicrostrip)
-        
-            epsilon_eff_even=calc_coupledmicrostrip_eps_eff_even(coupledmicrostrip);
-            
-        end
-        
-        function epsilon_eff_odd=get.epsilon_eff_odd(coupledmicrostrip)
-           
-            epsilon_eff_odd=calc_coupledmicrostrip_eps_eff_odd(coupledmicrostrip);
-        
         end
         
     end

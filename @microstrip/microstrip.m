@@ -1,47 +1,100 @@
-classdef microstrip < handle
+classdef Microstrip < handle
     
-    properties (Constant)
+%     handle class for Microstrip object
+%     
+%     properties :
+%     
+%         width
+%         length
+%         thickness
+%         epsilon_r
+% 
+%     methods :
+%         
+%         set_width(value)
+%         set_length(value)
+%         set_thickness(value)
+%         set_epsilon_r(value)
+%         
+%         get_epsilon_eff()
+%         get_Z_line()
+%         
+       
+    properties (Constant,Access=protected)
+        
         epsilon_0=8.85418e-12;
+        
         c_0=299.7e6;
+        
+        def_length=1000;
+        def_width=50;
+        def_units='mil';
+        def_thickness=62;
+        def_epsilon_r=1;
+        
     end
         
-    properties 
+    properties (SetAccess=protected)
+        
         units='mil';
-        width=50;
-        length=500;
-        metalthickness=1.4;
-        thickness=62;
-        epsilon_r=1;
-    end
-    
-    properties (Dependent)
-        epsilon_eff;
-        Z_line;
-        epsilon_tot;
+        
+        width;
+        
+        length;
+        
+        thickness;
+        
+        epsilon_r;
+        
     end
     
     methods
-        function obj=microstrip(varargin)
-            if isempty(varargin)
-            else
-                init_microstrip(obj,varargin{:}); 
-            end   
+        
+        function obj=Microstrip(varargin)
+
+            init_microstrip(obj,varargin{:}); 
+ 
         end
+        
     end
     
-    methods 
+    methods (Access=protected)
+       
         init_microstrip(microstrip,varargin);
+        
     end
     
-    methods
-        function epsilon_eff=get.epsilon_eff(microstrip)
-            epsilon_eff=calc_microstrip_eps_r(microstrip);
+    methods %set/get properties
+        
+        function set_width(obj,value)
+            
+            obj.width=value;
+            
         end
-        function Z_line=get.Z_line(obj)
-            Z_line=calc_microstrip_Z_line(obj);
+        
+        function set_length(obj,value)
+        
+            obj.length=value;
+        
         end
-        function epsilon_tot=get.epsilon_tot(obj)
-            epsilon_tot=obj.epsilon_0*obj.epsilon_r;
+        
+        function set_thickness(obj,value)
+        
+            obj.thickness=value;
+        
         end
+        
+        function set_epsilon_r(obj,value)
+        
+            obj.epsilon_r=value;
+            
+        end
+        
+        ret=get_epsilon_eff(obj);
+        
+        ret=get_Z_line(obj);
+        
     end
+    
+    
 end

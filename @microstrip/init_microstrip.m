@@ -1,41 +1,28 @@
-function init_microstrip(microstrip,varargin)
+function init_microstrip(obj,varargin)
 
-widths={'w','W','width','Width','WIDTH'};
-lengths={'l','L','length','Length','LENGTH'};
-eps_r={'eps_r','epsr','eps'};
-thickness={'T','t','thickness','Thickness','THICKNESS'};
-    for i=1:length(varargin)
-        if any(strcmp(varargin{i},widths))
-            if ~isempty(varargin{i+1})
-                if isnumeric(varargin{i+1})
-                    microstrip.width=varargin{i+1};
-                end
-            end
-        end
+    %set to default
 
-        if any(strcmp(varargin{i},lengths))
-            if ~isempty(varargin{i+1})
-                if isnumeric(varargin{i+1})
-                    microstrip.length=varargin{i+1};
-                end
-            end
-        end
+    obj.set_width(obj.def_width);
+    obj.set_length(obj.def_length);
+    obj.set_epsilon_r(obj.def_epsilon_r);
+    obj.set_thickness(obj.def_thickness);
 
-        if any(strcmp(varargin{i},eps_r))
-            if ~isempty(varargin{i+1})
-                if isnumeric(varargin{i+1})
-                    microstrip.epsilon_r=varargin{i+1};
-                end
-            end
-        end
-        
-        if any(strcmp(varargin{i},thickness))
-            if ~isempty(varargin{i+1})
-                if isnumeric(varargin{i+1})
-                    microstrip.thickness=varargin{i+1};
-                end
-            end
-        end
+    width_opts={'w','W','width','Width','WIDTH'};
 
-    end
+    length_opts={'l','L','length','Length','LENGTH'};
+
+    eps_r_opts={'eps_r','epsr','eps','epsilon_r'};
+
+    thickness_opts={'T','t','thickness','Thickness','THICKNESS'};
+
+    options={width_opts,length_opts,eps_r_opts,thickness_opts};
+
+    set_functions={...
+        @(x) obj.set_width(x),...
+        @(x) obj.set_length(x),...
+        @(x) obj.set_epsilon_r(x),...
+        @(x) obj.set_thickness(x)};
+
+    set_if_valid(varargin,options,set_functions);
+
 end

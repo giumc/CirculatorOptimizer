@@ -1,8 +1,9 @@
-function Z_odd=calc_coupledmicrostrip_Z_odd(coupledmicrostrip)
+function Z_even=get_Z_even(obj)
 
-eps_r=coupledmicrostrip.line.epsilon_r;
-g=coupledmicrostrip.spacing / coupledmicrostrip.line.thickness;
-u=coupledmicrostrip.line.width / coupledmicrostrip.line.thickness;
+% eps_r=obj.epsilon_r;
+
+g=obj.spacing / obj.thickness;
+u=obj.width / obj.thickness;
 
 q1 = 0.8685 * u ^ 0.194 ;
 
@@ -27,11 +28,11 @@ q9 = log ( q7 ) * (q8 +1/16.5) ;
 
 q10 = q4 - q5/q2 * exp( q6 * log (u) / u ^ q9 ) ;
 
-Z_odd = coupledmicrostrip.line.Z_line * ...
-    sqrt ( coupledmicrostrip.line.epsilon_eff /...
-            coupledmicrostrip.epsilon_eff_odd ) /...
-    (1 - q10 * sqrt( coupledmicrostrip.line.epsilon_eff ) * ...
-    coupledmicrostrip.line.Z_line/377 ) ;
+Z_even = obj.get_Z_line * ...
+    sqrt ( obj.get_epsilon_eff / ...
+            obj.get_epsilon_even ) /...
+    (1 - q4 * sqrt( obj.get_epsilon_eff ) * ...
+    obj.get_Z_line/377 ) ;
 
 %needs to implement from page 89 chap 4 
     
