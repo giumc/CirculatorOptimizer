@@ -1,4 +1,4 @@
-classdef Microstrip < handle
+classdef Microstrip < TwoPort
     
 %     handle class for Microstrip object
 %     
@@ -21,11 +21,7 @@ classdef Microstrip < handle
 %         
        
     properties (Constant,Access=protected)
-        
-        epsilon_0=8.85418e-12;
-        
-        c_0=299.7e6;
-        
+   
         def_length=1000;
         def_width=50;
         def_units='mil';
@@ -34,7 +30,7 @@ classdef Microstrip < handle
         
     end
         
-    properties (SetAccess=protected)
+    properties (Access=protected)
         
         units='mil';
         
@@ -61,6 +57,8 @@ classdef Microstrip < handle
     methods (Access=protected)
        
         init_microstrip(microstrip,varargin);
+        
+        m=ABCD(obj,freq);
         
     end
     
@@ -90,11 +88,38 @@ classdef Microstrip < handle
             
         end
         
-        ret=get_epsilon_eff(obj);
+        function ret=get_length(obj)
+            
+            ret=obj.length/1e3*2.54;
         
-        ret=get_Z_line(obj);
+        end
+        
+        function ret=get_width(obj)
+            
+            ret=obj.width/1e3*2.54;
+        
+        end
+        
+        function ret=get_thickness(obj)
+            
+            ret=obj.thickness/1e3*2.54;
+        
+        end
+        
+        function ret=get_epsilon_r(obj)
+            
+            ret=obj.epsilon_r;
+        
+        end
         
     end
     
+    methods (Access=protected)
+        
+        ret=get_epsilon_eff(obj,varargin);
+        ret=get_Z_line(obj,varargin);
+        ret=get_prop_const(obj,freq,varargin);
+        
+    end
     
 end

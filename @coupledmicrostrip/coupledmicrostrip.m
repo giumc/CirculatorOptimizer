@@ -1,6 +1,7 @@
 classdef CoupledMicrostrip < Microstrip
     
-    properties
+    
+    properties (Access=protected)
         
         spacing=10;
         
@@ -17,6 +18,8 @@ classdef CoupledMicrostrip < Microstrip
     end
     
     methods (Access=protected)
+        
+        m=ABCD(obj,freq);
         
         init_coupledmicrostrip(obj,varargin);
         
@@ -37,6 +40,22 @@ classdef CoupledMicrostrip < Microstrip
             obj.spacing=value;
             
         end
+        
+        function ret=get_spacing(obj)
+            
+            ret=obj.spacing;
+        
+        end
+    
+        test(obj);
+        
+        plot_dispersion(obj);
+        
+    end
+    
+    methods (Access=protected)
+    
+        beta=get_prop_const(obj,varargin);
         
     end
     
