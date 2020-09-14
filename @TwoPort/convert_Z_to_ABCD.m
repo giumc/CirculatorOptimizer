@@ -1,4 +1,4 @@
-function m=convert_Z_to_ABCD(y)
+function m=convert_Z_to_ABCD(z)
 
     [z11,z12,z21,z22]=ABCD_split(z);
     

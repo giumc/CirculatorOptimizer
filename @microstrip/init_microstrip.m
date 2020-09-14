@@ -24,5 +24,7 @@ function init_microstrip(obj,varargin)
         @(x) obj.set_thickness(x)};
 
     set_if_valid(varargin,options,set_functions);
+    
+    
 
 end

@@ -58,8 +58,6 @@ classdef Microstrip < TwoPort
        
         init_microstrip(microstrip,varargin);
         
-        m=ABCD(obj,freq);
-        
     end
     
     methods %set/get properties
@@ -112,12 +110,12 @@ classdef Microstrip < TwoPort
         
         end
         
-    end
-    
-    methods (Access=protected)
+        m=ABCD(obj,freq);
         
         ret=get_epsilon_eff(obj,varargin);
+        
         ret=get_Z_line(obj,varargin);
+        
         ret=get_prop_const(obj,freq,varargin);
         
     end

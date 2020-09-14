@@ -1,11 +1,5 @@
 classdef CoupledMicrostrip < Microstrip
     
-    properties (Access=private,Constant)
-        
-        def_spacing=20;
-        
-    end
-    
     properties (Access=protected)
         
         spacing;

@@ -1,6 +1,6 @@
-classdef (Abstract) TwoPort < handle
+classdef (Abstract) TwoPort < matlab.mixin.Heterogeneous & handle
    
-    methods (Abstract,Access=protected)
+    methods (Abstract)
        
         m=ABCD(obj,freq);
         beta=get_prop_const(obj,freq);
@@ -23,6 +23,10 @@ classdef (Abstract) TwoPort < handle
         
         ret=get_phase_lag(obj,freq);
         
+        plot_s21(obj,freq,z0,varargin);
+        
+%         plot_s11(obj,freq,varargin);
+        
     end
     
     methods(Static, Access=protected)
@@ -30,6 +34,8 @@ classdef (Abstract) TwoPort < handle
         m=convert_Z_to_ABCD(zmat);
         
         m=convert_Y_to_ABCD(ymat);
+        
+        s=convert_ABCD_to_S(m,z0);
         
     end
     

@@ -9,4 +9,10 @@ function init_coupledmicrostrip(obj,varargin)
 
     set_if_valid(varargin,options,set_options);
     
+    if isempty(obj.get_spacing)
+       
+        obj.set_spacing(obj.def_spacing);
+        
+    end
+    
 end
