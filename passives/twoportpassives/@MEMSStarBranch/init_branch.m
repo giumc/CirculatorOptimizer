@@ -38,7 +38,8 @@ function init_branch(obj,varargin)
         for i=1:length(obj.passive.resonators)
 
             obj.passive.resonators(i).q_unloaded.optimizable=false;
-
+            obj.passive.resonators(i).kt2.optimizable=false;
+            
         end
 
     else
@@ -53,15 +54,15 @@ function init_branch(obj,varargin)
 
     %set_default_values
 
-    if ~isempty(obj.passive)
-
-        obj.passive.set_f_c(obj.def_f_c);
-        
-        obj.passive.set_kt2(obj.def_kt2);
-        
-        obj.passive.set_ref_impedance(obj.def_term);
-        
-    end
+%     if ~isempty(obj.passive)
+% 
+%         obj.passive.set_f_c(obj.def_f_c);
+%         
+%         obj.passive.set_kt2(obj.def_kt2);
+%         
+%         obj.passive.set_ref_impedance(obj.def_term);
+%         
+%     end
 
     obj.init_branch@OptNLBranch(varargin{:});
     

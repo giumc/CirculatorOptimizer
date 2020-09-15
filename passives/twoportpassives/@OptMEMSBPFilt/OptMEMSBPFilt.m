@@ -14,7 +14,7 @@ classdef OptMEMSBPFilt < OptLadderFilt
         
         def_ratio_cap=1;
         
-        def_q_u=1e3;
+        def_q_u=2e3;
         
     end
 
@@ -31,7 +31,6 @@ classdef OptMEMSBPFilt < OptLadderFilt
 
        res=pick_resonator(obj,n_res);
        m=ABCD(obj,freq);
-       update_filt(obj);
        init_filt(obj,varargin);
 
     end
@@ -109,6 +108,8 @@ classdef OptMEMSBPFilt < OptLadderFilt
             obj.update_filt;
         
         end
+        
+        update_filt(obj);
         
         function s=calculate_S_lin_response(obj,ftest)
         

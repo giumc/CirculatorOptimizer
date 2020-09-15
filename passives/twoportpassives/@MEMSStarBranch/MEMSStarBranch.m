@@ -29,7 +29,7 @@ classdef MEMSStarBranch < OptNLBranch
         
     end
     
-    properties (Access=private,Constant)
+    properties (Access=protected,Constant)
         
         def_kt2=0.03;
         def_q_u=2e3;

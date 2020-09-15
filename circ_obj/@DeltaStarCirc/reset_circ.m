@@ -1,12 +1,12 @@
 function reset_circ(obj)
 
-    %implementation for OptCirc
+    %implementation for DeltaStarCirc
 
     obj.calculate_ftest;
     obj.calculate_goals;
     
     def_f_center=obj.f_center;
-    def_q_loaded=2/obj.bandwidth;
+    def_q_loaded=1/4/obj.bandwidth;
     
     obj.nlres.f_center.set_value(def_f_center,'override');
     obj.nlres.q_loaded.set_value(def_q_loaded,'override');

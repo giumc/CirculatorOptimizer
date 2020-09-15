@@ -1,6 +1,6 @@
 function calculate_tx_points(obj)
 
-    % implementation for CircGoal
+% implementation for BandStopCircGoal
     f_points= [...
         obj.f_center*(1-obj.bandwidth/2),...
         obj.f_center*(1+obj.bandwidth/2)];

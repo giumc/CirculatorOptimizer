@@ -10,7 +10,7 @@ function res=pick_resonator(obj,n)
             
             res=OptParalRes();
             
-            res.label=strcat(res.label,' ',num2str(n))
+            res.label=strcat(res.label,' ',num2str(n));
             
         else
             
@@ -18,7 +18,7 @@ function res=pick_resonator(obj,n)
                 
                 res=OptSeriesRes();
                 
-                res.label=strcat(res.label,' ',num2str(n))
+                res.label=strcat(res.label,' ',num2str(n));
                 
             else
                 
@@ -36,7 +36,7 @@ function res=pick_resonator(obj,n)
             
                 res=OptSeriesRes();
 
-                res.label=strcat(res.label,' ',num2str(n))
+                res.label=strcat(res.label,' ',num2str(n));
             
             else
 
@@ -44,7 +44,7 @@ function res=pick_resonator(obj,n)
 
                     res=OptParallelRes();
 
-                    res.label=strcat(res.label,' ',num2str(n))
+                    res.label=strcat(res.label,' ',num2str(n));
 
                 else
 

@@ -34,7 +34,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 % calculate_frf()   -> calculates ftest
 % n_freqs()         -> calculates number of frequencies
 
-    properties (Access=protected,Constant)
+    properties (Access=protected)
 
         harmonics=2;
 
@@ -156,6 +156,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         test(obj);
         
         s=print_report(obj);
+        
+        s=summary(obj);
         
     end
     

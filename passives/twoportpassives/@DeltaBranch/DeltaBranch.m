@@ -22,7 +22,7 @@ classdef DeltaBranch < OptNLBranch
         
         init_branch(obj,varargin);
         
-       m=ABCD(obj,freq);
+        m=ABCD(obj,freq);
         
         m=ABCD_inverse_branch(obj,freq);
         

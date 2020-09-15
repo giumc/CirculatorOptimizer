@@ -5,8 +5,7 @@ function varargout=summary(obj)
     
     s=obj.build_summary(tbp);
 
-    s=strcat(s,sprintf('%10s \t =\t %8.2e',pad('Ref.Load',12), obj.ref_impedance),...
-        '\n\n');
+    s=strcat(s,obj.summary_parameter('Ref.Load',obj.ref_impedance));
     
     switch nargout 
         

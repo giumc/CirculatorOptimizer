@@ -98,6 +98,26 @@ classdef (Abstract) GetSetOptParam < handle
                
         end
         
+        function varargout=summary_parameter(label,value)
+        
+            s=strcat(...
+                sprintf('%10s \t =\t %8.2e',pad(label,12),value),...
+                '\n');
+            
+            switch nargout
+                
+                case 0
+                    
+                    fprintf(s);
+                    
+                case 1
+                    
+                    varargout{1}=s;
+                    
+            end
+        
+        end
+        
     end
     
 end

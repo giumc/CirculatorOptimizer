@@ -1,6 +1,6 @@
 function calculate_iso_points(obj)
 
-    % implementation for CircGoal
+    % implementation for BandStopCircGoal
 
     % iso frequencies
     f_points= [...

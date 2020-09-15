@@ -1,6 +1,6 @@
 function update_filt(obj)
 
-
+    % MEMSBPFIlt implementation
     res=obj.resonators;
 
     n=obj.order;

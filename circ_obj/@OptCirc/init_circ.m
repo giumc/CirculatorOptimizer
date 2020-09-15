@@ -1,5 +1,7 @@
 function init_circ(obj,varargin)
-        
+
+    %implementation for OptCirc
+    
     obj.init_goal(varargin{:});
 
     obj.init_branch(varargin{:});

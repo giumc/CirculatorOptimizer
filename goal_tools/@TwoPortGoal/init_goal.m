@@ -1,5 +1,7 @@
 function init_goal(obj,varargin)
 
+    % implementation for TwoPortGoal
+    
     if ~isempty(varargin)
 
         for i=1:length(varargin)

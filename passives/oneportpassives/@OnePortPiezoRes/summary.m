@@ -1,5 +1,6 @@
 function varargout=summary(obj)
 
+    %implementation for PiezoRes
     tbp=[obj.f_center,obj.kt2,obj.q_unloaded,obj.z_match];
     
     s=strcat(obj.label,'\n');

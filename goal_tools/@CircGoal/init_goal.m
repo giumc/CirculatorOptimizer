@@ -1,5 +1,7 @@
 function init_goal(obj,varargin)
 
+    %implementation for CircGoal
+    
     init_goal@TwoPortGoal(obj,varargin{:});
 
     if ~isempty(varargin)
@@ -17,6 +19,10 @@ function init_goal(obj,varargin)
                     case 'direction'
 
                         obj.direction=varargin{i+1};
+                        
+                    case 'order'
+                        
+                        obj.order=varargin{i+1};
 
                 end
 

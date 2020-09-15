@@ -12,12 +12,6 @@ classdef StarCirc < StarBranch & OptCirc
 % Protected:
 % ABCD(freq)
 %
-% Private:
-% callback_term()    -> updates ref_impedance of each resonator
-%                       in passive and nlres
-% callback_goal()    -> updates design when goals are edited
-
-    
     methods 
         
         function obj=StarCirc(varargin)

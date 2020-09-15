@@ -29,7 +29,7 @@ classdef OptParalRes < OnePortRes
         end
         
         function imp=z(obj,freq)
-            imp = inverse(obj.y(freq));
+            imp = inv(obj.y(freq));
         end
         
     end
