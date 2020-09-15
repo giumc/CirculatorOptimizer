@@ -59,8 +59,13 @@ classdef OptNLParallelRes <OnePortNLRes
             adm = obj.var.y(freq)+obj.ind.y(freq)+obj.resis.y(freq);
             
         end
+        
+        function g=get_normalized_param(obj,fc)
+        
+          g=obj.c/obj.ref_impedance*fc;    
+          
+        end
        
     end
 
-    
 end

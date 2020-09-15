@@ -17,6 +17,8 @@ classdef OptSeriesRes < OnePortRes
    % y(freq)   
    % l
    % c
+   % r
+   % get_normalized_param(fc,bw)
       
     methods
 
@@ -47,6 +49,12 @@ classdef OptSeriesRes < OnePortRes
         
         function res=r(obj)
             res = (2*pi*obj.f_center.value*obj.l)/obj.q_unloaded.value;
+        end
+        
+        function g=get_normalized_param(obj,fc)
+        
+          g=obj.l/obj.ref_impedance*fc;    
+          
         end
         
     end

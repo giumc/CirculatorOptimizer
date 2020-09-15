@@ -126,6 +126,8 @@ classdef  OnePortRes < OnePortPassive
         ind=l(obj);
         cap=c(obj);
         res=r(obj);
+        
+        ret=get_normalized_param(obj,fc);
 
     end
              

@@ -61,6 +61,10 @@ classdef (Abstract) OnePortPassive < matlab.mixin.Heterogeneous & ...
         
         end
         
+    end
+    
+    methods (Sealed=true)
+        
         function flag=isempty(obj)
             
             flag=isemptyobj(obj);

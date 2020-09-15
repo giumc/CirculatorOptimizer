@@ -58,6 +58,14 @@ classdef OptNLSeriesRes < OnePortNLRes
             adm=pinv(imp);
             
         end
+        
+        function g=get_normalized_param(obj,fc)
+        
+          g=obj.l/obj.ref_impedance*fc;    
+          
+        end
+        
+        
        
     end
         

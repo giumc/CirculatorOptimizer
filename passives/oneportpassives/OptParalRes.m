@@ -32,6 +32,12 @@ classdef OptParalRes < OnePortRes
             imp = inv(obj.y(freq));
         end
         
+        function g=get_normalized_param(obj,fc)
+        
+          g=obj.c/obj.ref_impedance*fc;    
+          
+        end
+        
     end
     
 end

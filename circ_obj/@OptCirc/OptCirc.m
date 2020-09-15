@@ -159,6 +159,8 @@ classdef (Abstract) OptCirc <  CircGoal & ...
         
         s=summary(obj);
         
+        g=get_normalized_params(obj);
+        
     end
     
     methods (Access=protected)
