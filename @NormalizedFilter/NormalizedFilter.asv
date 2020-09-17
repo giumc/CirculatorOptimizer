@@ -1,0 +1,48 @@
+classdef NormalizedFilter < handle
+    
+    properties (Access=protected)
+        
+        coeffs;
+        components;
+        
+    end
+    
+    methods 
+        
+        function obj=NormalizedFilter(coeffs)
+        
+            obj.set_coeffs(coeffs);
+            
+        end
+        
+        function ret=get_coeffs(obj)
+        
+            ret=obj.coeffs;
+            
+        end
+
+        plot_S21(obj,varargin);
+        
+        function ret=get_components(obj)
+            
+            r
+        end
+        
+    end
+    
+    methods (Access=protected)
+                
+        function set_norm_coeff(obj,coeffs)
+                
+            obj.coeffs=coeffs;
+            obj.set_components();
+            
+        end
+        
+        set_components(obj);
+        
+        ret=get_S21(obj,freq);
+        
+    end
+    
+end
