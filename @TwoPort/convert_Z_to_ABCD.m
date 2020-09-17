@@ -8,13 +8,13 @@ function m=convert_Z_to_ABCD(z)
     
     det=z11*z22-z12*z21;
     
-    a= -z21\z11;
+    a= z21\z11;
     
-    b= -det/(z21);
+    b= det/(z21);
   
     c= Id/z21;
     
-    d= -z22/z21;
+    d= z22/z21;
     
     m = [a b ; c d];
 

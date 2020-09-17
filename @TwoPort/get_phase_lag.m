@@ -4,6 +4,6 @@ function theta=get_phase_lag(obj,freq)
     
     l=obj.get_length;
     
-    theta=mod(beta*l,2*pi);
+    theta=beta*l;
     
 end

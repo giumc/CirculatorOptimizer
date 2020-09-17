@@ -1,10 +1,10 @@
-function plot_s21(obj,freq,z0,varargin)
+function plot_s11(obj,freq,z0,varargin)
 
 for i=1:length(freq)
    
     s=obj.convert_ABCD_to_S(obj.ABCD(freq(i)),z0);
     
-    s21(i)=s(2,1);
+    s11(i)=s(1,1);
     
 end
 
@@ -12,10 +12,10 @@ f=figure;
 
 ax=axes;
 
-plot(ax,freq,20*log10(abs(s21)));
+plot(ax,freq,20*log10(abs(s11)));
 
 xlabel('Frequency');
-ylabel('S_{21} [dB]');
+ylabel('S_{11} [dB]');
 axis tight;
 
 ylim([-Inf 0])

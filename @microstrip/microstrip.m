@@ -28,9 +28,11 @@ classdef Microstrip < TwoPort
         def_thickness=62;
         def_epsilon_r=1;
         
+        mil_to_metre=1e-3*2.54*1e-2;
+        
     end
         
-    properties (Access=protected)
+    properties (SetAccess=protected)
         
         units='mil';
         
@@ -88,19 +90,19 @@ classdef Microstrip < TwoPort
         
         function ret=get_length(obj)
             
-            ret=obj.length/1e3*2.54;
+            ret=obj.length*obj.mil_to_metre;
         
         end
         
         function ret=get_width(obj)
             
-            ret=obj.width/1e3*2.54;
+            ret=obj.width*obj.mil_to_metre;
         
         end
         
         function ret=get_thickness(obj)
             
-            ret=obj.thickness/1e3*2.54;
+            ret=obj.thickness*obj.mil_to_metre;
         
         end
         

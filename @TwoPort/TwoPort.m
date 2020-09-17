@@ -25,7 +25,11 @@ classdef (Abstract) TwoPort < matlab.mixin.Heterogeneous & handle
         
         plot_s21(obj,freq,z0,varargin);
         
-%         plot_s11(obj,freq,varargin);
+        plot_s11(obj,freq,varargin);
+
+        plot_dispersion(obj,freq);
+        
+        plot_phase_lag(obj,freq);
         
     end
     
