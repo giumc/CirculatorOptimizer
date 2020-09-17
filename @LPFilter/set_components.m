@@ -2,9 +2,9 @@ function set_components(obj)
 
 %LPFilter implementation
 
-    ind_transform=1/obj.get_omega_c*obj.z_term;
+    ind_transform=1./obj.get_omega_c.*obj.z_term;
     
-    cap_transform=1/obj.get_omega_c/obj.z_term;
+    cap_transform=1./obj.get_omega_c./obj.z_term;
     
     obj.set_components@NormalizedFilter(); 
     

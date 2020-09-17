@@ -1,23 +1,17 @@
 classdef LPFilter < NormalizedFilter
    
-    properties (Access=private)
+    properties (Access=private,Constant)
         
-        def_omega_c=1;
-        def_z_term=1;
-        
-    end
+        def_omega_c=1e3;
+        def_z_term=10;
     
-    properties (Access=protected)
-        
-        omega_axis=def_omega_c*(0.01:0.01:3);
-        domega_axid=def_omega_c*0.01;
-        
     end
     
     properties (SetAccess=protected)
        
-        omega_c=def_omega_c;
-        z_term=def_z_term;
+        omega_c=LPFilter.def_omega_c;
+
+        z_term=LPFilter.def_z_term;
         
     end
     
@@ -39,6 +33,8 @@ classdef LPFilter < NormalizedFilter
             
             obj.set_components();
             
+            obj.set_omega_axis();
+            
         end
         
         function set_z_term(obj,z_term)
@@ -49,11 +45,25 @@ classdef LPFilter < NormalizedFilter
         
         end
         
+        function ret=get_omega_c(obj)
+            
+            ret=obj.omega_c;
+            
+        end
+        
+        function ret=get_z_term(obj)
+        
+            ret=obj.z_term;
+        
+        end
+        
     end
     
     methods (Access=protected)
     
         set_components(obj);
+        
+        set_omega_axis(obj);
         
     end
     

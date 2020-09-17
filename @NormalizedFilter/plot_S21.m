@@ -26,7 +26,7 @@ function plot_S21(obj,varargin)
     
     ax.YAxis(1).Color=rgb("Firebrick");
     
-    xlim([0 3]);
+    xlim([min(omega) max(omega)]);
     
     yyaxis right
     

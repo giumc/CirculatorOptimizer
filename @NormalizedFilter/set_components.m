@@ -2,7 +2,7 @@ function elem=set_components(obj)
 
     %NormalizedFilter implementation
     
-    coeffs = obj.get_coeffs;
+    coeffs =[1 obj.get_coeffs];
     
     for i=1:length(coeffs)
 

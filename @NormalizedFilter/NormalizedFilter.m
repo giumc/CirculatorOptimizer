@@ -1,15 +1,20 @@
 classdef NormalizedFilter < handle
     
-    properties (Access=private,Constant)
+    properties (Access=protected)
         
-        omega_axis=[0.01:0.01:3];
+        omega_axis=(0.01:0.01:3);
         domega_axis=0.01;
         
     end
     
-    properties (Access=protected)
+    properties (SetAccess=protected)
         
         coeffs;
+        
+    end
+    
+    properties (Access=protected)
+       
         components;
         
     end
@@ -30,7 +35,7 @@ classdef NormalizedFilter < handle
         
         function set_coeffs(obj,coeffs)
                 
-            obj.coeffs=[1 coeffs];
+            obj.coeffs=coeffs;
             obj.set_components();
             
         end
