@@ -39,6 +39,8 @@ classdef BPFilter < LPFilter
         
         ret=get_Z_coupled(obj);
         
+        vararout=summary(obj);
+        
     end
     
     methods (Access=protected)

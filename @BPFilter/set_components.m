@@ -21,6 +21,7 @@ function set_components(obj)
                 elems(i)=OptResistor(...
                     elems(i).value*obj.get_z_term);
                 
+                elems(i).optimizable=false;
             case 'OptCap'
                 
                 elems(i)=OptParalRes(...
@@ -28,12 +29,16 @@ function set_components(obj)
                     'q_loaded',elems(i).value/fbw,...
                     'ref_impedance',z_term);
                     
+                elems(i).set_optimizable(false);
+                
             case 'OptInd'
                 
                 elems(i)=OptSeriesRes(...
                     'f_center',omega_c/2/pi,...
                     'q_loaded',elems(i).value/fbw,...
                     'ref_impedance',z_term);
+                
+                elems(i).set_optimizable(false);
                 
         end
         

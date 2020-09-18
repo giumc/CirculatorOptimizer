@@ -10,11 +10,11 @@ function elem=set_components(obj)
 
             if mod(i,2)==1 %odd
 
-                elem(i)=OptInd(coeffs(i)); 
+                elem(i)=OptCap(coeffs(i));
 
             else %even
 
-                elem(i)=OptCap(coeffs(i));
+                elem(i)=OptInd(coeffs(i)); 
 
             end
 
@@ -30,11 +30,11 @@ function elem=set_components(obj)
                     
                     if mod(i,2)==1 %odd
 
-                        elem(i)=OptResistor(coeffs(i));
+                        elem(i)=OptResistor(1/coeffs(i));
 
                     else
 
-                        elem(i)=OptResistor(1/coeffs(i));
+                        elem(i)=OptResistor(coeffs(i));
 
                     end
                     
@@ -44,6 +44,12 @@ function elem=set_components(obj)
             
         end
 
+    end
+    
+    for i=1:length(elem)
+        
+        elem(i).optimizable=false;
+        
     end
     
     obj.components=elem;

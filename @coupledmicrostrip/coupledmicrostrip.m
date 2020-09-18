@@ -38,17 +38,9 @@ classdef CoupledMicrostrip < Microstrip
         
         ret=get_epsilon_odd(obj);
         
-        function set_spacing(obj,value)
+        set_spacing(obj,value,varargin);
         
-            obj.spacing=value;
-            
-        end
-        
-        function ret=get_spacing(obj)
-            
-            ret=obj.spacing*obj.mil_to_metre;
-        
-        end
+        ret=get_spacing(obj,varargin);
         
         m=ABCD(obj,freq);
         
@@ -57,6 +49,10 @@ classdef CoupledMicrostrip < Microstrip
         ret=get_Z_coupledline(obj);
         
         [w,s]=solve_for_Z(obj,Z_e,Z_o);
+        
+        l=solve_for_lambda4(obj,freq);
+        
+        varargout=summary(obj);
         
     end
     

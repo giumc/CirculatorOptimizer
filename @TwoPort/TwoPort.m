@@ -5,6 +5,7 @@ classdef (Abstract) TwoPort < matlab.mixin.Heterogeneous & ...
        
         m=ABCD(obj,freq);
         beta=get_prop_const(obj,freq);
+        varargout=summary(obj);
         
     end
     
@@ -41,6 +42,10 @@ classdef (Abstract) TwoPort < matlab.mixin.Heterogeneous & ...
         m=convert_Y_to_ABCD(ymat);
         
         s=convert_ABCD_to_S(m,z0);
+        
+        y=convert_metre_to_mil(x);
+        
+        y=convert_mil_to_metre(x);
         
     end
     

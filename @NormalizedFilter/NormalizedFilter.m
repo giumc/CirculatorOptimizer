@@ -48,6 +48,8 @@ classdef NormalizedFilter < handle
             
         end
         
+        varargout=summary(obj);
+        
     end
     
     methods (Access=protected)

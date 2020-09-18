@@ -14,11 +14,11 @@ function s21=get_S21(obj,freq)
 
                 if mod(k,2)==1 %odd
 
-                    m=m*elems(k).seriesABCD(f);
+                    m=m*elems(k).shuntABCD(f);
 
                 else
 
-                    m=m*elems(k).shuntABCD(f);
+                    m=m*elems(k).seriesABCD(f);
 
                 end
                 

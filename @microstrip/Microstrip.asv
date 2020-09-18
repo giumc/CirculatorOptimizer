@@ -86,7 +86,7 @@ classdef Microstrip < TwoPort
 
         m=ABCD(obj,freq);
         
-        ret=get_epsilon_eff(obj);
+        ret=get_epsilon_eff(obj,varargin);
         
         ret=get_Z_line(obj);
         
