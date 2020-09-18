@@ -8,7 +8,7 @@ function outcome=save_plot(obj,varargin)
    %'vec' to print eps and emf file
    %'fig' to print fig file
    %'tab' to print table
-   %'full' to print png,eps,fig,csv and mat file with circ data
+   %'full' to print png,eps,fig,csv and mat file with data
    %'data' to save only .m data file
    % OSS:
    
