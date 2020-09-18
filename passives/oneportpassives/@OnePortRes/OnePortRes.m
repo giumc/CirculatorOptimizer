@@ -102,6 +102,8 @@ classdef  OnePortRes < OnePortPassive
          
         varargout=summary(obj);
         
+        set_optimizable(obj,flag);
+        
     end
     
     methods (Access=protected)

@@ -9,41 +9,24 @@ function init_resonator(obj,varargin)
     obj.f_center.rescale_factor=obj.def_f_rescale;
 
     obj.q_loaded.rescale_factor=obj.def_q_rescale;
+    
+    options={{'f','f_center','f_c'},...
+        {'q','q_ref','q_l','q_loaded'},...
+        {'q_u','qu','q_unloaded'},...
+        {'ref_impedance','z_term','z_ref'},...
+        {'label'}};
+    
+    set_functions={...
+        @(x)obj.f_center.set_value(x,'override'),...
+        @(x)obj.q_loaded.set_value(x,'override'),...
+        @(x)obj.q_unloaded.set_value(x,'override'),...
+        @(x)obj.set_ref_impedance(x),...
+        @(x)set_label(x)};
 
-     if ~isempty(varargin)
+    function set_label(x)
+        obj.label=x;
+    end
 
-        for i=1:length(varargin)
-
-            if ischar(varargin{i})||isstring(varargin{i})
-
-                switch varargin{i}
-
-                    case {'f','f_center','f_c'}
-
-                        obj.f_center.set_value(varargin{i+1},'override');
-
-                    case {'q','q_ref','q_l','q_loaded'}
-
-                        obj.q_loaded.set_value(varargin{i+1},'override');
-
-                    case {'q_u','qu','q_unloaded'}
-
-                        obj.q_unloaded.set_value(varargin{i+1},'override');
-                    
-                    case {'ref_impedance','z_term','z_ref'}
-                    
-                        obj.set_ref_impedance(varargin{i+1});
-                        
-                    case {'label'}
-                        
-                        obj.label=varargin{i+1};
-                
-                end
-
-            end
-
-        end
-
-    end % set values as Name Value pair
-
+    set_if_valid(varargin,options,set_functions);
+    
 end
