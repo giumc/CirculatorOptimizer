@@ -90,7 +90,7 @@ classdef OptLadderFilt < TwoPortPassive
         
         varargout=summary(obj);
         
-        ret=get_normalized_params(obj,fc);
+        ret=get_normalized_params(obj,fc,fbw);
         
     end
     

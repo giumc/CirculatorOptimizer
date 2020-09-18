@@ -30,6 +30,10 @@ function init_resonator(obj,varargin)
 
                         obj.q_unloaded.set_value(varargin{i+1},'override');
                     
+                    case {'ref_impedance','z_term','z_ref'}
+                    
+                        obj.set_ref_impedance(varargin{i+1});
+                        
                     case {'label'}
                         
                         obj.label=varargin{i+1};

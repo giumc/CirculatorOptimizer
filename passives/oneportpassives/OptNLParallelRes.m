@@ -60,9 +60,9 @@ classdef OptNLParallelRes <OnePortNLRes
             
         end
         
-        function g=get_normalized_param(obj,fc)
+        function g=get_normalized_param(obj,fc,fbw)
         
-          g=obj.c/obj.ref_impedance*fc;    
+            g=obj.c*fbw*2*pi*fc*obj.ref_impedance;
           
         end
        

@@ -1,4 +1,4 @@
-function g=get_normalized_params(obj,fc)
+function g=get_normalized_params(obj,fc,fbw)
 
     % Ladder implementation
     if isempty(obj.resonators)
@@ -11,7 +11,7 @@ function g=get_normalized_params(obj,fc)
 
         for i=1:length(obj.resonators)
             
-            g(i)=obj.resonators(i).get_normalized_param(fc);
+            g(i)=obj.resonators(i).get_normalized_param(fc,fbw);
 
         end
         

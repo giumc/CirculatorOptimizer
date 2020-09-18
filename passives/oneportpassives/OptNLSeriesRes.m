@@ -59,9 +59,9 @@ classdef OptNLSeriesRes < OnePortNLRes
             
         end
         
-        function g=get_normalized_param(obj,fc)
+        function g=get_normalized_param(obj,fc,fbw)
         
-          g=obj.l/obj.ref_impedance*fc;    
+          	g=obj.l*2*pi*fc*fbw/obj.ref_impedance;
           
         end
         
