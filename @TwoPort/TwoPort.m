@@ -1,4 +1,5 @@
-classdef (Abstract) TwoPort < matlab.mixin.Heterogeneous & handle
+classdef (Abstract) TwoPort < matlab.mixin.Heterogeneous & ...
+          matlab.mixin.Copyable & handle
    
     methods (Abstract)
        

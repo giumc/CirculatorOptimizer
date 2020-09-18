@@ -8,7 +8,7 @@ classdef CoupledMicrostrip < Microstrip
     
     properties (SetAccess=protected)
         
-        spacing;
+        spacing=CoupledMicrostrip.def_spacing;
         
     end
     
@@ -46,7 +46,7 @@ classdef CoupledMicrostrip < Microstrip
         
         function ret=get_spacing(obj)
             
-            ret=obj.spacing/obj.mil_to_metre;
+            ret=obj.spacing*obj.mil_to_metre;
         
         end
         
@@ -55,6 +55,8 @@ classdef CoupledMicrostrip < Microstrip
         beta=get_prop_const(obj,varargin);
         
         ret=get_Z_coupledline(obj);
+        
+        [w,s]=solve_for_Z(obj,Z_e,Z_o);
         
     end
     
