@@ -1,0 +1,20 @@
+function varargout=summary(obj)
+
+    %NormalizedFilter implementation
+    
+    coeffs= obj.get_coeffs;
+    
+    elems = obj.get_components;
+    
+    str=""
+    
+    for i=1:length(elems)
+        
+        switch class(elems)
+            
+            case "OptSeriesRes"
+                
+                str=strcat(str,"------Series Resonator (%d)\n"
+    keyboard();
+
+end
