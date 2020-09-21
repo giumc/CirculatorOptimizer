@@ -26,7 +26,7 @@ function solve_for_Z(obj)
         
         Z_o=tab_Z.Z_odd(i);
         
-        obj.coupledlines(i).solve_for_Z(Z_e,Z_o);
+        obj.coupledlines(i).solve_for_Z(Z_e,Z_o,obj.get_omega_c/2/pi);
         
     end
 

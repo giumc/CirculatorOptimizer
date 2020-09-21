@@ -12,7 +12,7 @@ function ret=get_thickness(obj,varargin)
             
         else
             
-            if strmp(varargin{1},'metre')
+            if strcmp(varargin{1},'metre')
                 
                 ret=obj.convert_mil_to_metre(obj.thickness);
                 

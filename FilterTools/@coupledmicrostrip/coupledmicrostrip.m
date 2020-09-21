@@ -26,17 +26,23 @@ classdef CoupledMicrostrip < Microstrip
         
         init_coupledmicrostrip(obj,varargin);
         
+        p=get_p(obj,freq);
+        
+        f=get_norm_freq(obj,freq);
+        
+        q=get_q(obj,freq);
+        
     end
         
-    methods %get/set properties
+    methods%get/set properties
         
-        ret=get_Z_odd(obj);
+        ret=get_Z_odd(obj,freq);
         
-        ret=get_Z_even(obj);
+        ret=get_Z_even(obj,freq);
         
-        ret=get_epsilon_even(obj);
+        ret=get_epsilon_even(obj,freq);
         
-        ret=get_epsilon_odd(obj);
+        ret=get_epsilon_odd(obj,freq);
         
         set_spacing(obj,value,varargin);
         
@@ -48,7 +54,7 @@ classdef CoupledMicrostrip < Microstrip
         
         ret=get_Z_coupledline(obj);
         
-        [w,s]=solve_for_Z(obj,Z_e,Z_o,varargin);
+        [w,s]=solve_for_Z(obj,Z_e,Z_o,freq,varargin);
         
         l=solve_for_lambda4(obj,freq,varargin);
         

@@ -1,4 +1,4 @@
-function solve_for_Z(obj,Z_e,Z_o,varargin)
+function solve_for_Z(obj,Z_e,Z_o,freq,varargin)
 
     %CoupledMicrostrip implementation
 
@@ -34,9 +34,9 @@ function solve_for_Z(obj,Z_e,Z_o,varargin)
         
         newobj.set_spacing(x(2),'mil');
         
-        y(1)=newobj.get_Z_even-Z_e;
+        y(1)=newobj.get_Z_even(freq)-Z_e;
         
-        y(2)=newobj.get_Z_odd-Z_o;
+        y(2)=newobj.get_Z_odd(freq)-Z_o;
     
     end
 
