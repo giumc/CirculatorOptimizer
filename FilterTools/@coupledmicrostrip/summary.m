@@ -7,6 +7,7 @@ function varargout=summary(obj)
     str=strcat(str,return_parameter("Width\t(mil)",obj.get_width('mil')));
     str=strcat(str,return_parameter("Thickness(mil)",obj.get_thickness('mil')));
     str=strcat(str,return_parameter("Length\t(mil)",obj.get_length('mil')));
+    str=strcat(str,return_parameter("Spacing\t(mil)",obj.get_spacing('mil')));
     str=strcat(str,return_parameter("Epsilon R\t",obj.get_epsilon_r));
     str=strcat(str,return_parameter("ZLine\t(Ohm)",obj.get_Z_line));
     

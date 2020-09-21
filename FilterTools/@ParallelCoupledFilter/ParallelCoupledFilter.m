@@ -1,22 +1,22 @@
-classdef ParallelCoupledFilter <TwoPort
+classdef ParallelCoupledFilter < BPFilter & TwoPort
    
     properties (Access=protected)
         
-        coupledlines TwoPort;
+        coupledlines CoupledMicrostrip;
         
     end
     
     methods 
        
-        function obj=ParallelCoupledFilter(varargin)
+        function obj=ParallelCoupledFilter(coeffs,omega_c,bw,z_term,varargin)
         
-            set_if_valid(varargin,...
-                {{'n','order','N'}},...
-                {@(x) obj.reset_coupledlines(x,varargin{:})});
+            obj@BPFilter(coeffs,omega_c,bw,z_term);
+            
+            obj.set_coupledlines(varargin{:});
             
         end
         
-        function reset_coupledlines(obj,nres,varargin)
+        function reset_coupledlines(obj,varargin)
         
             for i=1:nres
                
@@ -36,16 +36,26 @@ classdef ParallelCoupledFilter <TwoPort
             
             for i=1:length(obj.coupledlines)
                
-                m=m*obj.coupledlines(i).ABCD(freq)
+                m=m*obj.coupledlines(i).ABCD(freq);
                 
             end
             
         end
         
-        function beta=get_prop_const(obj,freq)
+        ret=get_prop_const(obj,freq);
         
-        end
-    
+        varargout=summary(obj);
+        
+        solve_for_Z(obj);
+        
+        set_coupledlines(obj,varargin);
+        
+        ret=get_coupledlines(obj);
+        
+        ret=get_param_table(obj);
+        
+        solve_for_lambda4(obj);
+        
     end
     
 end

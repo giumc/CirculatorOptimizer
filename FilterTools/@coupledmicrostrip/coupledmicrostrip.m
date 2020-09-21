@@ -48,12 +48,13 @@ classdef CoupledMicrostrip < Microstrip
         
         ret=get_Z_coupledline(obj);
         
-        [w,s]=solve_for_Z(obj,Z_e,Z_o);
+        [w,s]=solve_for_Z(obj,Z_e,Z_o,varargin);
         
-        l=solve_for_lambda4(obj,freq);
+        l=solve_for_lambda4(obj,freq,varargin);
         
         varargout=summary(obj);
         
+        ret=get_param_table(obj);
     end
     
 end

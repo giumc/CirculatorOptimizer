@@ -94,6 +94,8 @@ classdef Microstrip < TwoPort
         
         varargout=summary(obj);
         
+        tab=get_param_table(obj);
+        
     end
     
 end
