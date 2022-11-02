@@ -36,7 +36,7 @@ classdef (Abstract) OptCirc <  CircGoal & ...
 
     properties (Access=protected)
 
-        harmonics=2;
+        harmonics=5;
 
         phases=[0 240 120]; 
         

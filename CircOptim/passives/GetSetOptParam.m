@@ -4,15 +4,15 @@ classdef (Abstract) GetSetOptParam < handle
 %
 % ------ METHODS ------
 %
-% Abstract:
-% opt_par = get_OptParam(obj);
-% set_bounds(obj);
+% Abstract :
+% opt_par = get_OptParam(obj);      (return all optimizable params)
+% 
+% Public :
 %
-% Static:
-% opt_par = set_OptParam_value(param,value);
-% set_OptParam_min(param,min);
-% set_OptParam_max(param,max);
-
+%   val=get_opt_norm_values(obj)
+%   update_opt_norm_values(obj,vals)
+%   update_bounds(obj)
+%
 
     methods (Abstract)
         

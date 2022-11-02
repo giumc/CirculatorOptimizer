@@ -14,6 +14,7 @@ classdef (Abstract) OnePortPassive < matlab.mixin.Heterogeneous & ...
 %                    in case subclass is not a OptParam
 % set_bounds() -> defines base method, needs to be overridden 
 %                    in case subclass is not a OptParam
+% utility functions : seriesABCD(obj,freq), shuntABCD(obj,freq)
 
     methods (Abstract)
         
@@ -47,7 +48,8 @@ classdef (Abstract) OnePortPassive < matlab.mixin.Heterogeneous & ...
             d=diag(ones(1,nfreq));
             
             m= [ a b ; c d];
-        end     
+            
+        end  
         
         function opt_par = get_OptParam(obj)
         

@@ -16,6 +16,12 @@ classdef OnePortPiezoRes < OnePortRes
         
     end
     
+    events 
+        
+        ValueUpdate;
+        
+    end
+    
     methods 
    
         function obj=OnePortPiezoRes(varargin)
@@ -23,6 +29,10 @@ classdef OnePortPiezoRes < OnePortRes
             obj@OnePortRes(varargin{:},'label','PiezoRes');
             
             addlistener(obj,'label','PostSet',@(x,y) obj.update_label(x,y));
+            addlistener(obj.f_center,'ValueUpdate',@(x,y) notify(obj,'ValueUpdate'));
+            addlistener(obj.q_unloaded,'ValueUpdate',@(x,y) notify(obj,'ValueUpdate'));
+            addlistener(obj.kt2,'ValueUpdate',@(x,y) notify(obj,'ValueUpdate'));
+            addlistener(obj.z_match,'ValueUpdate',@(x,y)notify(obj,'ValueUpdate'));
             
         end
        
@@ -99,6 +109,13 @@ classdef OnePortPiezoRes < OnePortRes
         end
         
         varargout=summary(obj);
+        
+        function ret=get_normalized_param(obj,~,~)
+           
+            ret=0
+            fprintf("not implementable for MEMS resonator");
+            
+        end
         
     end
     

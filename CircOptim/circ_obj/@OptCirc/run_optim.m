@@ -15,7 +15,7 @@ function flag=run_optim(obj)
     
     problem.options.StepTolerance = 5e-3;
     
-    problem.options.OutputFcn                   =@(x,y,z) obj.out_optim(x,y,z);
+    problem.options.OutputFcn =@(x,y,z) obj.out_optim(x,y,z);
     
     problem.options.UseParallel = false;
 
